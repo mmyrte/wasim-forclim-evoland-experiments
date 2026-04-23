@@ -2379,7 +2379,7 @@ $set $JDVegWrite = 365
 
 [multilayer_landuse]
 17 # count of multilayer landuses
-1  Wasserfl chen	{ Landuse_Layers = 16, -9999;	k_extinct = 0.3; LAI_scale = 20;}
+1  Wasserflaechen	{ Landuse_Layers = 16, -9999;	k_extinct = 0.3; LAI_scale = 20;}
 2  Bebauung		{ Landuse_Layers = 2,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
 3  Teilbebauung		{ Landuse_Layers = 1,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
 4  Wald			{ Landuse_Layers = 13,  4;	k_extinct = 0.3; LAI_scale = 20;}
