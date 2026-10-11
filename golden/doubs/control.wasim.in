@@ -1,0 +1,1963 @@
+# golden test case: Doubs, 2021-01-01 to 2021-01-11, hourly
+# derived from the Doubs control file; paths replaced by placeholders (see tests/golden/run_case.py)
+# == protected part to be changed by the module adapter ==
+# == all manual changes in this section will be overwritten by the module adapter ==
+
+$set $runID1      = 2021
+$set $runID2      = 2022
+
+
+$set $mainpath       = @CASE_DIR@/
+$set $inpath         =  $mainpath//Input/
+$set $exchngpath     =  @OUT_DIR@/
+$set $InitialStateDirectory = $mainpath//StateIni_$runID1///
+$set $DefaultOutputDirectory = @OUT_DIR@/
+
+$set $time           = 60
+
+$set $starthour      = 1
+$set $startday       = 1
+$set $startmonth     = 1
+$set $startyear      = $runID1
+$set $endhour        = 0
+$set $endday         = 11
+$set $endmonth       = 1
+$set $endyear        = $runID1
+
+
+
+# it is important to set $outpath to an empty string in order to activate $DefaultOutputDirectory
+$set $outpath        =  
+
+# readgrids : 1 = read storage grids (as SI, SSNOW,SLIQ...) from hard disk, 0=generate and initialize with 0
+$set $readgrids     =  1
+
+# read grids for dynamic phenology -> usually chilling grid should be read in if availabe because otherwise thermal time method will be applied and not the sequential model
+$set $DPreadgrids   =  1
+
+# == end of protected part ==
+
+
+$set $subdir_ingrids = grids/
+$set $subdir_timeseries = timeseries/
+
+$set $do_RegionalSuperposition = 0
+$set $do_precipitation_correction = 1
+$set $do_radiation_correction = 1
+$set $do_evapotranspiration = 1
+$set $do_snow_model = 1
+$set $do_interception_model = 1
+$set $do_infiltration_model = 0
+$set $do_SiltingUpModel = 0
+$set $do_SurfaceRoutingModel = 0
+$set $do_lake_model = 1
+$set $do_unsatzon_model = 1
+$set $do_soil_model = 0
+$set $do_heat_transfer = 0
+$set $do_ExternalCoupling = 0
+$set $do_irrigation = 0
+$set $do_groundwater_flow = 1
+$set $do_routing_model = 1
+$set $do_substance_transport = 0
+$set $do_irrigation_table = 0
+$set $do_special_output = 0
+$set $do_data_assimilation = 0
+$set $do_spin_up = 0
+
+$set $DPreadgrids   = 0
+
+$set $grid           = doubs500
+$set $stack          = doubs500
+$set $suffix         = grd
+$set $code           = s
+
+
+# kd --> recession constant for single linear reservoir for direct runoff
+$set $kd1     = 2
+$set $kd2     = 2 
+$set $kd3     = 2 
+$set $kd4     = 2 
+$set $kd5     = 2 
+$set $kd6     = 2
+$set $kd7     = 2 
+$set $kd8     = 2 
+$set $kd9     = 2 
+$set $kd10    = 2 
+$set $kd11    = 2
+$set $kd12    = 2
+$set $kd13    = 2
+$set $kd14    = 2
+$set $kd15    = 2
+$set $kd16    = 2
+$set $kd17    = 2
+$set $kd18    = 2
+$set $kd19    = 2
+$set $kd20    = 2
+
+# ki --> recession constant for single linear reservoir for interflow
+$set $ki1     = 3
+$set $ki2     = 3 
+$set $ki3     = 3 
+$set $ki4     = 3
+$set $ki5     = 3 
+$set $ki6     = 3
+$set $ki7     = 3 
+$set $ki8     = 3 
+$set $ki9     = 3 
+$set $ki10    = 3 
+$set $ki11    = 3
+$set $ki12    = 3
+$set $ki13    = 3
+$set $ki14    = 3
+$set $ki15    = 3
+$set $ki16    = 3
+$set $ki17    = 3
+$set $ki18    = 3
+$set $ki19    = 3
+$set $ki20    = 3
+
+# dr --> drainage density (interflow generation parameter)
+$set $dr1     = 48.0  # 
+$set $dr2     = 48.0  # 
+$set $dr3     = 48.0  # 
+$set $dr4     = 48.0  # 
+$set $dr5     = 48.0  # 
+$set $dr6     = 48.0  # 
+$set $dr7     = 48.0  # 
+$set $dr8     = 48.0  # 
+$set $dr9     = 12.0  # water should go into groundwater and beeing extracted from there to Aare-JGK
+$set $dr10    = 48.0  # 
+$set $dr11    = 48.0  # 
+$set $dr12    = 12.0  # water should go into groundwater and beeing extracted from there to Aare-JGK
+$set $dr13    = 48.0  # 
+$set $dr14    = 48.0  # 
+$set $dr15    = 48.0  # 
+$set $dr16    = 48.0  # 
+$set $dr17    = 48.0  # 
+$set $dr18    = 48.0  # 
+$set $dr19    = 48.0  # 
+$set $dr20    = 48.0  # 
+
+# sdf --> Snow melt: Direct Runoff fraction
+$set $sdf1     = 0.05
+$set $sdf2     = 0.05 
+$set $sdf3     = 0.05 
+$set $sdf4     = 0.05 
+$set $sdf5     = 0.05 
+$set $sdf6     = 0.05
+$set $sdf7     = 0.05 
+$set $sdf8     = 0.05 
+$set $sdf9     = 0.05 
+$set $sdf10    = 0.05 
+$set $sdf11    = 0.05
+$set $sdf12    = 0.05
+$set $sdf13    = 0.05
+$set $sdf14    = 0.05
+$set $sdf15    = 0.05
+$set $sdf16    = 0.05
+$set $sdf17    = 0.05
+$set $sdf18    = 0.05
+$set $sdf19    = 0.05
+$set $sdf20    = 0.05
+
+# variables for standardgrids
+# first section: grids, which differ for different subdivisions of the basin
+$set $zone_grid             =  $grid//.e19
+$set $subcatchments         =  $grid//.ezg
+$set $flow_time_grid        =  $grid//.fzs_05 
+$set $river_links_grid      =  $grid//.lnk
+$set $regio_grid            =  $grid//.reg
+
+#second section: grids, which doesn't depend on subdivision (only pixel-values are of interest)
+$set $elevation_model       =  $grid//.dhk_lakesconst3
+$set $RelCellArea_grid      =  $grid//.rca
+$set $CellSizeX_grid        =  $grid//.csx
+$set $CellSizeY_grid        =  $grid//.csy
+$set $slope_grid            =  $grid//.slp
+$set $FlowDirection_grid    =  $grid//.fld
+$set $aspect_grid           =  $grid//.exp
+$set $land_use_grid         =  $grid//.use
+$set $ice_firn_grid         =  $grid//.ice
+$set $field_capacity_grid   =  $grid//.nfk
+$set $ATBgrid               =  $grid//.atb
+$set $hydr_cond_grid        =  $grid//.k
+$set $soil_types            =  $grid//.soil
+$set $sky_view_factor_grid  =  $grid//.hor
+$set $drain_depth_grid      =  $grid//.drn
+$set $drain_distance_grid   =  $grid//.dis
+$set $irrigationcodes       =  $grid//.irr19
+$set $max_pond_grid         =  $grid//.maxpond_c
+$set $clay_depth_grid       =  $grid//.cly
+$set $river_depth_grid      =  $grid//.dep2_0
+$set $river_width_grid      =  $grid//.wit5_0
+$set $tracer_1              =  $grid//.c1
+$set $tracer_2              =  $grid//.c2
+$set $tracer_3              =  $grid//.c3
+$set $tracer_4              =  $grid//.c4
+$set $tracer_5              =  $grid//.c5
+$set $tracer_6              =  $grid//.c6
+$set $tracer_7              =  $grid//.c7
+$set $tracer_8              =  $grid//.c8
+$set $tracer_9              =  $grid//.c9
+$set $kolmationsgrid        =  $grid//.kol
+$set $gw_kx_1_grid          =  $grid//.kx1
+$set $gw_kx_2_grid          =  $grid//.kx2
+$set $gw_kx_3_grid          =  $grid//.kx3
+$set $gw_ky_1_grid          =  $grid//.ky1
+$set $gw_ky_2_grid          =  $grid//.ky2
+$set $gw_ky_3_grid          =  $grid//.ky3
+$set $gw_bound_h_1_grid     =  $grid//.bh1
+$set $gw_bound_h_2_grid     =  $grid//.bh2
+$set $gw_bound_h_3_grid     =  $grid//.bh3
+$set $gw_bound_q_1_grid     =  $grid//.bq1a
+$set $gw_bound_q_2_grid     =  $grid//.bq2
+$set $gw_bound_q_3_grid     =  $grid//.bq3
+$set $aquiferthick1         =  $grid//.aq1
+$set $aquiferthick2         =  $grid//.aq2
+$set $aquiferthick3         =  $grid//.aq3
+$set $gw_storage_coeff_1    =  $grid//.s01
+$set $gw_storage_coeff_2    =  $grid//.s02
+$set $gw_storage_coeff_3    =  $grid//.s03
+$set $gw_kolmation_1        =  $grid//.gk1
+$set $gw_kolmation_2        =  $grid//.gk2
+$set $gw_kolmation_3        =  $grid//.gk3
+$set $lake_grid             =  $grid//.lake_IDs2
+$set $taucrit_grid          =  $grid//.tau
+$set $ThawCoeffPermaFrost   =  $grid//.alpha
+$set $debris_on_glaciers    =  $grid//.debris
+$set $slidefraction1        =  $grid//.sd1
+$set $slidefraction2        =  $grid//.sd2
+$set $slidefraction3        =  $grid//.sd3
+$set $slidefraction4        =  $grid//.sd4
+$set $depositionindex       =  $grid//.svfdir_2_masked_normalized
+$set $elevationordercols    =  $grid//.eoc
+$set $elevationorderrows    =  $grid//.eor
+
+# output grids for surface hydrology modules
+$set $nFK_grid_mm_min      =  uFCminmm//.//$suffix 
+$set $nFK_grid_mm_max      =  uFCmaxmm//.//$suffix 
+$set $nFK_grid_mm          =  uFCmm//.//$suffix      
+$set $nFK_grid_perc        =  uFCperc//.//$suffix 
+$set $forcingunitsgrid1    =  forc1//.//$suffix
+$set $TStartPhenoGrid1     =  phen1//.//$suffix
+$set $chillingunitsgrid1   =  chill1//.//$suffix
+$set $FStargrid1           =  fstar1//.//$suffix
+$set $forcingunitsgrid2    =  forc2//.//$suffix
+$set $TStartPhenoGrid2     =  phen2//.//$suffix
+$set $chillingunitsgrid2   =  chill2//.//$suffix
+$set $FStargrid2           =  fstar2//.//$suffix
+$set $forcingunitsgrid3    =  forc3//.//$suffix
+$set $TStartPhenoGrid3     =  phen3//.//$suffix
+$set $chillingunitsgrid3   =  chill3//.//$suffix
+$set $FStargrid3           =  fstar3//.//$suffix
+$set $albedo               =  albedo//.//$suffix
+$set $soilstoragegrid      =  sb__//.//$suffix
+$set $throughfall          =  qi__//.//$suffix
+$set $snowcover_outflow    =  qsno//.//$suffix
+$set $melt_from_snowcover  =  qsme//.//$suffix
+$set $days_snow            =  sday//.//$suffix
+$set $snow_age             =  sage//.//$suffix
+$set $snow_rate            =  snow//.//$suffix
+$set $rain_rate            =  rain//.//$suffix
+$set $firn_melt            =  qfir//.//$suffix
+$set $ice_melt             =  qice//.//$suffix
+$set $preci_grid           =  prec//.//$suffix
+$set $preci_grid1          =  prec1//.//$suffix
+$set $preci_grid2          =  prec2//.//$suffix
+$set $irrig_grid           =  irri//.//$suffix
+$set $etr2etpgrid          =  er2ep//.//$suffix
+$set $tempegrid            =  temp//.//$suffix
+$set $tempegrid1           =  temp1//.//$suffix
+$set $tempegrid2           =  temp2//.//$suffix
+$set $windgrid             =  wind//.//$suffix
+$set $sunshinegrid         =  ssd_//.//$suffix
+$set $radiationgrid        =  rad_//.//$suffix
+$set $humiditygrid         =  humi//.//$suffix
+$set $vaporgrid            =  vapo//.//$suffix
+$set $ETPgrid              =  etp_//.//$suffix
+$set $EIPgrid              =  eip_//.//$suffix
+$set $ETRgrid              =  etr_//.//$suffix
+$set $EVAPgrid             =  evap//.//$suffix
+$set $EVARgrid             =  evar//.//$suffix
+$set $ETRSgrid             =  etrs//.//$suffix
+$set $SSNOgrid             =  ssno//.//$suffix
+$set $SLIQgrid             =  sliq//.//$suffix
+$set $SSTOgrid             =  swe_//.//$suffix
+$set $SSNOOnGlacgrid       =  ssno_onGlac_//.//$suffix
+$set $SLIQOnGlacgrid       =  sliq_onGlac_//.//$suffix
+$set $SSTOOnGlacgrid       =  ssto_onGlac_//.//$suffix
+$set $sat_def_grid         =  sd__//.//$suffix
+$set $SUZgrid              =  suz_//.//$suffix
+$set $SIFgrid              =  sif_//.//$suffix
+$set $EIgrid               =  ei__//.//$suffix
+$set $SIgrid               =  si__//.//$suffix
+$set $ExpoCorrgrid         =  exco//.//$suffix
+$set $Tcorrgrid            =  tcor//.//$suffix
+$set $Shapegrid            =  shap//.//$suffix
+$set $INFEXgrid            =  infx//.//$suffix
+$set $SATTgrid             =  satt//.//$suffix
+$set $Nagrid               =  na__//.//$suffix
+$set $SSPgrid              =  ssp_//.//$suffix
+$set $Peakgrid             =  peak//.//$suffix
+$set $SBiagrid             =  sbia//.//$suffix
+$set $fcia_grid            =  nfki//.//$suffix
+$set $tavg_grid            =  tavg//.//$suffix
+
+# now variables for unsaturated zone model
+$set $SB_1_REL_grid  =  sb05rel//.//$suffix
+$set $SB_1_grid      =  sb05//.//$suffix
+$set $SB_2_grid      =  sb1_//.//$suffix
+$set $ROOTgrid       =  wurz//.//$suffix
+$set $QDgrid         =  qd__//.//$suffix
+$set $QIgrid         =  qifl//.//$suffix
+$set $GWdepthgrid    =  gwst//.//$suffix
+$set $GWthetagrid    =  gwth//.//$suffix
+$set $GWNgrid        =  gwn_//.//$suffix
+$set $UPRISEgrid     =  uprs//.//$suffix
+$set $PERCOLgrid     =  perc//.//$suffix
+$set $GWLEVELgrid    =  gwlv//.//$suffix
+$set $QDRAINgrid     =  qdrn//.//$suffix
+$set $QBgrid         =  qb__//.//$suffix
+$set $GWINgrid       =  gwin//.//$suffix
+$set $GWEXgrid       =  gwex//.//$suffix
+$set $act_pond_grid  =  pond//.//$suffix
+$set $MACROINFgrid   =  macr//.//$suffix
+$set $SUBSTEPSgrid   =  step//.//$suffix
+
+$set $SnowFreeDaysGrid = sfre//.//$suffix
+$set $SnowCoverDaysGrid = scov//.//$suffix
+$set $ThawDepthGrid    = thdp//.//$suffix
+$set $ThawDepthGridTMod = thaw//.//$suffix
+$set $ts_avg		= ts_avg//.//$suffix
+
+# variables for groundwater modeling
+$set $flowx1grid     =  gwx1//.//$suffix
+$set $flowx2grid     =  gwx2//.//$suffix
+$set $flowx3grid     =  gwx3//.//$suffix
+$set $flowy1grid     =  gwy1//.//$suffix
+$set $flowy2grid     =  gwy2//.//$suffix
+$set $flowy3grid     =  gwy3//.//$suffix
+$set $head1grid      =  gwh1//.//$suffix
+$set $head2grid      =  gwh2//.//$suffix
+$set $head3grid      =  gwh3//.//$suffix
+$set $GWbalance1grid =  gwbalance1//.//$suffix
+$set $GWbalance2grid =  gwbalance2//.//$suffix
+$set $GWbalance3grid =  gwbalance3//.//$suffix
+
+# result grids for surface routing model
+$set $surfspeed_grid        =  sfcv//.//$suffix
+$set $surfflux_grid         =  sflx//.//$suffix
+
+# some new stacks and grids for the dynamic glacier model
+$set $firn_WE_stack           = glfirn//.//$suffix
+$set $GlacierMassBalance      = glmb//.//$suffix
+$set $OldGlacierMassBalance   = glmb_old//.//$suffix
+$set $glacierizedCells_grid   = glc_//.//$suffix
+$set $glacier_codes_grid      = glid//.//$suffix
+
+# result-stacks for Unsatzonmodel
+$set $Thetastack              = thet//.//$suffix
+$set $hydraulic_heads_stack   = hhyd//.//$suffix
+$set $geodetic_altitude_stack = hgeo//.//$suffix
+$set $flowstack               = qu__//.//$suffix
+$set $concstack               = conc//.//$suffix
+$set $Temperaturestack	      = tsoil//.//$suffix
+
+# result-grids for snow model
+$set $snowtemperaturgrid       = snowtemp//.//$suffix
+$set $snowsurftemperaturgrid   = ssrftemp//.//$suffix
+$set $inputmassgrid            = inpmass//.//$suffix
+$set $mobilemassgrid           = mobmass//.//$suffix
+$set $depositiongrid           = deposit//.//$suffix
+$set $snowtemperaturgridGL     = snowtempgl//.//$suffix
+$set $snowsurftemperaturgridGL = ssrftempgl//.//$suffix
+$set $ETRSgridGl               = etrsgl//.//$suffix
+$set $QSNOWOnGlacgrid	       = qsmegl//.//$suffix
+
+# result-stacks for layered snow model
+$set $SWESstack			= swes_stack//.//$suffix	# stack with SWE solid values per snow layer
+$set $SWELStack			= swel_stack//.//$suffix	# stack with SWE liquid values per snow layer
+$set $temperSnowStack		= tempersnow_stack//.//$suffix	# stack with snow temperatures per snow layer
+$set $thetaSnowStack		= thetasnow_stack//.//$suffix	# stack with theta values per snow layer
+$set $hhSnowStack		= hhydsnow_stack//.//$suffix	# stack with hydraulic heads per snow layer
+$set $hgeoSnowStack		= hgeosnow_stack//.//$suffix	# stack with geodetic elevation per snow layer (bottom of layer)
+$set $quSnowStack		= qusnow_stack//.//$suffix	# stack with (bottom) water fluxes per snow layer
+$set $thickSnowStack		= thicksnow_stack//.//$suffix	# stack with the thickness of each snow layer
+$set $densSnowStack		= denssnow_stack//.//$suffix	# stack with density of each snow layer
+$set $upperIndexSnow		= upperIndexSnow//.//$suffix	# grid with the index of the first (uppermost) layer that constains snow
+
+
+# parameters for interpolation of meteorological input data
+$set $SzenUse        =  0
+$set $IDWmaxdist     =  100000
+$set $IDWweight      =  2
+$set $Anisoslope     =  45.0
+$set $Anisotropie    =  0.8
+
+
+# explanation of writegrid and outputcode some lines below
+$set $Writegrid_series 	= 3
+$set $Writegrid      	= 3
+$set $Write_no_grid  	= 0
+$set $Writestack     	= 3
+$set $Write_no_stack 	= 0
+
+$set $no_output  	 = 0
+$set $once_per_interval  = 2001
+$set $routing_code       = 4001
+
+
+[SpinUp]
+$do_spin_up
+
+
+[output_list]
+9     # number of subbasins which are scheduled for output (is only of interest, if the code for the statistic files are >5000)
+1		
+3	
+8	
+10	
+12	
+14
+16
+17
+19
+
+
+[output_interval]
+25             # increment of time steps until an output to the screen is done (24 = each day one output, if time steo = 1h)
+1              # warning level for interpolation (no station within search radius)
+1              # output of runoff results in 0=mm/time step, 1=m3/s   
+$time          # minutes from the hour-entry in the input data files until the end 
+# of the time step is reached 0 if the end of time step is given like "84 01 01 01", 
+# but it should be $time if the begin is given like in "84 01 01 00"
+WriteAsciiGrids = 1 					# 0 if grids should be written in WaSiM native format, 1 if in ESRI ASCII format
+WriteDoubleGrids = 0 					# 0 if grids should be written in WaSiM native format, 1 if in ESRI ASCII format
+InitialStateDirectory = $InitialStateDirectory 		# if using this parameter, all state grids  as well as the storage_richards.ftz file will be expected in that directory for reading
+DefaultOutputDirectory = $DefaultOutputDirectory 	# this is the default output directory, all output is written to unless the given filename contains an absolute path (starting with either / or ~ for UNIX or a drive letter and :/ for Windows
+
+
+[coordinates]
+47.0           # geogr. latitude (center of the basin -> for radiation calculations)
+6.6            # geogr. longitude (center of the basin)
+15.0           	# meridian according to the official time (middle europe: 15)(east: 0 ... +180 degree, west: 0 ... -180 (or 360 ... 180)
+0               # time shift of Meteo-data-time with respect to the true local time (mean sun time)
+
+[region_transition_distance]
+15000 # in m
+
+
+[soil_surface_groundwater_substeps]
+1 # number of sub time steps for the module group surface routing, unsaturated zone model and groundwater model (and accumulation of real evapotranspiration)
+
+
+[elevation_model]
+$inpath//$subdir_ingrids//$elevation_model    
+
+[zone_grid]
+$inpath//$subdir_ingrids//$zone_grid       
+
+
+[standard_grids]
+30                            	
+$inpath//$subdir_ingrids//$nFK_grid_mm_min      minFieldCapacity_mm	  fillcode = 1 defaultValue = 100 readcode = 0 outname = $outpath//$nFK_grid_mm_min   	writecode = $Write_no_grid  			# maximum usable field capacity in mm (depends on soil property psi_FC, or 200cm suction as default, calculated over the actual root depth at every time step, result of max grid is available when writecode contains a max output like 2xx)
+$inpath//$subdir_ingrids//$nFK_grid_mm_max      maxFieldCapacity_mm	  fillcode = 1 defaultValue = 100 readcode = 0 outname = $outpath//$nFK_grid_mm_max   	writecode = $Write_no_grid  			# maximum usable field capacity in mm (depends on soil property psi_FC, or 200cm suction as default, calculated over the actual root depth at every time step, result of max grid is available when writecode contains a max output like 2xx)
+$inpath//$subdir_ingrids//$nFK_grid_mm          usableFieldCapacity_mm    fillcode = 1 defaultValue = 100 readcode = 0 outname = $outpath//$nFK_grid_mm      	writecode = $Writegrid	statfile = $outpath//uFCmm.dat 		statcode = $once_per_interval  	# actual usable water capacity in mm (depends on max field capacity and the actual water content)
+$inpath//$subdir_ingrids//$nFK_grid_perc        usableFieldCapacity_perc  fillcode = 1 defaultValue = 100 readcode = 0 outname = $outpath//$nFK_grid_perc     	writecode = $Writegrid	statfile = $outpath//uFCperc.dat 	statcode = $once_per_interval  	# actual usable field capacity in % (depends on max field capacity and the actual water content)
+$inpath//$subdir_ingrids//$SB_1_REL_grid        SB_1_REL_grid             fillcode = 1  defaultValue = 1.0 readcode = 0 outname = $outpath//$SB_1_REL_grid  	writecode = $Writegrid	statfile = $outpath//sb_1_rel.dat 	statcode = $once_per_interval  	# 
+$inpath//$subdir_ingrids//$etr2etpgrid          ETR2ETP                   fillcode = 1  defaultValue = 1.0 readcode = 0 outname = $outpath//$etr2etpgrid  	writecode = $Writegrid	statfile = $outpath//etr2etp.dat 	statcode = $once_per_interval  	# 
+$inpath//$subdir_ingrids//$slope_grid       	slope_angle               1    			# grid with slope angle data
+$inpath//$subdir_ingrids//$aspect_grid      	slope_aspect              1    			# grid with slope aspect data
+$inpath//$subdir_ingrids//$land_use_grid    	landuse  		  fillcode = 1 		# writecode = 8 readcode = 1 outname = $outpath//$land_use_grid # grid with land use data (will be written out after reading in for getting gthe filles values)
+$inpath//$subdir_ingrids//$subcatchments    	zonegrid_soilmodel        1    			# zone grid for the runoff generation model (and unstaurated zone model)
+$inpath//$subdir_ingrids//$flow_time_grid   	flow_times                fillcode = 1 		# writecode = 8 readcode = 1 outname = $outpath//$flow_time_grid  		# grid with flow times for surface runoff to the subbasin outlet
+$inpath//$subdir_ingrids//$river_links_grid     river_links               0    			# grid with codes of tributaries, from which a channel was routed (only for real routing channels!!!)
+$inpath//$subdir_ingrids//$slidefraction1	slidefraction1		  fillcode = 0 		# new snow model extensions: fraction of the area flowing to the North (slides)
+$inpath//$subdir_ingrids//$slidefraction2	slidefraction2		  fillcode = 0 		# new snow model extensions: fraction of the area flowing to the West (slides)
+$inpath//$subdir_ingrids//$slidefraction3	slidefraction3		  fillcode = 0 		# new snow model extensions: fraction of the area flowing to the East (slides)
+$inpath//$subdir_ingrids//$slidefraction4	slidefraction4		  fillcode = 0 		# new snow model extensions: fraction of the area flowing to the South (slides)
+$inpath//$subdir_ingrids//$depositionindex      deposition_index          fillcode = 1 		# new snow model extensions: correction factor for wind impact on snow fall
+$inpath//$subdir_ingrids//$river_depth_grid     river_depth               0    			# grid with the depth of all streams in the stream network in m
+$inpath//$subdir_ingrids//$river_width_grid     river_width               0    			# grid with the witdh of all streams in m
+$inpath//$subdir_ingrids//$lake_grid		lake_codes                fillcode = 0 		# grid with a unique code for each lake
+$inpath//$subdir_ingrids//$soil_types       	soil_types                fillcode = 1 		# writecode = 8 readcode = 1 outname = $outpath//$soil_types     		# soil types as codes for the soil table
+$inpath//$subdir_ingrids//$kolmationsgrid       kolmation                 fillcode = 1 		# defaultValue = 1e-5   writecode = 8 readcode = 0 #outname = $outpath//$kolmationsgrid     # grid with codes of tributaries, from which a channel was routed (only for real routing channels!!!)
+$inpath//$subdir_ingrids//$aquiferthick1        aquifer_thickness_1       fillcode = 1 		# writecode = 8 readcode = 1 outname = $outpath//$aquiferthick1      # grid with thickness of first aquifer (m from soil surface to the aquifer bottom)
+$inpath//$subdir_ingrids//$gw_storage_coeff_1   gw_storage_coeff_1        fillcode = 1 		# defaultValue = 0.1    writecode = 8 readcode = 0 #outname = $outpath//$gw_storage_coeff_1 # storage coefficients for 1. aquifer
+$inpath//$subdir_ingrids//$gw_bound_h_1_grid    gw_boundary_fix_h_1       fillcode = 0 		# defaultValue = -9999  writecode = 8 readcode = 0 #outname = $outpath//$gw_bound_h_1_grid  # periodicity = 1 D 12 persistent = 0 # boundary conditions 1 constant head for layer 1
+$inpath//$subdir_ingrids//$gw_bound_q_1_grid    gw_boundary_fix_q_1       fillcode = 0 		# defaultValue = -9999  writecode = 8 readcode = 0 #outname = $outpath//$gw_bound_q_1_grid  # boundary conditions 2 (given flux perpendicular to the border) for layer 1
+$inpath//$subdir_ingrids//$gw_kx_1_grid         gw_k_x_1                  fillcode = 1 		# defaultValue = 1e-5   writecode = 8 readcode = 0 #outname = $outpath//$gw_kx_1_grid	# lateral hydraulic conductivities for the 1. aquifer in x direction
+$inpath//$subdir_ingrids//$gw_ky_1_grid         gw_k_y_1                  fillcode = 1 		# defaultValue = 1e-5   writecode = 8 readcode = 0 #outname = $outpath//$gw_ky_1_grid	# lateral hydraulic conductivities for the 1. aquifer in y direction
+$inpath//$subdir_ingrids//$gw_kolmation_1       gw_kolmation_1            fillcode = 1 		# defaultValue = 1e-5   writecode = 8 readcode = 0 # kolmation (leakage factor) between 1st and 2nd aquifer
+$inpath//$subdir_ingrids//$max_pond_grid        max_ponding_storage       fillcode = 1 defaultValue = 0 	# grid with height of small dams around the fields for water ponding (in m). 0 if no ponding occurs. For a call which is active in the lake grid, this value is the theoretical value when the pond overflows.
+
+
+[variable_grids]
+1                                                     		# Number of variable grids to read
+$outpath//$albedo            albedo               1  0 		# albedo; for time without snow derived from land use data
+$Writegrid                                             		# Writegrid for $albedo
+$readgrids                                             		# 0, if albedo is derived from land use at model start time, 1, if albedo is read from file
+
+
+[model_time]
+$starthour            #  start hour
+$startday             #  start day
+$startmonth           #  start month
+$startyear            #  start year
+$endhour              #  end hour
+$endday               #  end day
+$endmonth             #  end month
+$endyear              #  end year
+
+
+[meteo_data_count]
+6
+
+
+[meteo_names]
+temperature
+precipitation
+wind_speed
+air_humidity
+global_radiation
+sunshine_duration
+
+
+# methods: 
+# 1  = idw 
+# 2  = regress 
+# 3  = idw+regress 
+# 4  = thiessen 
+# 5  = bilinear 
+# 6  = bilinear gradients and residuals linarly combined, 
+# 7  = bicubic spline, 
+# 8  = bicubic splines of gradients and residuals linearly combined, 
+# 9  = read grids according to the name in a grid list file, 
+# 10 = regression from Stationdata instead from outputfile of regr.exe (similar to method 1, except that no station selection may be applied))
+# 11 = regression and IDW from station data (equivalent to method 3, except that no station selection may be applied)
+# 12 = Thiessen with given lapse rate (as single next line parameter or with multiple parameters lower lapse rate, upper limit, upper lapse rate, type (P-type or T-type , important for continuous or discontinuous data modelling)
+
+ 
+[temperature]
+10				# methods, see comments above
+$inpath//$subdir_timeseries//temperature.dat AdditionalColumns=0 # file name with station data (if method = 1, 3 or 4, else ignored)
+900 1200 350 1 100 		# lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$tempegrid          	# name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series	        # 0, if no grid-output is needed, else one of the codes described above
+1.0                           	# correction faktor for results
+$outpath//t2m_.dat $once_per_interval # file name for the statistic output (statially averaged values per time step and subcatchment...)
+998                           # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.1                           #  for interpolation method 3: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   #  max. distance of stations to the actual interpolation cell
+$Anisoslope                   #  slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  #  ratio of the short to the long axis of the anisotropy-ellipsis
+-40                           #  lower limit of interpolation results
+-40                           #  replace value for results below the lower limit
+40                            #  upper limit for interpolation results
+40                            #  replace value for results with larger values than the upper limit
+$SzenUse                      #  1=use scenario data for correction, 0=dont use scenarios
+1                             #  1=add scenarios, 2=multiply scenarios, 3=percentual change
+1                             # number of scenario cells
+
+
+[wind_speed]
+11                             	# methods, see comments above
+$inpath//$subdir_timeseries//windspeed.dat AdditionalColumns=0  # file name with station data (if method = 1, 3 or 4, else ignored)
+900 1200 350 1 100 		# lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$windgrid           	# name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series	        # 0, if no grid-output is needed, else one of the codes described above
+1.0                           	# correction faktor for results
+$outpath//wind.dat $once_per_interval  	# file name for the statistic output (statially averaged values per time step and subcatchment...)
+998                           # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.5                          # for interpolation method 3 and 11: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   # max. distance of stations to the actual interpolation cell
+$Anisoslope                   # slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  #  ratio of the short to the long axis of the anisotropy-ellipsis
+0                             # lower limit of interpolation results
+0                             # replace value for results below the lower limit
+90                            # upper limit for interpolation results
+90                            # replace value for results with larger values than the upper limit
+$SzenUse                      # 1=use scenario data for correction, 0=dont use scenarios
+3                             # 1=add scenarios, 2=multiply scenarios, 3=percentual change
+4                             # number of scenario cells
+
+
+[precipitation]
+11                            # methods, see comments above
+$inpath//$subdir_timeseries//precipitation.dat AdditionalColumns=0   # file name with station data (if method = 1,3,4,5,6,7,8 or 9 else ignored)
+900 1200 350 1 100 	      # lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$preci_grid         # name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series             # 0, if no grid-output is needed, else one of the codes described above
+1.0                           # correction faktor for results
+$outpath//prec.dat $once_per_interval  # file name for the statistic output (statially averaged values per time step and subcatchment...)
+998                           # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.75                          # for interpolation method 3: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   # max. distance of stations to the actual interpolation cell
+$Anisoslope                   #  slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  #  ratio of the short to the long axis of the anisotropy-ellipsis
+0.05                          # lower limit of interpolation results
+0                             # replace value for results below the lower limit
+90                            # upper limit for interpolation results
+90                            # replace value for results with larger values than the upper limit
+$SzenUse                      # 1=use scenario data for correction, 0=dont use scenarios
+3                             # 1=add scenarios, 2=multiply scenarios, 3=percentual change
+1                             # number of scenario cells
+
+
+[sunshine_duration]
+11                            # methods, see comments above
+$inpath//$subdir_timeseries//sunshine.dat AdditionalColumns=0  # file name with station data (if method = 1, 3 or 4, else ignored)
+900 1200 350 1 100 	      # lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$sunshinegrid       # name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series	        # 0, if no grid-output is needed, else one of the codes described above
+1.0                           # correction faktor for results
+$outpath//ssd_.dat $once_per_interval # file name for the statistic output (statially averaged values per time step and subcatchment...)
+998                           # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.25                          # for interpolation method 3: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   # max. distance of stations to the actual interpolation cell
+$Anisoslope                   # slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  # ratio of the short to the long axis of the anisotropy-ellipsis
+0                             # lower limit of interpolation results
+0                             # replace value for results below the lower limit
+1.0                           # upper limit for interpolation results
+1.0                           # replace value for results with larger values than the upper limit
+$SzenUse                      # 1=use scenario data for correction, 0=dont use scenarios
+3                             # 1=add scenarios, 2=multiply scenarios, 3=percentual change
+1                             # number of scenario cells
+
+
+[global_radiation]
+11                            # methods, see comments above
+$inpath//$subdir_timeseries//radiation.dat AdditionalColumns=0  # file name with station data (if method = 1, 3 or 4, else ignored)
+900 1200 350 1 100 	      # lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$radiationgrid      # name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series	        # 0, if no grid-output is needed, else one of the codes described above
+1.0                           # correction faktor for results
+$outpath//rad_.dat $once_per_interval # file name for the statistic output (statially averaged values per time step and subcatchment...)
+1360                          # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.5                           # for interpolation method 3: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   # max. distance of stations to the actual interpolation cell
+$Anisoslope                   #  slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  #  ratio of the short to the long axis of the anisotropy-ellipsis
+0                             # lower limit of interpolation results
+0                             # replace value for results below the lower limit
+1367                          # upper limit for interpolation results
+1367                          # replace value for results with larger values than the upper limit
+$SzenUse                      # 1=use scenario data for correction, 0=dont use scenarios
+1                             # 1=add scenarios, 2=multiply scenarios, 3=percentual change
+4                             # number of scenario cells
+
+
+[air_humidity]
+10                            # methods, see comments above
+$inpath//$subdir_timeseries//humidity.dat AdditionalColumns=0  # file name with station data (if method = 1, 3 or 4, else ignored)
+900 1200 350 1 100 	      # lower inversion [m asl], upper inversion [m asl], tolerance [m], overlap [0/1 for true/false], clusterlimit [m] 
+$outpath//$humiditygrid       # name of the output grid (is also used for deriving names of daily, monthly, yearly sums or averages)
+$Writegrid_series	        # 0, if no grid-output is needed, else one of the codes described above
+1.0                           # correction faktor for results
+$outpath//humi.dat $once_per_interval # file name for the statistic output (statially averaged values per time step and subcatchment...)
+9998                          # error value: all data in the input file greater than this values or lesser the negative value are nodata
+$IDWweight                    # weighting of the reciprocal distance for IDW
+0.5                           # for interpolation method 3: relative weight of IDW-interpolation in the result
+$IDWmaxdist                   # max. distance of stations to the actual interpolation cell
+$Anisoslope                   #  slope of the mean axis of the anisotropy-ellipsis (-90 ... +90 degree, mathem. positive)
+$Anisotropie                  #  ratio of the short to the long axis of the anisotropy-ellipsis
+0.01                          # lower limit of interpolation results
+0.01                          # replace value for results below the lower limit
+1.0                           # upper limit for interpolation results
+1.0                           # replace value for results with larger values than the upper limit
+$SzenUse                      # 1=use scenario data for correction, 0=dont use scenarios
+3                             # 1=add scenarios, 2=multiply scenarios, 3=percentual change
+1                             # number of scenario cells
+
+
+# ----------  parameter for model components  -----------------
+
+[RegionalSuperposition]
+$do_RegionalSuperposition
+$time
+
+
+[precipitation_correction]
+$do_precipitation_correction
+0.0                   # Snow-rain-temperature
+1.01                  # liquid:   b in:  y = p(ax + b)
+0.01                  # liquid:   a in:  y = p(ax + b) = 1% more per m/s + 0.5% constant
+1.01                  # Snow:     b in:  y = p(ax + b)
+0.05                  # Snow:     a in:  y = p(ax + b) = 15% more per m/s + 45% constant
+
+
+[radiation_correction]
+$do_radiation_correction	
+$time                		
+2                    		# control parameter for radiation correction (see above)
+$outpath//$Tcorrgrid 		# name of the grids with the corrected temperatures
+$Write_no_grid           	# Writegrid for corrected temperatures
+5				# scaling factor for temperature correction
+$outpath//$ExpoCorrgrid   	# name of the grids with the correction factors for the direct radiation
+$Write_no_grid           	# Writegrid
+$outpath//$Shapegrid 		# name of the grids for codes 1 for theor. shadow, 0 for theor. no shadow (day; assumed: SSD=1.0)
+$Write_no_grid           	# Writegrid
+1                    		# interval counter, after reaching this value, a new correction is calculated (3=all 3 hours a.s.o.)
+1                    		# Splitting of the interval, usefull for time step=24 hours (then: split=24, -> each hour one correction calculation)
+
+
+[evapotranspiration]
+$do_evapotranspiration
+$time
+1                        				# Method: 1=Penman-Monteith, 2=Hamon (only daily), 3=Wendling (only daily) 4= Haude (only daily)
+0.5  0.6  0.8  1.0  1.1 1.1 1.2 1.1 1.0 0.9 0.7 0.5  	# PEC correction factor for HAMON-evapotranspiration
+0.20 0.20 0.21 0.29 0.29 0.28 0.26 0.25 0.22 0.22 0.20 0.20 # fh (only for method 4: Haude) monthly values (Jan ... Dec) (here: for Grass)
+0.5                      				# fk -> factor for Wendling-evapotranspiration (only for Method = 3)
+$outpath//$ETPgrid       				# result grid for pot. evapotranspiration in mm/dt
+$Write_no_grid            				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//etp_.dat $no_output				# statisticfile for Teilgebiete of pot. evapo-Transpiration
+$outpath//$ETRgrid       				# result grid for real evapotranspiration in mm/dt
+$Write_no_grid            				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//etr_.dat $no_output				# statistic for subcatchments (zones) of the real evapotranspiration
+$outpath//$EVAPgrid      				# result grid for real evapotranspiration in mm/dt
+$Write_no_grid            				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//evap.dat $no_output				# statistic for subcatchments (zones) of the potential evaporation
+$outpath//$EVARgrid      				# result grid for real evapotranspiration in mm/dt
+$Write_no_grid            				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//evar.dat $no_output				# statistic for subcatchments (zones) of the real evaporation
+$outpath//$ETRSgrid	 				# result grid for real snow evapotranspiration in mm/dt
+$Write_no_grid        	 				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//etrs.dat $no_output				# statistic for subcatchments (zones) of the real snow evaporation
+$outpath//$EIPgrid       				# result grid for pot. interception evaporation in mm/dt
+$Write_no_grid               				# 0, if no grid-output is needed, else one of the codes described above
+$outpath//eip_.dat $no_output				# statisticfile for zones of pot. interception evaporation
+$outpath//rgex.dat $once_per_interval			# statistic for subcatchments (zones) of the corrected radiation
++0.23   +1.77    -2.28    +1.28    			# coefficients c for Polynom of order 3 RG = c1 + c2*SSD + c3*SSD^2 + c4*SSD^3
++0.072  -0.808   +2.112   -0.239   			# coefficients x for Polynom of order 3 SSD = x1 + x2*RG + x3*RG^2 + x4*RG^3
+0.88 0.05                          			# Extinktion coefficient for RG-modeling (Phi and dPhi) (summer phi = phi-dphi, winter phi=phi+dphi)
+1654.0                             			# recession constant (e-function for recession of the daily temperature amplitude with altitude [m]
+3.3  4.4  6.1  7.9  9.4  10.0  9.9  9.0  7.8  6.0  4.2  3.2  # monthly values of the max. daily T-amplitudes (for 0 m.a.s.l)
+0.62  0.1                          			# part of the temperature amplitude (dt), that is added to the mean day-temperature
+$outpath//cloud.dat $no_output				# statistic for subcatchments (zones) of the corrected radiation
+
+
+# snow model methods:
+# conventional:
+# 1 = T-index
+# 2 = T-u-Index
+# 3 = energy balance approach after Anderson
+# 4 = extended energy balance approach after Braun (based on Anderson) with observed vapor pressure
+# extended methods (introduced by Michael Warscher in 2013, implemented into WaSiMs main distribution by J. Schulla, 2014):
+# 5 = Enhanced energy balance approach (enhEnbal) (with more sophisticated parameter estimations)
+# 6 = enhEnbal + gravitational slides
+# 7 = enhEnbal + gravitational slides + wind redistribution
+# 8 = T-Index + gravitational slides
+# 9 = T-Index + gravitational slides + wind redistribution
+# 10 = T-Index + wind redistribution
+# 11 = enhEnbal + wind redistribution
+# 12 = T-u-Index + gravitational slides
+# 13 = T-u-Index + wind redistribution
+# 14 = T-u-Index + gravitational slides + wind redistribution
+
+[snow_model]
+$do_snow_model
+$time
+7	        # method 1=T-index, 2=t-u-index, 3=Anderson comb., 4=extended com.
+1.0             # transient zone for rain-snow (T0R +- this range)
+1.0             # T0R    temperature limit for rain (Grad Celsius)
+1.0             # T0     temperature limit snow melt
+0.05            # CWH    storage capacity of the snow for water (relative part)
+0.3		# CRFR   coefficient for refreezing
+1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6  1.6   # C0 degree-day-factor mm/d/C (1 value: constant for all months, 12 values: one value per month, linear interpolation between values, new values valid from each 16th)
+0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75  # C1 degree-day-factor without wind consideration  mm/(d*C) (1 value: constant for all months, 12 values: one value per month, linear interpolation between values, new values valid from each 16th)
+0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75 0.75  # C2 degree-day-factor considering wind mm/(d*C*m/s) (1 value: constant for all months, 12 values: one value per month, linear interpolation between values, new values valid from each 16th)
+0.07            # z0 roughness length cm for energy balance methods (not used)
+3.5             # RMFMIN minimum radiation melt factor      mm/d/C comb. method
+5.0             # RMFMAX maximum radiation melt factor      mm/d/C comb. method
+0.40            # Albedo for snow (Min)
+0.95            # Albedo for snow (Max)
+$outpath//$rain_rate         				# rain rate
+$Write_no_grid                    		# 0, if no grid-output is needed, else one of the codes described above
+$outpath//rain.dat $once_per_interval		# rain rate
+$outpath//$snow_rate         			# snow rate
+$Write_no_grid                    		# 0, if no grid-output is needed, else one of the codes described above
+$outpath//snow.dat $once_per_interval		# snow rate
+$outpath//$days_snow         			# days with snow (SWE > 5mm)
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//sday.dat $no_output			# days with snow (SWE > 5mm)
+$outpath//$snow_age          			# snow age (days without new snow)
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//sage.dat $no_output			# days since last snowfall
+$outpath//albe.dat $no_output			# Albedo
+$outpath//$snowcover_outflow 			# discharge from snow, input (precipitation) for following modules
+$Write_no_grid                   		# 0, if no grid-output is needed, else one of the codes described above
+$outpath//qsch.dat $no_output			# melt flow (or rain, if there is no snow cover) in mm/dt
+$outpath//$melt_from_snowcover 			# discharge from snow, input (precipitation) for following modules
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//qsme.dat $once_per_interval 		# melt flow in mm/dt
+$outpath//$SSNOgrid          			# name of the grids with the snow storage solid in mm
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//$SLIQgrid          			# name of the grids with the snow storage liquid in mm
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//swe_.dat $once_per_interval 		# total snow storage, in mm, (liquid and solid fraction)
+$outpath//$SSTOgrid          			# name of the grids with the total snow storage solid AND liquid in mm
+$Writegrid_series                   		# 0, if no grid-output is needed, else one of the codes described above
+$readgrids                   			# 1=read snow storage solid, liquid grids from disk, 0=generate new grids
+# now some new parameters and file names follow for the snow model extensions implemented in 2014 (originally done by M. Warscher and adopted and a little bit extended to the publicly available release in 2014 by J. Schulla)
+$outpath//$snowtemperaturgrid      		# result grid with snow pack temperature
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//snowtemp.dat $no_output 		# temperature of the snow pack (used for new energy balance model)
+$outpath//$snowsurftemperaturgrid  		# result grid with 
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//ssrftemp.dat $no_output 		# temperature of the snow surface (used for new energy balance model)
+$outpath//$inputmassgrid           		# result grid with snow surface temperature
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//inpmass.dat $no_output 		# input mass for snow redistribution (gravitational snow slides)
+$outpath//$mobilemassgrid          		# result grid with input mass for gravitational snow slides
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//mobmass.dat $no_output 		# moving/mobile mass for snow redistribution (gravitational snow slides)
+$outpath//$depositiongrid          		# result grid with deposition amount for each cell (gravitational snow slides)
+$Writegrid                   			# 0, if no grid-output is needed, else one of the codes described above
+$outpath//deposit.dat $no_output 		# deposition amount (mm) for gravitational slides
+55								# maximum deposition slope (0...90)
+10								# scaling for maximum deposition (0..inf)
+35								# minimum slope for creating slides (0...90) (scale dependent! The coarser the resolution, the smaller this value must be since the average slope decreases).
+0.0005								# fraction of snow pack that forms the slide (0...1]
+1.15    # LWINcorr: correction factor for incoming long wave radiation for fine tuning the energy balance (accouting together with LWOUTcorr for errors in cloudiness and albedo); recommended Values: 0.8...1.2
+0.90	# 0.85 # LWOUTcorr: correction factor for outgoing long wave radiation for fine tuning the energy balance (accouting together with LWINcorr for errors in cloudiness and albedo): recommended Values: 0.8...1.2
+0.85	# scaling factor for energy balance (taking into account that the complete snow pack is modelled as a single bulk mass instead of as several layers - when using layeredSnowModel, 1.0 can be used)
+
+
+[permafrost]
+1			# method: 1=simple Alpha*sqrt(snow-free-days) approach to estimate thawdepth
+30			# number of days with snow cover after which the soil is assumed to be froozen again
+5			# maximum snow water equivalent for the interval to be counted as snow covered (then, the snow-cover-days grid will be incremented by the length of an interval
+
+
+[interception_model]
+$do_interception_model          
+$time                        	
+11				# method: 1 = use ETP for calculating EI; 2 = use EIP for calculating EI (only effective for method 1 in evapotranspiration model -> for other methods, ETP = EIP)
+$outpath//$throughfall       	# result grid :  = outflow from the interception storage
+$Write_no_grid                  # 0, if no grid-output is needed, else one of the codes described above
+$outpath//qi__.dat $no_output	# statistic file interception storage outflow
+$outpath//$EIgrid            	# Interzeption evaporation, grid
+$Write_no_grid                	# 0, if no grid-output is needed, else one of the codes described above
+$outpath//ei__.dat $no_output	# zonal statistic
+$outpath//$SIgrid            	# storage content of the interception storage
+$Writegrid                	# 0, if no grid-output is needed, else one of the codes described above
+$outpath//si__.dat $no_output	# zonal statistic For interception storage content
+0.35                         	# layer thickness of the waters on the leaves (multiplied with LAI -> storage capacity)
+$readgrids                   	# 1=read grids from disk, else generate internal
+
+
+[infiltration_model]
+$do_infiltration_model 	
+$time                        	
+
+
+[SiltingUpModel]
+$do_SiltingUpModel 	
+$time                        	
+
+
+[SurfaceRoutingModel]
+$do_SurfaceRoutingModel 	
+$time                        	
+
+
+[lake_model]
+$do_lake_model
+2                            	# method for recalculating DHM,  
+# 1 = do not change the DHM, it refects already the ground surface of the lakes, 
+# 2 = use mean_pond_grid to calculate dhm corrections
+# max_pond_grid will be used for mapping the cells pond content to a lake during model runs - so the lake level may well rise above the normal surface
+0.15 				# Albedo_OpenWater (will be used only, when the pond is filled with water when calculating potential evaporation -> otherwise, the normal landuse for this cell is referenced for this parameter)
+0.05  				# z0 for water (usage as above) 
+$readgrids                   	# readgrid code 0 do not read, 1 = read grids --> 
+# if 0, the initial valte for the POND-grid as Volume of Lakes and Reservoirs is set by V0 from the routing description, 
+# if readgrids=1, no initialization in done (POND-Grid is read in) but the Vakt-Value is set by the various grids
+
+
+[data_assimilation]
+$do_data_assimilation
+$time
+
+
+[unsatzon_model]
+$do_unsatzon_model
+$time
+3                            	# method, 1=simple method (will not work anymore from version 7.x), 2 = FDM-Method 3 = FDM-Method with dynamic time step down to 1 secound
+2  				# controlling interaction with surface water: 0 = no interaction, 1 = exfitration possible 2 = infiltration and exfiltration possible
+1  				# controlling surface storage in ponds:       0 = no ponds,       1 = using ponds for surface storage (pond depth as standard grid needed -> height of dams oround fields)
+0  				# controlling artificial drainage:            0 = no artificial drainage 1 = using drainage (drainage depth and horizontal pipe distances as standard grids needed!)
+0  				# controlling clay layer:                     0 = no clay layer,  1 = assuming a clay layer in a depth, specified within a clay-grid (declared as a standard grid)
+5e-8                         	# permeability of the clay layer (is used for the clay layer only)
+4  				# parameter for the initialization of the gw_level (range between 1..levels (standard: 4))
+$outpath//qdra.dat $no_output	# results drainage discharge in mm per zone
+$outpath//gwst.dat $no_output	# results groundwater depth
+$outpath//gwn_.dat $once_per_interval	# results mean groundwater recharge per zone
+$outpath//sb05.dat $once_per_interval	# results rel. soil moisture within the root zone per zone
+$outpath//sb1_.dat $no_output	# results rel. soil moisture within the unsat. zone (0m..GW table) per zone
+$outpath//wurz.dat $no_output	# results statistic of the root depth per zone
+$outpath//infx.dat $no_output	# results statistic of the infiltration excess
+$outpath//pond.dat $no_output	# results statistic of the ponding water storage content
+$outpath//qdir.dat $once_per_interval	# results statistic of the direct discharge
+$outpath//qifl.dat $once_per_interval	# results statistic of the interflow
+$outpath//qbas.dat $once_per_interval   # results statistic of the baseflow
+$outpath//qges.dat $once_per_interval	# results statistic of the total discharge
+$outpath//gwin.dat $no_output		# statistic of the infiltration from surface water into groundwater (from rivers and lakes)
+$outpath//gwex.dat $once_per_interval	# statistic of the exfiltration from groundwater into surface water (into rivers and lakes)
+$outpath//macr.dat $no_output		# statistic of infiltration into macropores
+$outpath//qinf.dat $no_output		# statistic of total infiltration into the first soil layer
+$outpath//$SB_1_grid         		# grid with actual soil water content for the root zone
+$Writegrid                		# writegrid for this grid
+$outpath//$SB_2_grid         		# grid with actual soil water content for the entire unsaturated zone
+$Writegrid                		# writegrid for this grid
+$outpath//$ROOTgrid          		# grid with root depth 
+$Writegrid                		# writegrid for this grid
+$outpath//$Thetastack       		# stack, actual soil water content for all soil levels
+$Writestack                 		# Writecode for this stack
+$outpath//$hydraulic_heads_stack   	# stack, containing hydraulic heads
+$Writestack                 		# Writecode for this stack
+$outpath//$geodetic_altitude_stack   	# stack, containig geodaetic altitudes of the soil levels (lower boudaries)
+$Writestack                 		# Writecode for this stack
+$outpath//$flowstack        		# stack, containing the outflows from the soil levels
+$Writestack                 		# Writecode for this stack
+$outpath//$GWdepthgrid      		# grid with groudwaterdepth
+$Writegrid                  		# writegrid for this grid
+$outpath//$GWthetagrid      		# grid with theta in GWLEVEL
+$Writegrid                  		# writegrid for this grid
+$outpath//$GWNgrid          		# grid with groundwater recharge
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$GWLEVELgrid      		# grid with level index of groundwater surface (Index der Schicht)
+$Writegrid                  		# writegrid for this grid
+$outpath//$QDRAINgrid       		# grid with the drainage flows
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$SATTgrid         		# grid with code 1=saturation at interval start, 0 no sat.
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$INFEXgrid        		# grid with infiltration excess in mm (surface discharge)
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$QDgrid           		# grid with direct discharge
+$Writegrid               		# writegrid for this grid
+$outpath//$QIgrid           		# grid with Interflow
+$Writegrid               		# writegrid for this grid
+$outpath//$QBgrid           		# grid with baseflow
+$Writegrid               		# write code for baseflow
+$outpath//$GWINgrid         		# grid with infiltration from rivers into the soil (groundwater)
+$Writegrid               		# writegrid for re-infiltration
+$outpath//$GWEXgrid         		# grid with exfiltration (baseflow) from groundwater (is only generated, if groundwater module is active, else baseflow is in QBgrid)
+$Writegrid               		# writegrid for exfiltration
+$outpath//$act_pond_grid    		# grid with content of ponding storge
+$Writegrid                  		#
+$outpath//$UPRISEgrid       		# grid with amount of capillary uprise (mm)
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$PERCOLgrid       		# grid with amount of percolation (mm)
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$MACROINFgrid     		# grid with amount of infiltration into macropores (mm)
+$Write_no_grid                  	# Writecode for this grid
+$outpath//$irrig_grid        		# grid with irrigation amount (will be written when irrigation is used, only)
+$Write_no_grid                  	# Writecode for this grid
+36 50 					# coordinates of control plot, all theta and qu-values are written to files (qu.dat, theta.dat in the directory, from which the model is started)
+$outpath//qbot.dat  			# name of a file containing the flows between the layers of the control point
+$outpath//thet.dat  			# name of a file containing the soil moisture as theta values of the layers of the control point
+$outpath//hhyd.dat  			# name of a file containing the hydraulic head of the layers of the control point
+$outpath//otherdata.dat  		# name of a file containing some other water balance data of the control point (non layer data)
+$outpath//etrd.dat  			# name of a file containing the withdrawal of soil water for each layer for the control point (due to transpiration)
+$outpath//intd.dat  			# name of a file containing the interflow for the soil layers of the control point
+1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	100	101	102	# range for subbasin codes
+$kd1	$kd2	$kd3	$kd3	$kd5	$kd6	$kd7	$kd8	$kd9	$kd10	$kd11	$kd12	$kd13	$kd14	$kd15	$kd16	$kd17	$kd18	$kd19	$kd19	$kd19	$kd19	# kelsqd
+$ki1	$ki2	$ki3	$ki3	$ki5	$ki6	$ki7	$ki8	$ki9	$ki10	$ki11	$ki12	$ki13	$ki14	$ki15	$ki16	$ki17	$ki18	$ki19	$ki19	$ki19	$ki19	# kelsqi
+$dr1	$dr2	$dr3	$dr3	$dr5	$dr6	$dr7	$dr8	$dr9	$dr10	$dr11	$dr12	$dr13	$dr14	$dr15	$dr16	$dr17	$dr18	$dr19	$dr19	$dr19	$dr19	# drainage density
+0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	0.4	# k in qb = Q0 * exp(-k/z) with z = depth to groundwater
+0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	0.1	# Q0 in the above formula
+$sdf1	$sdf2	$sdf3	$sdf3	$sdf5	$sdf6	$sdf7	$sdf8	$sdf9	$sdf10	$sdf11	$sdf12	$sdf13	$sdf14	$sdf15	$sdf16	$sdf17	$sdf18	$sdf19	$sdf19	$sdf19	$sdf19	# fraction of surface runoff on snow melt
+$readgrids               		# meanings are extended now! read the follwing comments
+$outpath//storage_richards.ftz  	# if readgrids = 1, then this file contains the contents of the flow travel time zones for interflow and surface flow and for the tracers
+120 					# minimum dynamic time step in secounds. the smaller this number, the longer the model runs but the results will be more accurate due to a maintained Courant condition
+$outpath//step.dat $no_output		# results statistic of the number of substeps 
+$outpath//$SUBSTEPSgrid     		# grid with number of substeps --> a good idea is to use writecode 5x (e.g. 53) to get the average number of substeps per cell for the model run
+$Write_no_grid               		# for substeps, the areal distribution is of interest for the annual average value. This is code 6 as first digit in 2-digit codes. Or use 5 for the entire model run
+
+
+[unsatzon_tuning]
+maxerror = 1e-5
+max_iterations = 100
+
+
+[heat_transfer]
+$do_heat_transfer
+
+
+[ExternalCoupling]
+$do_ExternalCoupling
+
+
+[irrigation]
+$do_irrigation
+$time
+
+
+[groundwater_flow]
+$do_groundwater_flow            
+$time                    	
+1                        	# solving method: 1=Gauss-Seidel-iteration (using alpha for control wether it is explicite, partly or fully implicite), 2=PCG (not yet implemented
+100                      	# if iterative solving method (1): max.numberof iterations
+0.0001                 	 	# if iterative solving method (1): max. changes between two iterations
+1.0                      	# Alpha for estimation of central differences 0.5 = Crank-Nicholson Method, 0 = fully explicite, 1 = fully implicite
+1.0	                 	# factor for relaxing the iteration if using iterativemethod (successive over[/under] relaxation) 
+$readgrids               	# 1=read grids for heads from disk, 0=do not read but initialize with gw-level from unsaturated zone
+1                        	# number of layers 
+36 50                  		# coordinates of a control point for all fluxes and for each layer : q0..q4, leakage up and down
+$outpath//glog.dat  		# name of a file containing the flows between of the control point
+1                        	# use Pond Grid -> this enables the model to use the hydraulic head of a pond in addition to the groundwater itself 0=use traditional method without pond (default), 1=use ponds
+$outpath//$head1grid     	# (new) grid for hydraulic heads for layer 1
+$Writegrid               	# writecode for hydraulic heads for layer 1
+$outpath//$flowx1grid    	# (new) grid for fluxes in x direction for layer 1
+$Writegrid               	# writecode for flux-x-grid in layer 1
+$outpath//$flowy1grid    	# (new) grid for fluxes in y direction for layer 1
+$Writegrid               	# writecode for flux-y-grid in layer 1
+$outpath//$GWbalance1grid 	# (new) grid for balance (difference of storage change vs. balance of fluxes -> should be 0 or the amount of in-/outflows by boundary conditions
+$Writegrid            		# writecode for balance control grid in layer 1 (should be at least one sum grid per year --> Code = 20 or 23 (if old grids must be read in)
+
+
+[groundwater_tuning]
+frozenDepthScaling = 0.0 	# if frozen soils impact on groundwater flows should be reduced, this parameter can be set in the range of 0...1 (1 is fully effectiv as without section groundwater_tuning at all)
+
+
+[soil_model]
+$do_soil_model
+$time
+
+
+# the following declarations will be used in routing descriotions for easier switching on and of  of reservoirs.
+# because: if one simply removes a reservoir with its depending abstractions and inflows, the numbering of abstractions and inflows is no longer 
+# without gap. So this list of abstractions can be used to close this gap (by renumbering all values in a manner that 
+# all n remaining abstractions and inflows are numbered without gap from 1 to n
+#the symbols are used consistently for inflows and outflows.
+$set $1   =  1
+$set $2   =  2
+$set $3   =  3
+$set $4   =  4
+$set $5   =  5
+$set $6   =  6
+$set $7   =  7
+$set $8   =  8
+$set $9   =  9
+$set $10  =  10
+$set $11  =  11
+$set $12  =  12
+$set $13  =  13
+$set $14  =  14
+$set $15  =  15
+$set $16  =  16
+$set $17  =  17
+$set $18  =  18
+$set $19  =  19
+$set $20  =  20
+$set $21  =  21
+$set $22  =  22
+$set $23  =  23
+$set $24  =  24
+$set $25  =  25
+$set $26  =  26
+$set $27  =  27
+$set $28  =  28
+$set $29  =  29
+$set $30  =  30
+             
+$set $dtmin1 = 60 # Sekundenzeitschritt, in dem Stauseen aktualisiert werden (insbesondere kleine SPs m ssen hier kleiner 60 haben um numerisch stabil zu bleiben
+$set $dtmin2 = 120 # Sekundenzeitschritt, in dem Stauseen aktualisiert werden (grosse Seen, 1min reicht aus)
+
+$set $ManningH = 30.0
+
+
+[routing_model]
+$do_routing_model                    	
+$time
+1 4800 150 48         	# minimum/maximum specific discharge (l/s/km^2), number of log. fractions of the range, splitting of the timeintervall (24= 1 hour-intervalls are splitted into 24 Intervalls each of 2.5 min. duration)
+$outpath//qgko.dat $routing_code  
+$inpath//$subdir_timeseries//obsrunoff.dat
+19			# number of following column descripotr (which column in the spec. disch. file corresponds to which subbasin
+1	1	# Doubs - Ocourt		# first number: subbasin, second: column index
+2	2	# Doubs - Goumois 		# -> if there is no column, the entry may be skipped or the column must be set to 0
+3	3	# Doubs - Le Noirmont
+4	0	# Doubs - Combe des Sarrasins
+5	0	# 
+6	4	# Doubs - La Rasse
+7	0	# 
+8	5	# Doubs - Les Brenets
+9	0	# Bied du Locle - La Ranconniere
+10	6	# Doubs - Ville du Pont
+11	7	# Doubs - Doubs
+12	8	# Doubs - Cluese et Mijoux
+13	9	# Doubs - Oye et Pallet
+14	10	# Doubs - Labergement
+15	11	# Doubs - Mouthe
+16	12	# Drugeon - Vuillecin
+17	13	# Drugeon - Riviere Drugeon
+18	14	# Drugeon - Vaux
+19	15	# Allaine - Boncourt
+0      #  timeoffset (for r-square calculation. intervals up to this parameter are not evaluated in r-square calculation. e.g. 12: first 12 intervals are neglected )
+TG 100 (AE=65.5000000, AErel=1.0)
+ from OL 101 (kh=0.1, kv=0.4, Bh= 8.1, Bv= 32.6, Th= 0.81, Mh=25.0, Mv=10.0, I=0.0048, L=4500.0, AE=44.2500000)
+TG 102 (AE=172.7500000, AErel=1.0)
+ from OL 100 (kh=0.1, kv=0.4, Bh= 9.5, Bv= 37.8, Th= 0.95, Mh=25.0, Mv=10.0, I=0.0047, L=5500.0, AE=65.5000000)
+TG 19 (AE=209.0000000, AErel=1.0)
+ from OL 102 (kh=0.1, kv=0.4, Bh=15.4, Bv= 61.4, Th= 1.54, Mh=25.0, Mv=10.0, I=0.0025, L=9000.0, AE=172.7500000)
+TG 14 (AE=180.0000000, AErel=1.0)
+ from OL 15 (kh=0.1, kv=0.4, Bh=11.2, Bv= 44.7, Th= 1.12, Mh=25.0, Mv=10.0, I=0.0044, L=12500.0, AE=98.0000000)
+TG 13 (AE=250.2500000, AErel=1.0)
+ from OL 14 (kh=0.1, kv=0.4, Bh=17.9, Bv= 71.4, Th= 1.79, Mh=25.0, Mv=10.0, I=0.0012, L=14500.0, AE=180.0000000)
+  and SP 4 ( file = $outpath//spv_04_sub13.dat , V0 = 81.0E6, C0 = 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0, dTmin = $dtmin1 )  # Lac de Saint-Point
+TG 12 (AE=353.2500000, AErel=1.0)
+ from OL 13 (kh=0.1, kv=0.4, Bh=20.9, Bv= 83.6, Th= 2.09, Mh=25.0, Mv=10.0, I=0.0010, L=6500.0, AE=250.2500000)
+TG 11 (AE=395.2500000, AErel=1.0)
+ from OL 12 (kh=0.1, kv=0.4, Bh=17.8, Bv= 71.3, Th= 1.78, Mh=25.0, Mv=10.0, I=0.0047, L=6500.0, AE=353.2500000)
+TG 17 (AE=94.2500000, AErel=1.0)
+ from OL 18 (kh=0.1, kv=0.4, Bh= 7.8, Bv= 31.1, Th= 0.78, Mh=25.0, Mv=10.0, I=0.0027, L=14000.0, AE=29.2500000)
+TG 16 (AE=186.2500000, AErel=1.0)
+ from OL 17 (kh=0.1, kv=0.4, Bh=14.5, Bv= 58.0, Th= 1.45, Mh=25.0, Mv=10.0, I=0.0010, L=18000.0, AE=94.2500000)
+TG 10 (AE=651.2500000, AErel=1.0)
+ from OL 11 (kh=0.1, kv=0.4, Bh=22.3, Bv= 89.1, Th= 2.23, Mh=25.0, Mv=10.0, I=0.0018, L=18500.0, AE=395.2500000)
+  and OL 16 (kh=0.1, kv=0.4, Bh=17.5, Bv= 70.0, Th= 1.75, Mh=25.0, Mv=10.0, I=0.0014, L=17000.0, AE=186.2500000)
+TG 9 (AE=121.2500000, AErel=1.0)
+ from AL 1 (modus = extern $outpath//abstraction_09.dat 0.4 0.95 25 m^3/s )
+TG 8 (AE=963.5000000, AErel=1.0)
+ from OL  9 (kh=0.1, kv=0.4, Bh= 8.9, Bv= 35.7, Th= 1.04, Mh=25.0, Mv=10.0, I=0.0136, L=5500.0, AE=121.2500000)
+  and OL 10 (kh=0.1, kv=0.4, Bh=29.9, Bv=119.7, Th= 2.99, Mh=25.0, Mv=10.0, I=0.0010, L=27000.0, AE=651.2500000)
+  and SP 3 ( file = $outpath//spv_03_sub08.dat , V0 = 8.0E6, C0 = 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0, dTmin = $dtmin1 )  # Lac des Brenets
+TG 7 (AE=973.7500000, AErel=1.0)
+ from OL  8 (kh=0.1, kv=0.4, Bh=20.4, Bv= 81.8, Th= 2.26, Mh=25.0, Mv=10.0, I=0.0122, L=4500.0, AE=963.5000000)
+  and SP 2 ( file = $outpath//spv_02_sub07.dat , V0 = 21.0E6, C0 = 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0, dTmin = $dtmin1 )  # Lac de Moron
+  and AL 2 (modus = intern_with_rule_from_reservoir ) # for power generation from Lac de Moron weekdays
+  and AL 3 (modus = intern_with_rule_from_reservoir ) # for power generation from Lac de Moron weekends
+TG 6 (AE=1013.5000000, AErel=1.0)
+ from OL 7 (kh=0.1, kv=0.4, Bh=25.7, Bv=102.8, Th= 2.57, Mh=25.0, Mv=10.0, I=0.0051, L=12000.0, AE=973.7500000)
+  and ZL 2 (modus = intern , kh=0.1, kv=0.4, Bh=25.7, Bv=102.8, Th= 2.57, Mh=25.0, Mv=10.0, I=0.0051, L=12000.0, AE=973.7500000)
+  and ZL 3 (modus = intern , kh=0.1, kv=0.4, Bh=25.7, Bv=102.8, Th= 2.57, Mh=25.0, Mv=10.0, I=0.0051, L=12000.0, AE=973.7500000)
+TG 5 (AE=1106.5000000, AErel=1.0)
+ from OL  6 (kh=0.1, kv=0.4, Bh=27.0, Bv=108.0, Th= 2.70, Mh=25.0, Mv=10.0, I=0.0042, L=5000.0, AE=1013.5000000)
+  and SP 1 ( file = $outpath//spv_01_sub05.dat , V0 = 1.0E6, C0 = 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0, dTmin = $dtmin1 )  # Lac de Biaufond
+TG 4 (AE=1116.0000000, AErel=1.0)
+ from OL  5 (kh=0.1, kv=0.4, Bh=21.7, Bv= 87.0, Th= 2.38, Mh=25.0, Mv=10.0, I=0.0120, L=4000.0, AE=1106.5000000)
+TG 3 (AE=1142.7500000, AErel=1.0)
+ from OL  4 (kh=0.1, kv=0.4, Bh=29.2, Bv=116.9, Th= 2.92, Mh=25.0, Mv=10.0, I=0.0033, L=8500.0, AE=1116.0000000)
+TG 2 (AE=1164.7500000, AErel=1.0)
+ from OL  3 (kh=0.1, kv=0.4, Bh=27.8, Bv=111.3, Th= 2.78, Mh=25.0, Mv=10.0, I=0.0045, L=6500.0, AE=1142.7500000)
+TG 1 (AE=1297.7500000, AErel=1.0)
+ from OL  2 (kh=0.1, kv=0.4, Bh=31.8, Bv=127.4, Th= 3.18, Mh=25.0, Mv=10.0, I=0.0023, L=37500.0, AE=1164.7500000)
+  and ZL  1 (modus = extern $inpath//$subdir_timeseries//inflow_from_birs.dat 4 5 , kh=0.1, kv=0.4, Bh=31.8, Bv=127.4, Th= 3.18, Mh=25.0, Mv=10.0, I=0.0023, L=37500.0, AE=1164.7500000) # external inflow from Birs basin (was extracted there as groundwater boundary condition of constant flux)
+  
+
+# Abstraction rule Lac de Biaufond
+[abstraction_rule_reservoir_1] # Lac de Biaufond
+14	1	366
+0	0	0	
+1.0e5	1	1	
+5.0e5	4	4	
+1.0e6	5	5	
+1.5e6	6	6	
+2.0e6	6	6	
+2.5e6	6	6	
+3.0e6	6	6	
+3.5e6	8	8	
+4.0e6	11	11	
+4.5e6	15	12	
+5.0e6	20	20	
+5.2e6	60	60	# ori:	300	300	
+6.0e6	500	500	
+
+#-------------------------------------------------------------------------------------------------------------------------------------
+
+# Abstraction rule Lac de Moron; this is the donation water rule and flood relief
+# [abstraction_rule_reservoir_2] # Lac de Moron
+# 14	32	60	91	121	152	182	213	244	274	305	335	366
+# 0	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2
+# 6.0e6	2	2	2	2	2	2	2	2	2	2	2	2
+# 8.0e6	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5
+# 12.0e6	3	3	3	3	3	3	3	3	3	3	3	3
+# 16.0e6	5	5	5	5	5	5	5	5	5	5	5	5
+# 18.0e6	5	5	5	5	5	5	5	5	5	5	5	5
+# 19.0e6	6	6	6	6	6	6	6	6	6	6	6	6
+# 19.5e6	10	10	10	11	11	11	11	11	11	10	10	10
+# 20.0e6	20	20	20	40	40	40	40	40	40	20	20	20
+# 20.5e6	55	55	55	55	55	55	55	55	55	20	20	20
+# 21.0e6	80	80	80	80      80	80	80      80      80      80	80	80
+# 21.5e6	100	100	80	100	100	100	100	100	100	80	80	80
+# 22.0e6	120	120	120	150	150	150	150	150	150	120	120	120
+# 24.0e6	500	500	500	500	500	500	500	500	500	500	500	500
+
+
+# modified by jk
+[abstraction_rule_reservoir_2] # Lac de Moron
+14	1	366
+0	1.2	1.2
+6.0e6	2	2
+8.0e6	2.5	2.5
+12.0e6	3	3
+16.0e6	5	5
+18.0e6	5	5
+19.0e6	6	6
+19.5e6	8	8
+20.0e6	12	12
+20.5e6	25	25
+21.0e6	50	50
+21.5e6	80	80
+22.0e6	120	120
+24.0e6	500	500
+
+
+[abstraction_rule_abstraction_2] # Lac de Moron Power generation weekdays
+11		32	60	91	121	152	182	213	244	274	305	335	366			
+0		0	0	0	0	0	0	0	0	0	0	0	0		
+16.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	
+17.5E+06	2	2	2	2	2	2	2	2	2	2	2	2	
+19.0E+06	25	25	25	25	25	25	25	25	25	25	25	25	
+19.5E+06	25	25	25	0	0	0	0	0	0	25	25	25	
+20.0E+06	25	25	25	0	0	0	0	0	0	25	25	25	
+20.5E+06	25	25	25	0	0	0	0	0	0	25	25	25	
+21.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	
+21.5E+06	0	0	0	0	0	0	0	0	0	0	0	0	
+22.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	
+24.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	
+TargetCap =	500	500	500	500	500	500	500	500	500	500	500	500	# maximum capacity of the target river: abstraction is reduced automatically if the resulting total runoff would be higher (works best with single inflows into a river)	
+WeekDays  =	12345	12345	12345	12345	12345	12345	12345	12345	12345	12345	12345	12345	# defines the days of week (ranging from 1 for Monday to 7 for Sunday) the rule is active. On other days	no abstraction is abstracted
+start_hour =	8	8	8	8	8	8	8	8	8	8	8	8	# at which time should the abstraction start (0=at midnight	12=at noon
+stop_hour  =	17	17	17	17	17	17	17	17	17	17	17	17	# at which time should the abstraction stop (time format as for start time)	
+
+															
+[abstraction_rule_abstraction_3] # Lac de Moron Power generation weekends
+11		32	60	91	121	152	182	213	244	274	305	335	366			
+0		0	0	0	0	0	0	0	0	0	0	0	0		
+16.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	# 
+17.0E+06	1	1	1	1	1	1	1	1	1	1	1	1	# 
+19.0E+06	8	8	8	8	8	8	8	8	8	8	8	8	# 
+19.5E+06	8	8	8	0	0	0	0	0	0	8	8	8	# 
+20.0E+06	8	8	8	0	0	0	0	0	0	8	8	8	# 
+20.5E+06	8	8	8	0	0	0	0	0	0	8	8	8	# 
+21.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	# 
+21.5E+06	0	0	0	0	0	0	0	0	0	0	0	0	# 
+22.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	# 
+24.0E+06	0	0	0	0	0	0	0	0	0	0	0	0	# 
+TargetCap =	500	500	500	500	500	500	500	500	500	500	500	500	# maximum capacity of the target river: abstraction is reduced automatically if the resulting total runoff would be higher (works best with single inflows into a river)	
+WeekDays  =	67	67	67	67	67	67	67	67	67	67	67	67	# defines the days of week (ranging from 1 for Monday to 7 for Sunday) the rule is active. On other days	no abstraction is abstracted
+start_hour =	8	8	8	8	8	8	8	8	8	8	8	8	# at which time should the abstraction start (0=at midnight	12=at noon
+stop_hour  =	17	17	17	17	17	17	17	17	17	17	17	17	# at which time should the abstraction stop (time format as for start time)	
+															
+
+#-------------------------------------------------------------------------------------------------------------------------------------
+
+# Abstraction rule Lac des Brenets
+# [abstraction_rule_reservoir_3] # Lac des Brenets
+# 10	32	60	91	121	152	182	213	244	274	305	335	366
+# 0	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	1.2	
+# 2.0e6	1.8	1.8	1.8	1.8	1.8	1.8	1.8	1.8	1.8	1.8	1.8	1.8	
+# 3.0e6	2	2	2	2	2	2	2	2	2	2	2	2	
+# 6.0e6	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	2.5	
+# 7.0e6	3	3	3	3	3	3	3	3	3	3	3	3	
+# 9.5e6	5	5	5	5	5	5	5	5	5	5	5	5	
+# 10.0e6	12	12	12	12	12	12	12	12	12	12	12	12	
+# 10.5e6	25	25	25	25	25	25	25	25	25	25	25	25	
+# 11.0e6	100	100	100	100	100	100	100	100	100	100	100	100	
+# 12.0e6	500	500	500	500	500	500	500	500	500	500	500	500	
+
+# modified by jk
+[abstraction_rule_reservoir_3] # Lac des Brenets
+10	1	366
+0	1.2	1.2
+2.0e6	1.8	1.8
+3.0e6	2	2
+6.0e6	2.5	2.5
+7.0e6	3	3
+9.5e6	5	5
+10.0e6	8	8
+10.5e6	15	15
+11.0e6	50	50
+11.5e6	100	100
+12.0e6	500	500
+
+
+# Abstraction rule Lac de Saint Point
+
+# [abstraction_rule_reservoir_4] # Lac de Saint Point
+# 10	32	60	91	121	152	182	213	244	274	305	335	366
+# 75.0e6	0.5       0.5       0.5       0.5       0.5       0.5       0.5       0.5       0.5       0.5       0.5       0.5       
+# 78.0e6	1         1         1         1         1         1         1         1         1         1         1         1         
+# 79.0e6	2         2         2         2         2         2         2         2         2         2         2         2         
+# 80.0e6	3         3         3         3         3         3         3         3         3         3         3         3         
+# 81.0e6	5         5         5         5         5         5         5         5         5         5         5         5         
+# 81.5e6	10        10        10        10        10        10        10        10        10        10        10        10        
+# 82.0e6	20        20        20        20        20        20        20        20        20        20        20        20        
+# 82.5e6	60        60        60        60        60        60        60        60        60        60        60        60        
+# 83.0e6	100       100       100       100       100       100       100       100       100       100       100       100       
+# 85.0e6	300       300       300       300       300       300       300       300       300       300       300       300       
+
+# modified by jk
+[abstraction_rule_reservoir_4] # Lac de Saint Point
+10	1	366
+75.0e6	0.5     0.5
+78.0e6	1       1  
+79.0e6	2       2  
+80.0e6	3       3  
+81.0e6	5       5  
+81.5e6	10      10 
+82.0e6	20      20 
+82.5e6	40      40 
+83.0e6	70      70
+85.0e6	300     300
+
+
+# the following section defines combinations of single landuse types to combinations of them.
+# e.g. a landuse type deciduous forest may contain of oaks, bushes, and herbs, so each of those three components
+# must be parameterised in the traditional landuse table. Example: oaks = code 1, bushes = code 2, herbs = code 3
+# here, the combination of oaks, bushes and herbs will be parameterised like: 1 deciduous_forest { layers = 1, 2, 3;}
+# The VCF (vegetation covered fraction) of each landuse will define the amount of water and radiation (except diffuse 
+# radiation which will go through the canopy layer) reaching the next layer. The uppermost layer must be listed first, 
+# the next layer follows then a.s.o.
+# All multilayer-landuses must have an equal number of layers. Missing layers can be filled up from the end of the 
+# list using landuse code 9999, e.g. grassland would be defined in a 3-layer configuration by "2 grass {layers = 4, 9999, 9999;}
+# When the multilayer_landuse table is used, the codes of the LANDUSE-Grid are referring no longer to the landuse_table 
+# anymore but to the multilayer_table following. The codes in the old landuse table are reffering to the entries in the 
+# multilayer_landuse table
+
+# declaring some common variables for vegetation period dependent grid-writing
+# default (if not used in land use table at all) is JDVegReset = 1 and JDVegWrite = 365
+$set $JDVegReset = 1
+$set $JDVegWrite = 365
+
+[multilayer_landuse]
+17 # count of multilayer landuses
+1  Wasserfl chen	{ Landuse_Layers = 16, -9999;	k_extinct = 0.3; LAI_scale = 20;}
+2  Bebauung		{ Landuse_Layers = 2,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+3  Teilbebauung		{ Landuse_Layers = 1,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+4  Wald			{ Landuse_Layers = 13,  4;	k_extinct = 0.3; LAI_scale = 20;}
+5  offener_Wald		{ Landuse_Layers = 14,  6;	k_extinct = 0.3; LAI_scale = 20;}
+6  Gebueschwald		{ Landuse_Layers = 10,  4;	k_extinct = 0.3; LAI_scale = 20;}
+7  Ackerland		{ Landuse_Layers = 7,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+8  Gruenland		{ Landuse_Layers = 5,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+9  Obstbauflaechen	{ Landuse_Layers = 17,  4;	k_extinct = 0.3; LAI_scale = 20;}
+10 Gebuesch		{ Landuse_Layers = 10,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+11 verbuschtes_Weidel	{ Landuse_Layers = 9,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+12 uebrige_Gruenfl	{ Landuse_Layers = 6,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+13 Moore_Suempfe	{ Landuse_Layers = 15,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+14 versteinte_wiesen	{ Landuse_Layers = 4,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+15 Felsflaechen_Oedland	{ Landuse_Layers = 3,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+16 Gletscher		{ Landuse_Layers = 22,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+21 Deponien		{ Landuse_Layers = 3,  -9999;	k_extinct = 0.3; LAI_scale = 20;}
+
+
+[landuse_table]
+19
+1  teilversiegelte_Flaechen {method = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.3;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 100   100   100   80    75    75     75     75     80     90     100    100  ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 150   150   150   150   150   150    150    150    150    150    150    150  ;
+	        LAI              = 1     1     1     1     1     1      1      1      1      1      1      1    ;
+	        Z0               = 1     1     1     1     1     1      1      1      1      1      1      1    ;
+	        VCF              = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        RootDepth        = 0.4   0.4   0.4   0.4   0.4   0.4    0.4    0.4    0.4    0.4    0.4    0.4  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+2  versiegelte_Flaechen {method = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.2;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 100   100   100   100   100   100    100    100    100    100    100    100  ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200  ;
+	        LAI              = 1     1     1     1     1     1      1      1      1      1      1      1    ;
+	        Z0               = 1     1     1     1     1     1      1      1      1      1      1      1    ;
+	        VCF              = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        RootDepth        = 0.4   0.4   0.4   0.4   0.4   0.4    0.4    0.4    0.4    0.4    0.4    0.4  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+3  vegetationslose_Flaechen {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.2;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 100   100   100   100   100   100    100    100    100    100    100    100  ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 150   150   150   150   150   150    150    150    150    150   150   150   ;
+	        LAI              = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        Z0               = 0.1   0.1   0.1   0.1   0.1   0.1    0.1    0.1    0.1    0.1    0.1    0.1 ;
+	        VCF              = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        RootDepth        = 0.1   0.1   0.1   0.1   0.1   0.1    0.1    0.1    0.1    0.1    0.1    0.1  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+4  spaerliche_Vegetation {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.2;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 90    90    80    70	   70	 70		70	   70	  70	 80     90     90   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 150   150   150   150   150   150    150    150    150    150    150    150  ;
+	        LAI              = 1     1     1     1.5   1.5   2      2      2      1.5    1.5    1      1    ;
+	        Z0               = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        VCF              = 0.2   0.2   0.2   0.2   0.4   0.4    0.4    0.4    0.3    0.2    0.2    0.2  ;
+	        RootDepth        = 0.4   0.4   0.4   0.4   0.4   0.4    0.4    0.4    0.4    0.4    0.4    0.4  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+5  Intensiv-Gruenland {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.25  0.25  0.25  0.25  0.25  0.25   0.25   0.25   0.25   0.25   0.25   0.25 ;
+	        rsc              = 90    90    80    70    65    65     60     65     65     70     90     90   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200  	200	   200  ;
+	        LAI              = 2     2     2     3     4     4      4      4      3      3      2      2    ;
+	        Z0               = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        VCF              = 0.95  0.95  0.95  0.95  1.0   1.0    1.0    1.0    0.95   0.95   0.95   0.95 ;
+	        RootDepth        = 0.3   0.3   0.4   0.5   0.5   0.6    0.6    0.5    0.5    0.4    0.3    0.3  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+6  Extensiv-Gruenland {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.4;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.25  0.25  0.25  0.25  0.25  0.25   0.25   0.25   0.25   0.25   0.25   0.25 ;
+	        rsc              = 90    90    80    70    60    60     55     55     60     70     90     90   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200  ;
+	        LAI              = 2     2     2     2     3     3      3      3      3      3      2      2    ;
+	        Z0               = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2 ;
+	        VCF              = 0.9   0.9   0.9   0.95  1.0   1.0    1.0    1.0    0.95   0.9    0.9    0.9  ;
+	        RootDepth        = 0.4   0.4   0.4   0.4   0.4   0.4    0.4    0.4    0.4    0.4    0.4    0.4  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+7  Intensiv-Ackerland_unbewaessert {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.4;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.25  0.25  0.25  0.25  0.25  0.25   0.25   0.25   0.25   0.25   0.25   0.25 ;
+	        rsc              = 80    80    75    65    60    50     50     50     65     70     90     90   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200  ;
+	        LAI              = 1     1     2     3     4     5      5      4      3      3      1      1    ;
+	        Z0               = 0.1   0.1   0.1   0.15  0.2   0.2    0.2    0.2    0.2    0.1	0.1    0.1  ;
+	        VCF              = 0.3   0.3   0.3   0.7   0.8   0.95   0.95   0.8    0.7    0.3    0.3    0.3  ;
+	        RootDepth        = 0.15  0.15  0.2   0.4   0.5   0.5    0.5    0.5    0.4    0.2    0.15   0.15 ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+8  Extensiv-Ackerland {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.4;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.25  0.25  0.25  0.25  0.25  0.25   0.25   0.25   0.25   0.25   0.25   0.25 ;
+	        rsc              = 80    80    75    65    60    50     50     50     65     70     90     90   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200  ;
+	        LAI              = 1     1     2     3     4     4      4      4      3      3      1      1    ;
+	        Z0               = 0.1   0.1   0.1   0.15  0.2   0.2    0.2    0.2    0.2    0.1	0.1    0.1  ;
+	        VCF              = 0.3   0.3   0.3   0.5   0.8   0.8    0.8    0.7    0.6    0.3    0.3    0.3  ;
+	        RootDepth        = 0.15  0.15  0.2   0.4   0.5   0.5    0.5    0.5    0.4    0.2    0.15   0.15 ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+9  Heidevegetation {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 80    80    70    60    60    60     60     65     65     70     70     80   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 3     3     3     4     4     4      4      4      3      3      3      3    ;
+	        Z0               = 0.1   0.1   0.1   0.15  0.2   0.2    0.2    0.2    0.2    0.1	0.1    0.1  ;
+	        VCF              = 1     1     1     1     1     1      1      1      1      1      1      1    ;
+	        RootDepth        = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+10  Busch-Kraut-Vegetation_mitteldicht {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        rsc              = 80    80    70    60    60    60     60     60     60     65     70     80   ;
+#	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 3     3     3     4     5     5      4      4      3      3      3      3    ;
+	        Z0               = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        VCF              = 0.9   0.9   0.9   0.9   0.95  0.95   0.95   0.95   0.95   0.9    0.9    0.9  ;
+	        RootDepth        = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+11  Laubwald {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.15  0.15  0.15  0.15  0.15  0.15   0.15   0.15   0.15   0.15   0.15   0.15 ;
+	        rsc              = 100   100   95    65    60    60     60     60     65     75     100    100  ;
+	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 1     1     4     4     6     8      8      7      6      5      1      1    ;
+	        Z0               = 2     2     2     3     5     5      5      5      4      3      2      2    ;
+	        VCF              = 0.7   0.7   0.7   0.8   0.95  0.95   0.95   0.95   0.9    0.8    0.7    0.7  ;
+	        RootDepth        = 1.4   1.4   1.4   1.4   1.4   1.4    1.4    1.4    1.4    1.4    1.4    1.4  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+12  Nadelwald {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.12  0.12  0.12  0.12  0.12  0.12   0.12   0.12   0.12   0.12   0.12   0.12 ;
+	        rsc              = 80    80    75    65    60    60     60     65     65     75     80     80   ;
+	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 6     6     8     8     10    10     10     10     8      8      6      6    ;
+	        Z0               = 3     3     3     3     3     3      3      3      3      3      3      3    ;
+	        VCF              = 0.9   0.9   0.9   0.9   0.95  0.95   0.95   0.95   0.95   0.9    0.9    0.9  ;
+	        RootDepth        = 1.2   1.2   1.2   1.2   1.2   1.2    1.2    1.2    1.2    1.2    1.2    1.2  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+13  Mischwald {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.6;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.15  0.15  0.15  0.15  0.15  0.15   0.15   0.15   0.15   0.15   0.15   0.15 ;
+	        rsc              = 90    90    85    70    65    65     65     65     70     75     90     90   ;
+	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 3     3     3     6     8     8      8      8      8      6      3      3    ;
+	        Z0               = 2.5   2.5   2.5   3.0   3.5   4.5    4.5    4.5    4.0    3.0    2.5    2.5  ;
+	        VCF              = 0.8   0.8   0.8   0.9   0.92  0.92   0.92   0.92   0.9    0.8    0.8    0.8  ;
+	        RootDepth        = 1.3   1.3   1.3   1.3   1.3   1.3    1.3    1.3    1.3    1.3    1.3    1.3  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+14  locker_baumbestanden {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.5;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.15  0.15  0.15  0.15  0.15  0.15   0.15   0.15   0.15   0.15   0.15   0.15 ;
+	        rsc              = 90    90    85    60    65    60     60     60     65     75     90     90   ;
+	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 200   200   200   200   200   200    200    200    200    200    200    200 ;
+	        LAI              = 2.5   2.5   2.5   3.5   4.0   4.0    4.0    4.0    3.5    2.5    2.5    2.5  ;
+	        Z0               = 2.5   2.5   2.5   2.5   2.5   2.5    2.5    2.5    2.5    2.5    2.5    2.5  ;
+	        VCF              = 0.4   0.4   0.4   0.4   0.8   0.9    0.9    0.9    0.7    0.4    0.4    0.4  ;
+	        RootDepth        = 1.3   1.3   1.3   1.3   1.3   1.3    1.3    1.3    1.3    1.3    1.3    1.3  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+15  Moore_Suempfe {method  = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.5;
+	        IntercepCap      = 0.0;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349  ;
+	        Albedo           = 0.15  0.15  0.15  0.15  0.15  0.15   0.15   0.15   0.15   0.15   0.15   0.15 ;
+	        rsc              = 50    50    40    40    40    40     40     40     50     50     50     50   ;
+	        rs_interception  = 0.5   0.5   0.5   0.5   0.5   0.5    0.5    0.5    0.5    0.5    0.5    0.5  ;
+	        rs_evaporation   = 100   100   100   100   100   100    100    100    100    100    100    100  ;
+	        LAI              = 3     3     3     3     4     4      4      4      3      3      3      3    ;
+	        Z0               = 0.1   0.1   0.1   0.1   0.1   0.1    0.1    0.1    0.1    0.1    0.1    0.1  ;
+	        VCF              = 0.8   0.8   0.8   0.9   0.9   0.9    0.9    0.9    0.8    0.8    0.8    0.8  ;
+	        RootDepth        = 0.2   0.2   0.2   0.2   0.2   0.2    0.2    0.2    0.2    0.2    0.2    0.2  ;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+16  Wasserflaechen  {method  = VariableDayCount;
+		RootDistr 	= 1;
+		TReduWet 	= 1;
+		LimitReduWet 	= 1;
+		HReduDry 	= 150;
+		IntercepCap 	= 0;
+		JulDays  	= 365;
+		Albedo 		= 0.15;
+ 		rsc 		= 1;
+		rs_interception = 0;
+		rs_evaporation 	= 0;
+		LAI 		= 1;
+		Z0 		= 0.1;
+		VCF  		= 1;
+		RootDepth  	= 1;
+		AltDep  	= 0;
+	        }
+17 horticulture    {method   = VariableDayCount;
+	        RootDistr        = 1.0;
+	        TReduWet         = 0.95;
+	        LimitReduWet     = 0.5;
+	        HReduDry         = 3.45;
+	        IntercepCap      = 0.35;
+	        JulDays          = 15    46    74    105   135   166    196    227    258    288    319    349 ;
+	        Albedo           = 0.25  0.25  0.25  0.25  0.25  0.25   0.25   0.25   0.25   0.25   0.25   0.25;
+	        rsc              = 100   100   90    80    55    55     55     55     65     75     100    100;
+	        rs_interception	 = 100   100   90    60    50    50     50     50     50     70     100    100;
+	        rs_evaporation	 = 280	 280   280   280   280	 280	280    280    280    280    280	   280;
+	        LAI              = 0.5   0.5   0.5   2     4     5      5      5      4      3      0.5    0.5;
+	        Z0               = 1.0   1.0   1.0   1.0   1.0   1.0    1.0    1.0    1.0    1.0    1.0    1.0;
+	        VCF              = 0.75  0.75  0.75  0.75  0.75  0.75   0.75   0.75   0.75   0.75   0.75   0.75;
+	        RootDepth        = 0.8   0.8   0.8   0.8   0.8   0.8    0.8    0.8    0.8    0.8    0.8    0.8;
+	        AltDep           = 0.025 0.025 0.025 0.025 0.025 0.025 -0.025 -0.025 -0.025 -0.025 -0.025 -0.025;
+	        }
+22  Eisflaechen  {method  = VariableDayCount;
+		RootDistr 	= 1;	
+		TReduWet 	= 1;	
+		LimitReduWet 	= 1;	
+		HReduDry 	= 150;	
+		IntercepCap 	= 0; 	
+		JulDays  	= 365;  
+		Albedo 		= 0.38;
+ 		rsc 		= 100;    
+		rs_interception = 0;
+		rs_evaporation 	= 400;
+		LAI 		= 1.0;
+		Z0 		= 0.05;
+		VCF  		= 1.0;
+		RootDepth  	= 0.1;
+		AltDep  	= 0;
+	        }
+23  Firnflaechen  {method  = VariableDayCount;
+		RootDistr 	= 1;	
+		TReduWet 	= 1;	
+		LimitReduWet 	= 1;	
+		HReduDry 	= 150;	
+		IntercepCap 	= 0; 	
+		JulDays  	= 365;  
+		Albedo 		= 0.60;
+ 		rsc 		= 100;    
+		rs_interception = 0;
+		rs_evaporation 	= 400;
+		LAI 		= 1.0;
+		Z0 		= 0.05;
+		VCF  		= 1.0;
+		RootDepth  	= 0.1;
+		AltDep  	= 0;
+	        }
+
+#----------------------------------		
+# 1x
+
+$set $1e3 = 1.00e-3
+
+$set $9e4 = 9.00e-4				
+$set $8e4 = 8.00e-4				
+$set $7e4 = 7.00e-4				
+$set $6e4 = 6.00e-4				
+$set $5e4 = 5.00e-4				
+$set $4e4 = 4.00e-4				
+$set $3e4 = 3.00e-4				
+$set $2e4 = 2.00e-4				
+$set $1.4e4 = 1.40e-4				
+$set $1e4 = 1.00e-4				
+
+$set $9e5 = 9.00e-5				
+$set $8e5 = 8.00e-5				
+$set $7e5 = 7.00e-5				
+$set $6e5 = 6.00e-5				
+$set $5e5 = 5.00e-5				
+$set $4e5 = 4.00e-5				
+$set $3e5 = 3.00e-5				
+$set $2e5 = 2.00e-5				
+$set $1.4e5 = 1.40e-5
+$set $1e5 = 1.00e-5				
+
+$set $9e6 = 9.00e-6				
+$set $8e6 = 8.00e-6				
+$set $7e6 = 7.00e-6				
+$set $6e6 = 6.00e-6				
+$set $5e6 = 5.00e-6				
+$set $4e6 = 4.00e-6				
+$set $3e6 = 3.00e-6				
+$set $2e6 = 2.00e-6				
+$set $1.4e6 = 1.40e-6
+$set $1e6 = 1.00e-6				
+
+$set $9e7 = 9.00e-7				
+$set $8e7 = 8.00e-7				
+$set $7e7 = 7.00e-7				
+$set $6e7 = 6.00e-7				
+$set $5e7 = 5.00e-7				
+$set $4e7 = 4.00e-7				
+$set $3e7 = 3.00e-7				
+$set $2e7 = 2.00e-7				
+$set $1.4e7 = 1.40e-7
+$set $1e7 = 1.00e-7				
+
+$set $9e8 = 9.00e-8				
+$set $8e8 = 8.00e-8				
+$set $7e8 = 7.00e-8				
+$set $6e8 = 6.00e-8				
+$set $5e8 = 5.00e-8				
+$set $4e8 = 4.00e-8				
+$set $3e8 = 3.00e-8				
+$set $2e8 = 2.00e-8				
+$set $1.4e8 = 1.40e-8
+$set $1e8 = 1.00e-8				
+
+$set $9e9 = 9.00e-9			
+$set $8e9 = 8.00e-9			
+$set $7e9 = 7.00e-9			
+$set $6e9 = 6.00e-9			
+$set $5e9 = 5.00e-9			
+$set $4e9 = 4.00e-9			
+$set $3e9 = 3.00e-9			
+$set $2e9 = 2.00e-9			
+$set $1.4e9 = 1.40e-9
+$set $1e9 = 1.00e-9			
+
+#----------------------------------		
+		
+$set $ThicknessScaling1 = 1.0 # original:  2 m with factor=1 
+$set $ThicknessScaling2 = 1.0 # original:  5 m with factor=1 
+$set $ThicknessScaling3 = 1.0 # original: 17 m with factor=1
+
+$set $MaxInterflowdepth1 = 1.2
+$set $MaxInterflowdepth2 = 1.5
+$set $MaxInterflowdepth3 = 1.8
+
+$set $PMacroThresh1	= 8.0   
+$set $MacroCapacity1 	= 0.5  
+$set $CapacityRedu1	= 0.7    
+$set $MacroDepth1 	= 1.0 
+
+$set $PMacroThresh2	= 8.0   
+$set $MacroCapacity2 	= 1.0
+$set $CapacityRedu2	= 0.7    
+$set $MacroDepth2 	= 1.5 
+
+$set $PMacroThresh3	= 8.0   
+$set $MacroCapacity3 	= 1.0
+$set $CapacityRedu3	= 0.7    
+$set $MacroDepth3 	= 2.0 
+
+[GlobalSoilParameters]
+psi_FC_global = 200; (hPa) 		# if this value is set, all soil types will use this value for all horizons, except when usePsiFCglobalForUnassignedOnly = 1;
+usePsiFCglobalForUnassignedOnly = 1; 	# if 0: psi_FC_global is used for all soil types and horizons, wether the local value of psi_FC is set or not. if 1, then only those soil types will use the global value, that not have a local psi_FC set.
+
+# field capacities (psi_FC):
+# sand 60-100 hPa (100 hPa)
+# silt 100-300 hPa (200 hPa)
+# clay 300-500 hPa (300 hPa)
+
+$set $S		= 60 	# sand
+$set $LS	= 100 	# loamy sand
+$set $SL	= 150 	# sandy loam
+$set $L		= 200 	# loam
+$set $SC	= 200 	# sandy clay
+$set $SIL	= 250 	# silty loam
+$set $SICL	= 300 	# silty clay loam
+$set $CL	= 300 	# clay loam
+$set $SIC	= 350 	# silty clay
+$set $HMT	= 100 	# Hochmoortorf 
+$set $NMT	= 100 	# Niedermoortorf 
+$set $M		= 100 	# Moor
+$set $R		= 100 	# rock
+
+
+[soil_table]
+7
+#co- name of the 	# van Genuchten Parameter nach Carsel & Parrish (1988)
+#de  soil profile
+#-- ---------------
+43	Clay_light_deep {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling3 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth3 ;
+			PMacroThresh   		= $PMacroThresh3;  
+			MacroCapacity  		= $MacroCapacity3; 
+			CapacityRedu   		= $CapacityRedu3;   
+			MacroDepth     		= $MacroDepth3;  
+		    	horizon   		= 1       2		;
+			Name			= T_Cu	  Sub_Cu	;  	
+			ksat      		= $4e7 	  $3e7		;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.43    0.45  	; 	
+			theta_res 		= 0.078   0.067 	;	
+			(hPa)psi_FC		= $SIC	  $SIC		;
+			alpha     		= 1.47 	  1.47		;	
+			Par_n     		= 1.25    1.25  	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.20    1.5	  	; #16m 
+			layers    		= 10       10		;
+		}
+9	loam_shallow {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling1 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth1;
+			PMacroThresh   		= $PMacroThresh1;  
+			MacroCapacity  		= $MacroCapacity1; 
+			CapacityRedu   		= $CapacityRedu1;   
+			MacroDepth     		= $MacroDepth1;  
+		    	horizon   		= 1       2		;
+			Name			= T_L	  Sub_L		;  	
+			ksat      		= $1e5    $8e6		;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.40    0.38  	; 	
+			theta_res 		= 0.080   0.110 	;	
+			(hPa)psi_FC		= $L	  $L		;
+			alpha     		= 1.6 	  1.6		;	
+			Par_n     		= 1.42    1.42   	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.10    0.15  	; #2m 
+			layers    		= 10       10		;
+		}
+29	loam_medium {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling2 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth2;
+			PMacroThresh   		= $PMacroThresh2;  
+			MacroCapacity  		= $MacroCapacity2; 
+			CapacityRedu   		= $CapacityRedu2;   
+			MacroDepth     		= $MacroDepth2;  
+		    	horizon   		= 1       2		;
+			Name			= T_L	  Sub_L		;  	
+			ksat      		= $1e5    $8e6		;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.40    0.38  	; 	
+			theta_res 		= 0.080   0.110 	;	
+			(hPa)psi_FC		= $L	  $L		;
+			alpha     		= 1.6 	  1.6		;	
+			Par_n     		= 1.42    1.42   	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.20    0.30  	; #4m 
+			layers    		= 10       10		;
+		}
+49	loam_deep {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling3 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth3;
+			PMacroThresh   		= $PMacroThresh3;  
+			MacroCapacity  		= $MacroCapacity3; 
+			CapacityRedu   		= $CapacityRedu3;   
+			MacroDepth     		= $MacroDepth3;  
+		    	horizon   		= 1       2		;
+			Name			= T_L	  Sub_L		;  	
+			ksat      		= $1e5    $8e6		;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.40    0.38  	; 	
+			theta_res 		= 0.080   0.110 	;	
+			(hPa)psi_FC		= $L	  $L		;
+			alpha     		= 1.6 	  1.6		;	
+			Par_n     		= 1.42    1.42   	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.20    1.5   	; #16m 
+			layers    		= 10      10		;
+		}
+11	sandy_loam_shallow {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling1 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth1;
+			PMacroThresh   		= $PMacroThresh1;  
+			MacroCapacity  		= $MacroCapacity1; 
+			CapacityRedu   		= $CapacityRedu1;   
+			MacroDepth     		= $MacroDepth1;  
+		    	horizon   		= 1       2		;
+			Name			= T_Ls	  Sub_Ls	;  	
+			ksat      		= $2e5    $1.4e5	;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.40    0.38  	; 	
+			theta_res 		= 0.080   0.110 	;	
+			(hPa)psi_FC		= $SL	  $SL		;
+			alpha     		= 3.6 	  3.6		;	
+			Par_n     		= 2.1     2.1   	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.10    0.15  	; #2m 
+			layers    		= 10       10		;
+		}
+52	loamy_sand_deep {
+			method 			= MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling3 ; 		
+ 			MaxInterflowDepth 	= $MaxInterflowdepth3;
+			PMacroThresh   		= $PMacroThresh3;  
+			MacroCapacity  		= $MacroCapacity3; 
+			CapacityRedu   		= $CapacityRedu3;   
+			MacroDepth     		= $MacroDepth3;  
+		    	horizon   		= 1       2		;
+			Name			= T_Sl	  Sub_Sl	;  	
+			ksat      		= $1e4    $5e5	    	;	
+			k_recession 		= 0.95    0.95  	;
+			theta_sat 		= 0.37    0.30  	; 	
+			theta_res 		= 0.080   0.10  	;	
+			(hPa)psi_FC		= $LS	  $LS		;
+			alpha     		= 4.0 	  4.0		;	
+			Par_n     		= 3.0     3.0   	;	
+			Par_tau			= 0.5	  0.5		;  	
+			thickness 		= 0.20    1.5   	; #16m 
+			layers    		= 10       10		;
+		}
+14	23_Seen_subhydrische_Boeden {
+			method = MultipleHorizons;
+			ThicknessScaling	= $ThicknessScaling3 ; 	
+			MaxInterflowDepth	= $MaxInterflowdepth3 ;
+			PMacroThresh		= 0;  
+			MacroCapacity		= 0; 
+			CapacityRedu		= 0;   
+			MacroDepth		= 0;  
+			horizon			= 1	2	3	;  	
+			Name			= SIL	SIL	CL	;  	
+			ksat			= $3e7	$1e7	$1e7	; 
+			k_recession		= 0.9	0.9	0.9	;  	
+			theta_sat		= 0.45	0.45	0.40	;	
+			theta_res		= 0.067	0.067	0.095	;	
+			(hPa)psi_FC		= $SIL	$SIL	$CL	;
+			alpha			= 2.00	2.0	1.90	;	
+			Par_n			= 1.41	1.41	1.31	;	
+			Par_tau			= 0.5	0.5	0.5	;  	
+			thickness		= 0.10	0.30	2.00	;	# 19.0 m
+			layers			= 9	2	9	;
+		}
+
+
+[substance_transport]
+$do_substance_transport
+
+
+[irrigation_table]
+$do_irrigation_table                  
+
+
+[special_output]
+$do_special_output 
+$time 
+
+
