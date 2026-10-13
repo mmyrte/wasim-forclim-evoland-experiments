@@ -84,11 +84,11 @@ Not in the grid table, but equally binding: the soil model sorts river-link cell
 
 All three are checked bit for bit against WaSiM: interception and snow evaporation over every step and active cell, the soil functions against WaSiM's own C++ code.
 
-| Port | File | Reference | Result |
+| Port | Kernel (wasim-gt) / check (here) | Reference | Result |
 | --- | --- | --- | --- |
-| interception, methods 1/11, multiple vegetation layers | `interception.py` | golden Doubs setup, 48 hourly steps, grid dumps before and after the call | all 12 output grids (per-layer and total storage, evaporation, throughfall, remaining ETP) **bit-identical**, numpy and `gtfn_cpu` backends |
-| snow evaporation, conventional and energy-balance branches | `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
-| soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `soil/van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
+| interception, methods 1/11, multiple vegetation layers | `wasim_gt.processes.interception` / `interception.py` | golden Doubs setup, 48 hourly steps, grid dumps before and after the call | all 12 output grids (per-layer and total storage, evaporation, throughfall, remaining ETP) **bit-identical**, numpy and `gtfn_cpu` backends |
+| snow evaporation, conventional and energy-balance branches | `wasim_gt.processes.snow_evaporation` / `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
+| soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
@@ -145,8 +145,9 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
 | dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |
+| simple permafrost model | 100–200 | 0.03–0.05 M |
 | Richards column, one option set (no tracers, no macropores), plus river links | 6,000–8,000 | 0.8–1.5 M |
-| heat transport and layered snow in the column, only if the Swiss setup needs them (not in `scope.md`) | 2,000–3,000 | 0.3–0.5 M |
+| heat transport and layered snow in the column, only if the Swiss setup needs them (not in wasim-gt's scope) | 2,000–3,000 | 0.3–0.5 M |
 | groundwater | 2,000 | 0.2–0.35 M |
 | routing and lakes in Python | 3,000–4,000 | 0.3–0.6 M |
 | driver: state object, time loop in compiled code, I/O, ensemble dimension, GPU tuning | | 0.3–0.5 M |

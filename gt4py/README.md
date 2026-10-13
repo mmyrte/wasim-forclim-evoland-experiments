@@ -1,8 +1,14 @@
-# Reimplementing WaSiM's physics in GT4Py: feasibility
+# GT4Py: feasibility and per-process validation
 
-**Short answer: not trivial, but feasible for a chosen subset of processes.** A complete replication of WaSiM would be very large. Porting the processes and method variants our reference setups (Doubs, Rhone) switch on, without simplifying them, is realistic for an LLM agent. [`scope.md`](scope.md) lists what is in and out of that scope, and what a complete replication would take. Cost: about 2.5–4 million tokens of agent work (see [`coupling.md`](coupling.md#effort-in-tokens-and-compute)), if every process is validated against WaSiM as it is ported. The ports so far reproduce WaSiM bit for bit. The main cost is not the equations but the implicit coupling between modules, which is now documented in [`coupling.md`](coupling.md).
+The reimplementation is now its own repository, **wasim-gt** (private, mmyrte/wasim-gt). Its scope, compared with all of WaSiM, is in its `docs/scope.md` and its design decisions in `docs/architecture.md`. The ported kernels moved there (`wasim_gt.processes`, `wasim_gt.soil`). This directory keeps:
 
-**Update 2026-10-13:** module coupling documented, no blockers found; interception, snow evaporation and the soil hydraulic functions ported bit-identically; WaSiM has a grid dump hook for per-process validation. Details in `coupling.md`.
+- the feasibility assessment below (first written 2026-10-11);
+- the analysis of WaSiM's module coupling ([`coupling.md`](coupling.md), with the effort estimate in tokens);
+- the scripts that check each wasim-gt process against WaSiM grid dumps.
+
+The validation plan as a whole, including synthetic reference cases and coverage, is in [`../validation/README.md`](../validation/README.md).
+
+**Short answer to the feasibility question:** feasible. Porting the processes and method variants the Swiss setup needs, without simplifying them, is realistic for an LLM agent at about 2.5–4 million tokens of agent work, if every process is validated against WaSiM as it is ported. The ports so far reproduce WaSiM bit for bit. The main cost is not the equations but the implicit coupling between modules, now documented in `coupling.md`.
 
 First written 2026-10-11, based on WaSiM 11.01.01 (wasim-eth) and GT4Py 1.2.3.
 
@@ -46,24 +52,22 @@ At 500 m, all of hydrological Switzerland is about 0.2 million active cells, too
 
 Effort is given in tokens of agent work, measured on the ports so far, in [`coupling.md`](coupling.md#effort-in-tokens-and-compute). GPU validation needs a CUDA node.
 
-## Running the prototype
+## Running the checks
+
+The scripts import the kernels from wasim-gt, so install it first: `pip install -e path/to/wasim-gt`.
 
 ```sh
-# 1. WaSiM reference run with per-step output (wasim-eth, tests/golden/run_case.py)
+# T-index snow, against a WaSiM run with per-step netCDF output (wasim-eth, tests/golden/run_case.py)
 python3 tests/golden/run_case.py --binary <wasim> --template gt4py/doubs_snow_tindex.wasim.in \
     --case-dir path/to/Doubs --out runs/doubs_snow_tindex
-# 2. prototype against it (pip install gt4py netCDF4)
 python3 gt4py/snow_tindex.py runs/doubs_snow_tindex path/to/Doubs/StateIni_2021 \
-    path/to/Doubs/Input/grids/doubs500.lake_IDs2 --backend numpy
-```
+    path/to/Doubs/Input/grids/doubs500.lake_IDs2
 
-The Doubs setup is `sample-run-doubs.zip`.
-
-The newer ports read grid dumps instead of netCDF output; see `coupling.md` ("How the ports are validated"):
-
-```sh
+# the newer checks read grid dumps (coupling.md, "How the ports are validated")
 python3 gt4py/interception.py <dump dir> <run dir>/control.wasim          # golden Doubs setup, interception method 11
 python3 gt4py/snow_evaporation.py <dump dir>                              # T-index setup (doubs_snow_tindex.wasim.in)
 python3 gt4py/snow_evaporation.py <dump dir> --energy-balance --pre after_snow1   # golden setup, snow method 7
 python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs g++
 ```
+
+The Doubs setup is `sample-run-doubs.zip`.

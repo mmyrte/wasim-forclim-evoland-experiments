@@ -1,6 +1,6 @@
 # WaSiM for hydrological Switzerland: working plan
 
-Status 2026-10-11, adapted from the project plan doc and its review comments. **Entry point for the second half of November: read "Where things stand", then pick from "Next steps".**
+Status 2026-10-13, adapted from the project plan doc and its review comments. **Entry point for the second half of November: read "Where things stand", then pick from "Next steps".**
 
 ## Where things stand
 
@@ -11,7 +11,7 @@ Status 2026-10-11, adapted from the project plan doc and its review comments. **
 | Reference outputs and Doubs setup | uploaded (git-lfs) | `golden/<case>/reference.zip`, `sample-run-doubs.zip` |
 | Memory and runtime measurements | done for Doubs and Rhone; hourly vs daily; OpenMP and MPI | below, and wasim-eth `docs/domain-size-limits.md` |
 | Performance profile and quick wins | done: profile below; LTO 3%; `OMP_SCHEDULE=dynamic,4` helps short winter runs but slows a full year, so no general recommendation yet | below |
-| GT4Py track | module coupling documented (no blockers); bit-identical ports of interception, snow evaporation and the soil hydraulic functions, plus the T-index snow prototype; effort estimated in tokens (about 2.5–4 M for a water-balance subset) | `gt4py/coupling.md`, `gt4py/README.md` |
+| wasim-gt (GT4Py reimplementation) | module coupling documented (no blockers); bit-identical ports of interception, snow evaporation and the soil hydraulic functions, plus T-index snow; scope defined; effort estimated in tokens (about 2.5–4 M) | wasim-gt repository (`docs/scope.md`); validation here in `gt4py/`, `validation/` |
 | Code fixes | done: g++ builds could not write netCDF (overlapping `sprintf`), memory and format errors, netCDF buffer sizes, zone code bounds, UTF-8 sources, `--help` | wasim-eth `TODO.md`, commit history |
 | Other problems found | logged, not fixed (they change results or need a decision) | below and wasim-eth `TODO.md` |
 | National input data, routing, config generator | not started | next steps |
@@ -67,21 +67,21 @@ All runs on 4 cores of this machine, single-node, WaSiM built with clang at `-O3
 
 The inherited control files have drifted apart (1,257 different `$set` names across the 17 files, 143 soil types, 17 land use tables). Every file starts with a block marked "protected part to be changed by the module adapter": run IDs, start and end dates, paths and the `readgrids` switch. A separate tool, the module adapter, rewrites that block when runs are chained (it is not in this repository). A generator replacing it would also replace the regex edits used so far.
 
-First step, as you suggested: **a general generator that writes correct control files from JSON**, before deciding how to fill individual sections.
+A run is described by **one TOML file**, the configuration format of wasim-gt (`docs/architecture.md` there). Legacy WaSiM keeps being needed for production until wasim-gt is complete, and as the validation reference. A legacy tool here (`legacy/`) therefore writes WaSiM control files from the same TOML, so both models run from one description:
 
-1. A schema for the run-level settings (period, time step, paths relative to one root, module switches, output codes). Paths are built in one place; this would have avoided several problems found this week (below).
-2. Templates per section, filled from JSON. Positional sections keep their order; the template documents each line, as in wasim-eth `docs/sample_control_file.wasim`.
+1. A schema for the run-level settings (period, time step, paths relative to one root, module switches, outputs). Paths are built in one place; this would have avoided several problems found this week (below).
+2. TOML to WaSiM control file: templates per section, filled from the TOML. Positional sections keep their order; the template documents each line, as in wasim-eth `docs/sample_control_file.wasim`.
 3. Golden tests as the check: a generated Doubs and Rhone control file must give the same outputs as the originals.
-4. Later: parameter tables (soil, land use) and regionalized parameters as separate files; a parser for the 17 legacy files only if their parameter values are still needed.
+4. Later: parameter tables (soil, land use) and regionalized parameters as TOML tables; reading the 17 legacy control files into TOML only if their parameter values are still needed.
 
 ## Next steps
 
 1. **Find the Doubs reference outputs** from the legacy runs, to check the golden references against them.
 2. **Domain:** build the 500 m LV95 grid and mask from CAMELS-CH catchments.
-3. **Config generator:** JSON to control file for the run-level settings; golden round trip on Doubs and Rhone.
+3. **Config generator:** TOML to WaSiM control file for the run-level settings (`legacy/`); golden round trip on Doubs and Rhone.
 4. **Hydro boosting test:** hourly Rhone event from daily states vs a continuous hourly run.
 5. **Routing from scratch** on the national grid; decide the subbasin density.
-6. **GT4Py track:** next Penman-Monteith ET, then the Richards column on top of `gt4py/soil/`; on a GPU node, check the ports and measure ensemble throughput (`gt4py/coupling.md`; one issue per process under [#2](https://github.com/mmyrte/wasim-forclim-evoland-experiments/issues/2)).
+6. **wasim-gt:** next Penman-Monteith ET, then the Richards column on top of the soil functions; on a GPU node, check the ports and measure ensemble throughput. One issue per process in the wasim-gt repository; validation cases and tools are tracked here (`validation/README.md`).
 
 ## Problems found while setting up the runs
 

@@ -28,50 +28,10 @@ import netCDF4
 import numpy as np
 
 import gt4py.next as gtx
-from gt4py.next import where, minimum, float64
+from gt4py.next import float64
 
-I = gtx.Dimension("I")
-J = gtx.Dimension("J")
-Field2D = gtx.Field[gtx.Dims[I, J], float64]
-Mask2D = gtx.Field[gtx.Dims[I, J], bool]
-
-
-@gtx.field_operator
-def snow_step(
-    temp: Field2D, prec: Field2D, evrs: Field2D, ssnow: Field2D, sliq: Field2D, no_snow: Mask2D,
-    t0r: float64, transition: float64, t0: float64, c0: float64, cwh: float64, steps_per_day: float64,
-) -> tuple[Field2D, Field2D, Field2D]:
-    # 1. snow fraction of precipitation
-    frac = where(temp <= t0r + transition,
-                 where(temp > t0r - transition, ((t0r + transition) - temp) / (2.0 * transition), 1.0),
-                 0.0)
-    frac = where(no_snow, 0.0, frac)
-    # 2. accumulation
-    ssnow1 = ssnow + frac * prec
-    sliq1 = sliq + (1.0 - frac) * prec
-    # 3. melt, limited to the available snow
-    melt = where((temp > t0) & (ssnow1 > 0.0), c0 * (temp - t0) / steps_per_day, 0.0)
-    melt = minimum(melt, ssnow1)
-    ssnow2 = ssnow1 - melt
-    sliq2 = sliq1 + melt
-    # 4. outflow above the holding capacity
-    capacity = ssnow2 * cwh
-    exceeded = capacity < sliq2
-    outflow = where(exceeded, sliq2 - capacity, 0.0)
-    sliq3 = where(exceeded, capacity, sliq2)
-    # 5. snow evaporation (never more than the snow left, as in WaSiM)
-    ssnow3 = ssnow2 - minimum(evrs, ssnow2)
-    return ssnow3, sliq3, outflow
-
-
-@gtx.program
-def snow_program(
-    temp: Field2D, prec: Field2D, evrs: Field2D, ssnow: Field2D, sliq: Field2D, no_snow: Mask2D,
-    t0r: float64, transition: float64, t0: float64, c0: float64, cwh: float64, steps_per_day: float64,
-    ssnow_out: Field2D, sliq_out: Field2D, outflow: Field2D,
-):
-    snow_step(temp, prec, evrs, ssnow, sliq, no_snow, t0r, transition, t0, c0, cwh, steps_per_day,
-              out=(ssnow_out, sliq_out, outflow))
+from wasim_gt.fields import I, J
+from wasim_gt.processes.snow_tindex import snow_program
 
 
 def read_ascii_grid(path):

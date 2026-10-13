@@ -35,3 +35,11 @@ Monthly timesteps will not be sufficient to capture anything less than the most 
   - [ ] Plant mortality from flooding - is there precedent for this in CH?
 - WASIM + ForClim integration
   - Find interfacing options; avoid redundancies. ForClim has some hydro routines. WASIM has some dynamic plant phenologies.
+
+## Layout
+
+- `plan-switzerland.md`: working plan for the harmonized Swiss WaSiM setup.
+- `golden/`: golden-test cases (Doubs, Rhone) and benchmarks for legacy WaSiM ([wasim-eth](https://github.com/mmyrte/wasim-eth)).
+- `validation/`: checking wasim-gt (the GT4Py reimplementation, separate repository) against legacy WaSiM. Includes reference cases and the coverage tool.
+- `gt4py/`: per-process checks of wasim-gt against WaSiM grid dumps, plus the analysis of WaSiM's module coupling.
+- `legacy/`: tools that convert legacy WaSiM inputs, states and control files (planned).

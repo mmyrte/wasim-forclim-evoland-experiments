@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare the GT4Py soil hydraulic functions with WaSiM's C++ originals on random soils and inputs.
+"""Compare wasim-gt's soil hydraulic functions (wasim_gt.soil.van_genuchten) with WaSiM's C++ originals on random soils and inputs.
 
 Builds the C++ reference from the WaSiM sources (extract_reference.sh), evaluates h_calc, k_calc
 and get_theta for N random soil horizons with one random query each, and reports the largest
@@ -19,7 +19,7 @@ import gt4py.cartesian.gtscript as gs
 import gt4py.storage as gts
 from gt4py.cartesian.gtscript import PARALLEL, computation, interval
 
-from van_genuchten import H_TAB, get_theta, h_calc, k_calc
+from wasim_gt.soil.van_genuchten import H_TAB, get_theta, h_calc, k_calc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 

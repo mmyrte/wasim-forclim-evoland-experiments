@@ -14,10 +14,9 @@ The analysis is regex-based and approximate: identifiers built at run time (spri
 name variable) are resolved when the sprintf is in the same file, pointer aliases and
 writes through helper functions are not followed. Check findings in the code.
 
-usage: coupling.py WASIM_SRC_DIR [--json out.json] [--markdown out.md]
+usage: coupling.py WASIM_SRC_DIR [--markdown out.md]
 """
 import argparse
-import json
 import os
 import re
 from collections import defaultdict
@@ -174,13 +173,10 @@ def to_markdown(result, rows):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src")
-    ap.add_argument("--json")
     ap.add_argument("--markdown")
     args = ap.parse_args()
     result, defines = analyse(args.src)
     rows = cross_writes(result)
-    if args.json:
-        json.dump({"modules": result, "cross_writes": rows}, open(args.json, "w"), indent=1)
     if args.markdown:
         open(args.markdown, "w").write(to_markdown(result, rows))
     for f, e in result.items():
