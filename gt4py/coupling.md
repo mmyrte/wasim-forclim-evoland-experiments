@@ -144,8 +144,9 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 | potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M |
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
+| dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |
 | Richards column, one option set (no tracers, no macropores), plus river links | 6,000–8,000 | 0.8–1.5 M |
-| heat transport and layered snow in the column, if needed | 2,000–3,000 | 0.3–0.5 M |
+| heat transport and layered snow in the column, only if the Swiss setup needs them (not in `scope.md`) | 2,000–3,000 | 0.3–0.5 M |
 | groundwater | 2,000 | 0.2–0.35 M |
 | routing and lakes in Python | 3,000–4,000 | 0.3–0.6 M |
 | driver: state object, time loop in compiled code, I/O, ensemble dimension, GPU tuning | | 0.3–0.5 M |
