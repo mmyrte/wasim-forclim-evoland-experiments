@@ -11,7 +11,7 @@ Status 2026-10-11, adapted from the project plan doc and its review comments. **
 | Reference outputs and Doubs setup | uploaded (git-lfs) | `golden/<case>/reference.zip`, `sample-run-doubs.zip` |
 | Memory and runtime measurements | done for Doubs and Rhone; hourly vs daily; OpenMP and MPI | below, and wasim-eth `docs/domain-size-limits.md` |
 | Performance profile and quick wins | done: profile below; LTO 3%; `OMP_SCHEDULE=dynamic,4` helps short winter runs but slows a full year, so no general recommendation yet | below |
-| GT4Py feasibility | assessment plus a validated T-index snow prototype | `gt4py/README.md` |
+| GT4Py track | module coupling documented (no blockers); bit-identical ports of interception, snow evaporation and the soil hydraulic functions, plus the T-index snow prototype; effort estimated in tokens (about 2.5–4 M for a water-balance subset) | `gt4py/coupling.md`, `gt4py/README.md` |
 | Code fixes | done: g++ builds could not write netCDF (overlapping `sprintf`), memory and format errors, netCDF buffer sizes, zone code bounds, UTF-8 sources, `--help` | wasim-eth `TODO.md`, commit history |
 | Other problems found | logged, not fixed (they change results or need a decision) | below and wasim-eth `TODO.md` |
 | National input data, routing, config generator | not started | next steps |
@@ -81,7 +81,7 @@ First step, as you suggested: **a general generator that writes correct control 
 3. **Config generator:** JSON to control file for the run-level settings; golden round trip on Doubs and Rhone.
 4. **Hydro boosting test:** hourly Rhone event from daily states vs a continuous hourly run.
 5. **Routing from scratch** on the national grid; decide the subbasin density.
-6. **Decide on the GT4Py track** after reading `gt4py/README.md`; if yes, the next process to port is the Richards column.
+6. **GT4Py track:** next Penman-Monteith ET, then the Richards column on top of `gt4py/soil/`; on a GPU node, check the ports and measure ensemble throughput (`gt4py/coupling.md`, next steps).
 
 ## Problems found while setting up the runs
 

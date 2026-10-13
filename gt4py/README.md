@@ -1,8 +1,10 @@
 # Reimplementing WaSiM's physics in GT4Py: feasibility
 
-**Short answer: not trivial, but feasible for a chosen subset of processes.** A one-to-one port of all of WaSiM is a multi-year effort. A "WaSiM-lite" covering only the processes our Swiss water-balance runs use is a realistic project of a few person-months, if every process is validated against WaSiM as it is ported. The prototype here shows that such validation works to machine precision. The main cost is not the equations but the implicit coupling between modules.
+**Short answer: not trivial, but feasible for a chosen subset of processes.** A one-to-one port of all of WaSiM would be very large. A "WaSiM-lite" covering only the processes our Swiss water-balance runs use is realistic for an LLM agent: about 2.5–4 million tokens of agent work (see [`coupling.md`](coupling.md#effort-in-tokens-and-compute)), if every process is validated against WaSiM as it is ported. The ports so far reproduce WaSiM bit for bit. The main cost is not the equations but the implicit coupling between modules, which is now documented in [`coupling.md`](coupling.md).
 
-As of 2026-10-11, based on WaSiM 11.01.01 (wasim-eth) and GT4Py 1.2.3.
+**Update 2026-10-13:** module coupling documented, no blockers found; interception, snow evaporation and the soil hydraulic functions ported bit-identically; WaSiM has a grid dump hook for per-process validation. Details in `coupling.md`.
+
+First written 2026-10-11, based on WaSiM 11.01.01 (wasim-eth) and GT4Py 1.2.3.
 
 ## What was tried
 
@@ -26,8 +28,8 @@ The compiled backend is slower here because a kernel this small is dominated by 
 | Size | about 44,000 lines of physics (Richards zone 13,600, routing/lakes 6,700, snow/glacier 5,800, meteo interpolation 4,500, surface routing 3,600, groundwater 2,500, ET 2,400), plus 21,000 lines of infrastructure | port selectively, not wholesale |
 | Method variants | 14 snow methods, 12 interpolation methods, 4 ET methods, many switches in the soil model (ponding, drainage, clay layer, macropores, irrigation, heat transfer, layered snow, tracers) | choose one variant per process for our setup and drop the rest |
 | Implicit coupling | about 140 shared grids, looked up by name (`gridinfo[getindex(...)]`); modules modify each other's state (e.g. ET writes the snow store) | write down the data flow per process before porting it; validate per step |
-| Richards zone (60% of run time) | per-cell column solver with adaptive sub-steps (down to 120 s), table lookups for van Genuchten functions, many branches | fits GT4Py's vertical `scan_operator`, but adaptive sub-stepping per column has to become masked fixed iterations; this is the hardest and most valuable part |
-| Groundwater | 2D Gauss-Seidel iteration | a natural stencil, but Gauss-Seidel is sequential; a parallel version (Jacobi, red-black or CG) changes the numerics slightly |
+| Richards zone (60% of run time) | per-cell column solver with adaptive sub-steps (down to 120 s), table lookups for van Genuchten functions, many branches | fits `gt4py.cartesian` column stencils (K intervals, `while` loops); per-cell sub steps cost GPU efficiency, not correctness; the hardest and most valuable part. The lookup functions are ported (`soil/`) |
+| Groundwater | 2-D implicit, line relaxation by rows (parallel over rows) | neighbour stencils plus tridiagonal solves along rows |
 | Routing, lakes, reservoir rules | tree of subbasins, channel routing per link, rule tables | not grid-shaped; keep in ordinary code (it takes about 1% of run time) |
 | Meteo interpolation (11% of run time) | IDW and regression over all stations for every cell and step | a dense operation that ports easily; precomputing station weights would help regardless of a port |
 | Zonal statistics, I/O | per-zone reductions, many file formats | outside the stencil part; use xarray/netCDF |
@@ -39,10 +41,10 @@ At 500 m, all of hydrological Switzerland is about 0.2 million active cells, too
 ## Suggested path
 
 1. **Keep WaSiM for production** of the Swiss setup and build the config generator anyway. The validation method used here depends on WaSiM runs as the reference.
-2. **Port process by process**, in order of value for a daily water balance: snow (done for T-index), interception, Penman-Monteith ET, Richards column (one soil option set), groundwater, then simple routing. Each process gets a per-step comparison against a WaSiM run that writes its inputs and outputs, as in `doubs_snow_tindex.wasim.in`.
+2. **Port process by process**, in order of value for a daily water balance: snow (T-index done), interception (done), snow evaporation (done), Penman-Monteith ET, Richards column (one soil option set; hydraulic functions done), groundwater, then simple routing. Each process is compared at every step with the state WaSiM had just before and after the call (grid dump hook, `coupling.md`).
 3. **Decision point after the Richards column**: if one soil configuration reproduces WaSiM within an agreed tolerance, the rest is mostly routine. If not, the port stays a research prototype.
 
-Rough effort, for orientation only: interception and ET a few days each, Richards column several weeks, groundwater one to two weeks, routing and lakes in plain Python or C++ another few weeks.
+Effort is given in tokens of agent work, measured on the ports so far, in [`coupling.md`](coupling.md#effort-in-tokens-and-compute). GPU validation needs a CUDA node.
 
 ## Running the prototype
 
@@ -56,3 +58,12 @@ python3 gt4py/snow_tindex.py runs/doubs_snow_tindex path/to/Doubs/StateIni_2021 
 ```
 
 The Doubs setup is `sample-run-doubs.zip`.
+
+The newer ports read grid dumps instead of netCDF output; see `coupling.md` ("How the ports are validated"):
+
+```sh
+python3 gt4py/interception.py <dump dir> <run dir>/control.wasim          # golden Doubs setup, interception method 11
+python3 gt4py/snow_evaporation.py <dump dir>                              # T-index setup (doubs_snow_tindex.wasim.in)
+python3 gt4py/snow_evaporation.py <dump dir> --energy-balance --pre after_snow1   # golden setup, snow method 7
+python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs g++
+```
