@@ -159,7 +159,7 @@ That is roughly 10–20 sessions of this one's size, and the uncertainty is a fa
 
 ## Next steps
 
-The remaining work is split into issues, one per process, under the tracking issue [#2](https://github.com/mmyrte/wasim-forclim-evoland-experiments/issues/2).
+The remaining work is split into issues, one per process, in the wasim-gt repository, under its tracking issue [mmyrte/wasim-gt#1](https://github.com/mmyrte/wasim-gt/issues/1). Validation work stays here: harness #16, synthetic cases #17, legacy tools #18.
 
 1. Penman-Monteith potential ET (pointwise; closes the snow, interception, ET chain).
 2. Richards column for the Doubs/Rhone option set, in `gt4py.cartesian`, built on `soil/van_genuchten.py`; validate against `after_unsatzon` dumps per sub step.
