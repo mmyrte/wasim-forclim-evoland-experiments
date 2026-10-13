@@ -157,6 +157,8 @@ That is roughly 10–20 sessions of this one's size, and the uncertainty is a fa
 
 ## Next steps
 
+The remaining work is split into issues, one per process, under the tracking issue [#2](https://github.com/mmyrte/wasim-forclim-evoland-experiments/issues/2).
+
 1. Penman-Monteith potential ET (pointwise; closes the snow, interception, ET chain).
 2. Richards column for the Doubs/Rhone option set, in `gt4py.cartesian`, built on `soil/van_genuchten.py`; validate against `after_unsatzon` dumps per sub step.
 3. On a GPU node: run the soil-function test and interception on `gt:gpu`/`dace:gpu`, measure throughput with an ensemble dimension, and set the validation tolerance.

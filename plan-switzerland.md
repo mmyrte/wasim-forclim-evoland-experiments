@@ -81,7 +81,7 @@ First step, as you suggested: **a general generator that writes correct control 
 3. **Config generator:** JSON to control file for the run-level settings; golden round trip on Doubs and Rhone.
 4. **Hydro boosting test:** hourly Rhone event from daily states vs a continuous hourly run.
 5. **Routing from scratch** on the national grid; decide the subbasin density.
-6. **GT4Py track:** next Penman-Monteith ET, then the Richards column on top of `gt4py/soil/`; on a GPU node, check the ports and measure ensemble throughput (`gt4py/coupling.md`, next steps).
+6. **GT4Py track:** next Penman-Monteith ET, then the Richards column on top of `gt4py/soil/`; on a GPU node, check the ports and measure ensemble throughput (`gt4py/coupling.md`; one issue per process under [#2](https://github.com/mmyrte/wasim-forclim-evoland-experiments/issues/2)).
 
 ## Problems found while setting up the runs
 
