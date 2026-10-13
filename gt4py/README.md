@@ -55,4 +55,4 @@ python3 gt4py/snow_tindex.py runs/doubs_snow_tindex path/to/Doubs/StateIni_2021 
     path/to/Doubs/Input/grids/doubs500.lake_IDs2 --backend numpy
 ```
 
-The Doubs setup is `sample-run-doubs.zip` (upload pending, see `golden/README.md`).
+The Doubs setup is `sample-run-doubs.zip`.

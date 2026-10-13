@@ -8,7 +8,7 @@ Status 2026-10-11, adapted from the project plan doc and its review comments. **
 | --- | --- | --- |
 | macOS and unified Linux/macOS build | done; g++ and clang builds give identical results; legacy makefiles kept | wasim-eth `src/Makefile`, `README.md` |
 | Golden tests (run a case, compare all outputs) | done; Doubs and Rhone, 10 days hourly | wasim-eth `tests/golden/`, here `golden/` |
-| Reference outputs and Doubs setup upload | **pending**: this session could not upload LFS files (`lfs.github.com` blocked by the network policy) | regenerate with `golden/README.md` |
+| Reference outputs and Doubs setup | uploaded (git-lfs) | `golden/<case>/reference.zip`, `sample-run-doubs.zip` |
 | Memory and runtime measurements | done for Doubs and Rhone; hourly vs daily; OpenMP and MPI | below, and wasim-eth `docs/domain-size-limits.md` |
 | Performance profile and quick wins | done: profile below; LTO 3%; `OMP_SCHEDULE=dynamic,4` helps short winter runs but slows a full year, so no general recommendation yet | below |
 | GT4Py feasibility | assessment plus a validated T-index snow prototype | `gt4py/README.md` |
@@ -76,13 +76,12 @@ First step, as you suggested: **a general generator that writes correct control 
 
 ## Next steps
 
-1. **Upload the pending LFS data** (`sample-run-doubs.zip`, golden references), after allowing `lfs.github.com` in the environment's network settings or from a local machine.
-2. **Find the Doubs reference outputs** from the legacy runs, to check the golden references against them.
-3. **Domain:** build the 500 m LV95 grid and mask from CAMELS-CH catchments.
-4. **Config generator:** JSON to control file for the run-level settings; golden round trip on Doubs and Rhone.
-5. **Hydro boosting test:** hourly Rhone event from daily states vs a continuous hourly run.
-6. **Routing from scratch** on the national grid; decide the subbasin density.
-7. **Decide on the GT4Py track** after reading `gt4py/README.md`; if yes, the next process to port is the Richards column.
+1. **Find the Doubs reference outputs** from the legacy runs, to check the golden references against them.
+2. **Domain:** build the 500 m LV95 grid and mask from CAMELS-CH catchments.
+3. **Config generator:** JSON to control file for the run-level settings; golden round trip on Doubs and Rhone.
+4. **Hydro boosting test:** hourly Rhone event from daily states vs a continuous hourly run.
+5. **Routing from scratch** on the national grid; decide the subbasin density.
+6. **Decide on the GT4Py track** after reading `gt4py/README.md`; if yes, the next process to port is the Richards column.
 
 ## Problems found while setting up the runs
 
