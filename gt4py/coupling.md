@@ -145,7 +145,7 @@ The work is done by an LLM agent, so effort is measured in tokens and machine ti
 | snow evaporation port, both branches | about 12,000 | about 200 |
 | soil hydraulic functions, C++ reference extraction, test | about 45,000 | about 250 |
 | radiation correction and Penman-Monteith potential ET, hourly and daily; Rhone daily setup, synthetic case, coverage (later session) | about 330,000 | about 1,100 |
-| table-based phenology, same session | about 90,000 | about 500 |
+| table-based phenology, same session | about 100,000 | about 500 |
 
 For a port, the rate works out to about 100–150 tokens per C++ line that has to be read, rewritten and validated. That covers debugging and the GT4Py frontend's quirks, and comes on top of a fixed cost of about 10,000 tokens per process for a dump run and a comparison script.
 
@@ -153,7 +153,7 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 
 | Item | Relevant C++ lines (estimate) | Tokens (counter) |
 | --- | --- | --- |
-| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with the phenology: about 0.42 M; see above) |
+| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with the phenology: about 0.43 M; see above) |
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
 | dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |
