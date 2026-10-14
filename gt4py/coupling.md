@@ -90,11 +90,12 @@ All are checked bit for bit against WaSiM: the processes over every step and act
 | snow evaporation, conventional and energy-balance branches | `wasim_gt.processes.snow_evaporation` / `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
 | radiation and temperature correction (method 2, with shading) | `wasim_gt.processes.radiation_correction` / `potential_et.py` | Doubs: golden setup 2021-01-01, 48 hourly steps, and `doubs_et_june.wasim.in` (48 sunny hours in June); Rhone daily (`golden/rhone/daily_jan.wasim.in`, `daily_june.wasim.in`), 61 days; dumps `after_meteo` → `after_expokorr` | correction factor, `Ieff_max`, shadow, corrected temperature: **bit-identical**, numpy and `gtfn_cpu` |
 | potential ET, Penman-Monteith, several vegetation layers, open water on ponded lake cells, hourly and daily | `wasim_gt.processes.potential_et` / `potential_et.py` | same runs, dumps `after_expokorr` → `after_etp` | ETP and EIP per layer and total, EVAP, corrected radiation, `AspectCorrectedGlobalRadiation`, cloudiness, `SSDTemp`, day and night temperature (daily): **bit-identical**, numpy and `gtfn_cpu` |
+| vegetation parameters from the land-use table (`VariableDayCount`), initialisation and daily update | `wasim_gt.processes.vegetation` / `vegetation.py` | golden Doubs setup, 10 days hourly (initialisation and 10 updates); Rhone daily, all of 2021 (365 updates); dump `after_meteo` | LAI, VCF, rsc, rsi, z0 and root depth per layer, albedo, rse: **bit-identical** |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
-Together with the earlier T-index prototype, the chain radiation correction, potential ET, interception, snow evaporation can now run from the meteo fields, the vegetation parameters and the albedo (from snow method 7, not yet ported).
+Together with the earlier T-index prototype, the chain phenology, radiation correction, potential ET, interception, snow evaporation can now run from the meteo fields and the albedo under snow (from snow method 7, not yet ported).
 
 The coverage tool (`../validation/wasim_coverage.py`) over the four reference runs shows every line of `getETP` run except net radiation as input (not ported), and in `potentiell` and `expokorrklasse::run` all lines of the ported branches except: the cap of the radiation at 1260 Wh/m² per bright hour; the albedo without a lake model; the sun below 1° altitude in a bright sub interval; the temperature formulas for `split` > 1; and branches that cannot run at Swiss latitudes (sunset after midnight, polar day and night) or with these settings (SSDTemp without a bright step).
 
@@ -121,6 +122,8 @@ Each port reads the state WaSiM had just before the call and compares its result
 - Potential ET: the LAI accumulated above a layer (`LAIkum`, `etpetr.cc:2042`) adds the LAI of the layer above even where that layer has no land use, i.e. adds -9999, which makes the aerodynamic resistance of the lower layer negative. Only cells whose top layer is empty but a lower one is not are affected; the Doubs and Rhone grids have none.
 - Potential ET corrects the global radiation in place (`etpetr.cc:1956`) but caps only its copy `RGEX` at 1260 Wh/m² per bright hour, so later modules (snow) can see a corrected radiation above the cap.
 - The constant `c64_0` is 25.0 (`etpetr.cc:1349`), the ratio of measurement height and roughness length for z0 > 2 m.
+- Phenology: the initialisation and the daily update clamp differently and use different elevations on lake cells (before and after the lake model lowers them); two leap-year rules, both wrong for 2000; before the first fix point the values are interpolated from the last one without its altitude shift. Details in wasim-eth `TODO.md`.
+- WaSiM replaces the land-use codes in the grids by the position of the record in the table (`defltuzr.cc:1825`), so dumped land-use grids hold positions, not codes.
 
 ## GT4Py limits met
 
@@ -142,6 +145,7 @@ The work is done by an LLM agent, so effort is measured in tokens and machine ti
 | snow evaporation port, both branches | about 12,000 | about 200 |
 | soil hydraulic functions, C++ reference extraction, test | about 45,000 | about 250 |
 | radiation correction and Penman-Monteith potential ET, hourly and daily; Rhone daily setup, synthetic case, coverage (later session) | about 330,000 | about 1,100 |
+| table-based phenology, same session | about 90,000 | about 500 |
 
 For a port, the rate works out to about 100–150 tokens per C++ line that has to be read, rewritten and validated. That covers debugging and the GT4Py frontend's quirks, and comes on top of a fixed cost of about 10,000 tokens per process for a dump run and a comparison script.
 
@@ -149,7 +153,7 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 
 | Item | Relevant C++ lines (estimate) | Tokens (counter) |
 | --- | --- | --- |
-| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**: about 0.33 M; see above) |
+| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with the phenology: about 0.42 M; see above) |
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
 | dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |

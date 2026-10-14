@@ -65,13 +65,14 @@ def numbers(line):
 
 
 def multilayer_table(text):
-    """{landuse code: (k_extinct, LAI_scale)} from [multilayer_landuse]."""
+    """{position: (k_extinct, LAI_scale)} from [multilayer_landuse]. WaSiM replaces the codes in the
+    land-use grid by the record's position (defltuzr.cc:1878), so the dumped grid holds positions."""
     body = text.split("[multilayer_landuse]", 1)[1].split("\n[", 1)[0]
     out = {}
-    for m in re.finditer(r"^\s*(\d+)\s+.*?\{(.*?)\}", body, re.M | re.S):
+    for pos, m in enumerate(re.finditer(r"^\s*(\d+)\s+.*?\{(.*?)\}", body, re.M | re.S), start=1):
         k = re.search(r"k_extinct\s*=\s*([-+0-9.eE]+)", m.group(2))
         s = re.search(r"LAI_scale\s*=\s*([-+0-9.eE]+)", m.group(2))
-        out[int(m.group(1))] = (float(k.group(1)) if k else 0.3, float(s.group(1)) if s else 10.0)
+        out[pos] = (float(k.group(1)) if k else 0.3, float(s.group(1)) if s else 10.0)
     return out
 
 
