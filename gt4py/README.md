@@ -67,6 +67,7 @@ python3 gt4py/snow_tindex.py runs/doubs_snow_tindex path/to/Doubs/StateIni_2021 
 python3 gt4py/interception.py <dump dir> <run dir>/control.wasim          # golden Doubs setup, interception method 11
 python3 gt4py/snow_evaporation.py <dump dir>                              # T-index setup (doubs_snow_tindex.wasim.in)
 python3 gt4py/snow_evaporation.py <dump dir> --energy-balance --pre after_snow1   # golden setup, snow method 7
+python3 gt4py/permafrost.py <dump dir> <run dir>/control.wasim         # Rhone variant with the permafrost model on (see its docstring)
 python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs g++
 ```
 
