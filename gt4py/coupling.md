@@ -57,6 +57,7 @@ Interception methods 1 and 2 swap 7a and 7b. Real evapotranspiration is computed
 | groundwater | `baseflow` (soil) | exchange with the soil from head changes | `gwflow.cc:2327` |
 | routing | `ponding_storage` (soil) | lake water level → pond depth | `abfluss.cc:6698` |
 | ET | `ponding_storage` (soil) | evaporation from ponds | `etpetr.cc:2594` |
+| snow (permafrost) | `root_depth1` (vegetation parameters) | limited to the thaw depth in every step | `snowmod.cc:4422` |
 | ET | `global_radiation` (meteo) | corrected for exposure in place | `etpetr.cc:1956` |
 | irrigation | precipitation (meteo), `irrigation_amounts` (soil) | `P += IRRIG` | `irrigate.cc:338ff, 623` |
 | precipitation correction (gridded or superposed input only) | precipitation (meteo) | in place | `meteoint.cc:4694ff` |
@@ -89,6 +90,7 @@ All three are checked bit for bit against WaSiM: interception and snow evaporati
 | interception, methods 1/11, multiple vegetation layers | `wasim_gt.processes.interception` / `interception.py` | golden Doubs setup, 48 hourly steps, grid dumps before and after the call | all 12 output grids (per-layer and total storage, evaporation, throughfall, remaining ETP) **bit-identical**, numpy and `gtfn_cpu` backends |
 | snow evaporation, conventional and energy-balance branches | `wasim_gt.processes.snow_evaporation` / `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
+| simple permafrost model (thaw depth, snow-cover and snow-free days, root-depth limit) | `wasim_gt.processes.permafrost` / `permafrost.py` | Rhone variant with the model switched on, 48 hourly steps, dumps before snow and `after_snow1` | all 4 output grids **bit-identical**, embedded and `gtfn_cpu`; the update code ran completely |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
