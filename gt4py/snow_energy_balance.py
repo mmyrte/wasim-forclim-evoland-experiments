@@ -40,6 +40,17 @@ from wasim_gt.processes.snow_slides import snow_slides
 from wasim_dump import Dump
 
 
+def difference(candidate, reference, cells, nodata=-9999.0):
+    """Largest absolute difference over cells; inf if the NaN, infinity or nodata patterns differ
+    (max() alone would let NaN pass: max(0.0, nan) is 0.0)."""
+    a, b = candidate[cells], reference[cells]
+    special = lambda x: np.isnan(x) | np.isinf(x) | (x == nodata)
+    if not np.array_equal(special(a), special(b)) or not np.array_equal(a[special(a)], b[special(b)], equal_nan=True):
+        return float("inf")
+    regular = ~special(a)
+    return float(np.abs(a[regular] - b[regular]).max()) if regular.any() else 0.0
+
+
 GLACIER_SNOW = ("TotalSnowStorage_onGlacier", "LiquidSnowStorage_onGlacier", "SolidSnowStorage_onGlacier")
 
 
@@ -157,8 +168,7 @@ def main():
         res = snow_energy_balance(inputs, params, args.step_minutes, backend=args.backend)
         t_run += time.perf_counter() - start
         for k, name in compare1.items():
-            diff = np.abs(res[k] - g(name, post))[check]
-            worst1[k] = max(worst1[k], float(diff.max()))
+            worst1[k] = max(worst1[k], difference(res[k], g(name, post), check))
 
     worst2 = dict.fromkeys(["snow_storage_total", "snowstorage_liquid", "snowstorage_solid",
                             "input_mass", "mobile_mass", "deposition"], 0.0)
@@ -186,7 +196,7 @@ def main():
             cells = active & (ref > -9999) if k in GLACIER_SNOW else (active if args.ice else check)
             if args.ice and k in ("snow_storage_total", "snowstorage_liquid", "snowstorage_solid"):
                 cells = active & ~(static["ice"] >= 1.0)  # fully glacierized cells have no snow off the glacier
-            worst2[k] = max(worst2[k], float(np.abs(v - ref)[cells].max()))
+            worst2[k] = max(worst2[k], difference(v, ref, cells))
 
     print(f"{active.sum()} active cells, {nsteps} steps, backend {args.backend}, "
           f"{1000 * t_run / nsteps:.1f} ms per step for part 1 (first step includes compilation)")
