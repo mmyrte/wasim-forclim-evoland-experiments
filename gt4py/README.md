@@ -63,6 +63,11 @@ python3 tests/golden/run_case.py --binary <wasim> --template gt4py/doubs_snow_ti
 python3 gt4py/snow_tindex.py runs/doubs_snow_tindex path/to/Doubs/StateIni_2021 \
     path/to/Doubs/Input/grids/doubs500.lake_IDs2
 
+# meteo interpolation and precipitation correction: 48 steps, exact numeric equality
+# Requires CONTROL_FILE.intern and supplemental static dumps (see meteo_interpolation.py).
+python3 gt4py/meteo_interpolation.py <dump dir> <run dir>/control.wasim <case dir> --static-dir <static dump dir>
+python3 gt4py/meteo_interpolation.py <dump dir> <run dir>/control.wasim <case dir> --backend gtfn_cpu --static-dir <static dump dir>
+
 # the newer checks read grid dumps (coupling.md, "How the ports are validated")
 python3 gt4py/interception.py <dump dir> <run dir>/control.wasim          # golden Doubs setup, interception method 11
 python3 gt4py/snow_evaporation.py <dump dir>                              # T-index setup (doubs_snow_tindex.wasim.in)
@@ -71,3 +76,9 @@ python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs
 ```
 
 The Doubs setup is `sample-run-doubs.zip`.
+
+The meteo check uses methods 10/11 and the legacy station precipitation correction, including
+its regression-profile refit. Regression regions/weights are ignored exactly as in the legacy
+constructor, which explicitly disables them. Missing-value patterns must also match. For exact
+compiled CPU checks, use a compiler with OpenMP, set `CXXFLAGS=-ffp-contract=off`, put the
+venv's CMake/Ninja on `PATH`, and use a fresh `GT4PY_BUILD_CACHE_DIR` after changing flags.
