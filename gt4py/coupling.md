@@ -91,6 +91,7 @@ All are checked bit for bit against WaSiM: the processes over every step and act
 | radiation and temperature correction (method 2, with shading) | `wasim_gt.processes.radiation_correction` / `potential_et.py` | Doubs: golden setup 2021-01-01, 48 hourly steps, and `doubs_et_june.wasim.in` (48 sunny hours in June); Rhone daily (`golden/rhone/daily_jan.wasim.in`, `daily_june.wasim.in`), 61 days; dumps `after_meteo` → `after_expokorr` | correction factor, `Ieff_max`, shadow, corrected temperature: **bit-identical**, numpy and `gtfn_cpu` |
 | potential ET, Penman-Monteith, several vegetation layers, open water on ponded lake cells, hourly and daily | `wasim_gt.processes.potential_et` / `potential_et.py` | same runs, dumps `after_expokorr` → `after_etp` | ETP and EIP per layer and total, EVAP, corrected radiation, `AspectCorrectedGlobalRadiation`, cloudiness, `SSDTemp`, day and night temperature (daily): **bit-identical**, numpy and `gtfn_cpu` |
 | vegetation parameters from the land-use table (`VariableDayCount`), initialisation and daily update | `wasim_gt.processes.vegetation` / `vegetation.py` | golden Doubs setup, 10 days hourly (initialisation and 10 updates); Rhone daily, all of 2021 (365 updates); dump `after_meteo` | LAI, VCF, rsc, rsi, z0 and root depth per layer, albedo, rse: **bit-identical** |
+| dynamic phenology DP1–DP4: forcing, chilling, start of growth, multiple start times, leaf fall, and the vegetation parameters that follow | `wasim_gt.processes.dynamic_phenology` / `dynamic_phenology.py` | synthetic Rhone case `rhone_dynphen.wasim.in` (one land use per model), daily, 2021-01-01 to 2022-07-31; dump `after_meteo` | all phenology grids and vegetation parameters: **bit-identical** (577 days, state carried from the start) |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
@@ -124,6 +125,7 @@ Each port reads the state WaSiM had just before the call and compares its result
 - The constant `c64_0` is 25.0 (`etpetr.cc:1349`), the ratio of measurement height and roughness length for z0 > 2 m.
 - Phenology: the initialisation and the daily update clamp differently and use different elevations on lake cells (before and after the lake model lowers them); two leap-year rules, both wrong for 2000; before the first fix point the values are interpolated from the last one without its altitude shift. Details in wasim-eth `TODO.md`.
 - WaSiM replaces the land-use codes in the grids by the position of the record in the table (`defltuzr.cc:1825`), so dumped land-use grids hold positions, not codes.
+- Dynamic phenology: the state grids are created with zeros, so the initialisation rules for unset (negative) values never apply to a fresh run: the start of growth is 0 and F* is 0 until the first `JDReset_TStart`, and DP2/DP4 skip their DP1 fallback, unlike the manual says. The day number counts February with 29 days in every year of a run that ends in a leap year. Details in wasim-eth `TODO.md`.
 
 ## GT4Py limits met
 
@@ -146,6 +148,7 @@ The work is done by an LLM agent, so effort is measured in tokens and machine ti
 | soil hydraulic functions, C++ reference extraction, test | about 45,000 | about 250 |
 | radiation correction and Penman-Monteith potential ET, hourly and daily; Rhone daily setup, synthetic case, coverage (later session) | about 330,000 | about 1,100 |
 | table-based phenology, same session | about 100,000 | about 500 |
+| dynamic phenology DP1–DP4, synthetic case, same session | about 120,000 | about 900 |
 
 For a port, the rate works out to about 100–150 tokens per C++ line that has to be read, rewritten and validated. That covers debugging and the GT4Py frontend's quirks, and comes on top of a fixed cost of about 10,000 tokens per process for a dump run and a comparison script.
 
@@ -153,7 +156,7 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 
 | Item | Relevant C++ lines (estimate) | Tokens (counter) |
 | --- | --- | --- |
-| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with the phenology: about 0.43 M; see above) |
+| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with both phenologies: about 0.55 M; see above) |
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
 | dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |

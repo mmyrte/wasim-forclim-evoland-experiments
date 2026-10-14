@@ -5,7 +5,7 @@ WaSiM sets the vegetation parameters at the start date and recomputes them on th
 each day (defaultini::int_tvar_params), before the dump point after_meteo. For every step this
 script compares the dumped parameters with wasim-gt's: at the first step with the initialisation,
 on day-end steps with the update for that day (the initialisation uses the elevation model as read
-from its file, before the lake model adjusts it; an ASCII grid is needed to check it), and on other steps it checks that WaSiM left them
+from its file, before the lake model adjusts it), and on other steps it checks that WaSiM left them
 unchanged. The albedo is compared on day-end steps only, because the snow model changes it in
 between.
 
@@ -38,6 +38,17 @@ def section(text, name):
     body = text.split(f"[{name}]", 1)[1].split("\n[", 1)[0]
     lines = [ln.split("#", 1)[0].strip() for ln in body.splitlines()]
     return [ln for ln in lines if ln]
+
+
+def initial_dem(text, shape):
+    """The elevation model as WaSiM reads it at the start (before the lake model lowers lake
+    cells): an ASCII grid, or WaSiM's binary grid (12 float32 header values, rows north first)."""
+    path = section(text, "elevation_model")[0]
+    try:
+        return np.loadtxt(path, skiprows=6)
+    except ValueError:
+        raw = np.fromfile(path, dtype="<f4")
+        return raw[12:12 + shape[0] * shape[1]].reshape(shape).astype(np.float64)
 
 
 def wasim_param(record, key, n, cast=float):
@@ -97,10 +108,7 @@ def main():
     luse = [d(p, f"landuse{n}")[0] for n in range(1, args.layers + 1)]
     # the initialisation uses the elevation model as read, before the lake model lowers lake cells
     # (lake initialisation method 2); the daily updates use the lowered one
-    try:
-        dem_file = np.loadtxt(section(text, "elevation_model")[0], skiprows=6)
-    except ValueError:
-        dem_file = None
+    dem_file = initial_dem(text, dhm.shape)
     nsteps = d(p, "leaf_area_index1").shape[0]
     grids = {(k, n): f"{g}{n}" for k, g in GRIDS.items() for n in range(1, args.layers + 1)}
     grids[("rse", 0)] = "SurfaceEvaporationResistance"
@@ -127,9 +135,6 @@ def main():
             updates += 1
             check_albedo = True
         elif t == 0:
-            if dem_file is None:
-                print("first step: elevation model is not an ASCII grid, initialisation not checked")
-                continue
             res = veg.vegetation_parameters(table, luse, dem_file, active, *first, initial=True)
             check_albedo = False
         else:

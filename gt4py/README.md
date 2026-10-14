@@ -73,6 +73,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 python3 gt4py/potential_et.py <dump dir> <run di
 python3 gt4py/potential_et.py <dump dir> <run dir>/control.wasim.intern 2021-06-01T24 --cellsize 500 --backend gtfn_cpu  # Rhone daily
 # table-based phenology (vegetation grids at after_meteo)
 python3 gt4py/vegetation.py <dump dir> <run dir>/control.wasim.intern 2021-01-01T01
+# dynamic phenology, synthetic Rhone case gt4py/rhone_dynphen.wasim.in (dump after_meteo; grid list in the script's header)
+NPY_DISABLE_CPU_FEATURES=X86_V4 python3 gt4py/dynamic_phenology.py <dump dir> <run dir>/control.wasim.intern 2021-01-01T24
 ```
 
 The Doubs setup is `sample-run-doubs.zip`.
