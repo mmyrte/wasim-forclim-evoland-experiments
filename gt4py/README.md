@@ -71,3 +71,5 @@ python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs
 ```
 
 The Doubs setup is `sample-run-doubs.zip`.
+
+`groundwater.py DUMP_DIR CONTROL_FILE --backend embedded|gtfn_cpu --json RESULT.json` compares all active cells and substeps at `after_etreal` → `after_gwflow`, including head, flow, balance and explicit soil/river handovers (target exactly zero).
