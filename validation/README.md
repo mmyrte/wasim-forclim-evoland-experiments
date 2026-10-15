@@ -7,10 +7,10 @@ wasim-gt (the GT4Py reimplementation, separate repository) contains no legacy co
 | Part | State | Where |
 | --- | --- | --- |
 | Grid dump hook: WaSiM writes named grids before and after each process call | done | wasim-eth `src/modapuzr.cc` (`WASIM_DUMP_GRIDS`) |
-| Per-process comparisons against the dumps | done for interception, snow evaporation, T-index snow; soil functions against WaSiM's C++ | `gt4py/*.py`, `gt4py/soil/` |
+| Per-process comparisons against the dumps | done for interception, snow evaporation, T-index snow, radiation correction, potential ET, table-based and dynamic phenology; soil functions against WaSiM's C++ | `gt4py/*.py`, `gt4py/soil/` |
 | Coverage of the WaSiM code a reference run executes | done | `wasim_coverage.py` |
 | Harness running legacy WaSiM and wasim-gt on the same case from one TOML configuration, comparing process by process and at the outputs | planned | here; uses the legacy tools (`../legacy/`) to write the WaSiM control file |
-| Reference cases | Doubs and Rhone (real); synthetic cases planned | `../golden/`, below |
+| Reference cases | Doubs and Rhone (real); synthetic variants: `../gt4py/doubs_et_june.wasim.in` (land-use parameters set to reach the surface-resistance branches of ET), `../gt4py/rhone_dynphen.wasim.in` and `rhone_dynphen2.wasim.in` (dynamic phenology DP1–DP4) | `../golden/`, below |
 
 ## Reference cases: real and synthetic
 
@@ -31,5 +31,17 @@ On the Doubs golden run (2 days, hourly), coverage of the functions ported or ne
 | snow evaporation (`etpetr.cc`) | 38 of 103 | energy-balance branch only; the conventional branch needs the T-index case |
 | Richards zone, `unsatzonmodellklasse::run` | 600 of 2,058 | includes heat transport, layered snow, tracers and irrigation, all off; the branch to port has to be measured separately |
 | glacier dynamics (`GlacierRetreatAndAdvance`) | 0 of 88 | no glaciers in Doubs, and no year boundary in 2 days |
+
+For the potential ET port, over four runs (Doubs golden, first 2 days; `../gt4py/doubs_et_june.wasim.in`; Rhone daily January and June, `../golden/rhone/daily_*.wasim.in`):
+
+| Function | Lines run | Note |
+| --- | --- | --- |
+| `verdunstungsmodellklasse::getETP` | 109 of 110 | the missing line is net radiation as input (not ported) |
+| `verdunstungsmodellklasse::potentiell`, up to the other ET methods (`etpetr.cc:1743–2111`) | 104 of 138 | missing: modelled radiation or sunshine duration (not ported), ArcVeg (not ported), the 1260 Wh/m² cap, the albedo without lake model, SSDTemp without a bright step (unreachable) |
+| `expokorrklasse::run` | 178 of 193 | missing: interval counter > 1 (not ported), sun below 1° in a bright sub interval, temperature for `split` > 1, sunset after midnight (not at Swiss latitudes) |
+
+For the table-based phenology, over the runs above plus the Rhone daily run of all 2021 (`../golden/rhone/year_daily.wasim.in`): every line of the `VariableDayCount` path in `GetJulDay`, `AltitudeCorrection`, `GetFixPoint`, the parameter getters and `int_tvar_params` ran, except the albedo and rse for cells without a land use in the top layer (none in Doubs or Rhone) and error exits. Not run and not ported: the vegetation start, stop and duration bookkeeping.
+
+For dynamic phenology, over `../gt4py/rhone_dynphen.wasim.in` and `rhone_dynphen2.wasim.in`: 153 of 163 lines of `CalculateDynamicPhenology` and all of `InitDynamicPhenology` and the DP getter branches ran. Not run: the DP1 fallback of DP4 and the MultipleStartTimes reset for fix points with a forcing threshold in the DP1 and DP4 branches (unreachable in a fresh run: they need a chilling grid read from a state, or thresholds, which only DP3 has), and F* of DP4 without any chilling day (no such cell).
 
 **What still needs real setups:** performance and scaling, calibration, and any variant whose parameters are hard to invent consistently. A further real setup is most useful if it exercises something the Swiss setup will use and Doubs and Rhone do not, for example heat transport and permafrost in an alpine catchment.

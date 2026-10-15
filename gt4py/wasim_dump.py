@@ -17,6 +17,7 @@ class Dump:
     def __init__(self, directory):
         self.dir = directory
         self.shape = {}
+        self._cache = {}
         with open(os.path.join(directory, "manifest.txt")) as f:
             for line in f:
                 point, grid, nrows, ncols, levels = line.split()
@@ -24,11 +25,13 @@ class Dump:
 
     def __call__(self, point, grid):
         """All records of a grid at a point: (steps, rows, cols) or (steps, rows, cols, levels+1)."""
+        if (point, grid) in self._cache:
+            return self._cache[(point, grid)]
         nrows, ncols, levels = self.shape[(point, grid)]
-        data = np.fromfile(os.path.join(self.dir, f"{point}__{grid}.f64"), dtype="f8")
-        if levels:
-            return data.reshape(-1, nrows, ncols, levels + 1)
-        return data.reshape(-1, nrows, ncols)
+        data = np.memmap(os.path.join(self.dir, f"{point}__{grid}.f64"), dtype="f8", mode="r")
+        data = data.reshape(-1, nrows, ncols, levels + 1) if levels else data.reshape(-1, nrows, ncols)
+        self._cache[(point, grid)] = data
+        return data
 
     def has(self, point, grid):
         return (point, grid) in self.shape

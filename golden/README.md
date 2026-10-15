@@ -34,3 +34,5 @@ python3 golden/rhone/hourly_to_daily.py golden/rhone/daily \
 ```
 
 Measured on 4 cores (clang 18, `-O3`): hourly about 30 min on 1 thread (extrapolated from 10 days) and 17 min on 4 threads; daily 401 s on 1 thread and 119 s on 4 threads (`OMP_SCHEDULE=dynamic,4`). See `plan-switzerland.md`.
+
+`rhone/daily_jan.wasim.in` and `rhone/daily_june.wasim.in` run one month each of the daily benchmark; they are reference runs for the potential ET port (daily path), validated with `../gt4py/potential_et.py`.
