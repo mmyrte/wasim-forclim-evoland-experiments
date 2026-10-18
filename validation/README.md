@@ -9,6 +9,7 @@ wasim-gt (the GT4Py reimplementation, separate repository) contains no legacy co
 | Grid dump hook: WaSiM writes named grids before and after each process call | done | wasim-eth `src/modapuzr.cc` (`WASIM_DUMP_GRIDS`) |
 | Per-process comparisons against the dumps | done for interception, snow evaporation, T-index snow, radiation correction, potential ET, table-based and dynamic phenology; soil functions against WaSiM's C++ | `gt4py/*.py`, `gt4py/soil/` |
 | Coverage of the WaSiM code a reference run executes | done | `wasim_coverage.py` |
+| Per-module run time of WaSiM and wasim-gt | first numbers | `performance.md`, wasim-eth `WASIM_TIMING`, `../gt4py/benchmark_et.py` |
 | Harness running legacy WaSiM and wasim-gt on the same case from one TOML configuration, comparing process by process and at the outputs | planned | here; uses the legacy tools (`../legacy/`) to write the WaSiM control file |
 | Reference cases | Doubs and Rhone (real); synthetic variants: `../gt4py/doubs_et_june.wasim.in` (land-use parameters set to reach the surface-resistance branches of ET), `../gt4py/rhone_dynphen.wasim.in` and `rhone_dynphen2.wasim.in` (dynamic phenology DP1–DP4) | `../golden/`, below |
 

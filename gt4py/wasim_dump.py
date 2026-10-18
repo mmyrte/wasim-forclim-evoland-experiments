@@ -3,7 +3,8 @@
 The hook (wasim-eth src/modapuzr.cc, griddump) appends one record per call to
 <dir>/<point>__<grid>.f64: float64, rows 1..nrows, columns 1..ncols, row-major, and for stacks
 levels+1 values per cell. <dir>/manifest.txt lists "point grid nrows ncols levels".
-Points: start, after_meteo, after_expokorr, after_etp, after_irrigation, after_interception,
+Points: start, after_precicorr, after_interpolation, after_phenology (the last three since the
+timing hook, wasim-eth WASIM_TIMING), after_meteo, after_expokorr, after_etp, after_irrigation, after_interception,
 after_snow1, after_snowevap, after_siltingup, after_unsatzon, after_surfrout, after_etreal,
 after_gwflow (these four once per sub step), after_snow2, after_post_run, after_routing.
 """
