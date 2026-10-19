@@ -1,0 +1,21 @@
+segment	calls	seconds	ms_per_call	share
+start -> after_precicorr	240	0.004573	0.0191	0.0002
+after_precicorr -> after_interpolation	240	0.434384	1.8099	0.0236
+after_interpolation -> after_phenology	240	0.051949	0.2165	0.0028
+after_phenology -> after_meteo	240	0.049217	0.2051	0.0027
+after_meteo -> after_expokorr	240	0.094906	0.3954	0.0052
+after_expokorr -> after_etp	240	0.374053	1.5586	0.0203
+after_etp -> after_irrigation	240	0.000915	0.0038	0.0000
+after_irrigation -> after_interception	240	0.147922	0.6163	0.0080
+after_interception -> after_snow1	240	0.373705	1.5571	0.0203
+after_snow1 -> after_snowevap	240	0.033237	0.1385	0.0018
+after_snowevap -> after_siltingup	240	0.000680	0.0028	0.0000
+after_siltingup -> after_unsatzon	240	14.375105	59.8963	0.7808
+after_unsatzon -> after_surfrout	240	0.001705	0.0071	0.0001
+after_surfrout -> after_etreal	240	0.000411	0.0017	0.0000
+after_etreal -> after_gwflow	240	0.285995	1.1916	0.0155
+after_gwflow -> after_snow2	240	0.284211	1.1842	0.0154
+after_snow2 -> after_post_run	240	1.581740	6.5906	0.0859
+after_post_run -> after_routing	240	0.090123	0.3755	0.0049
+after_routing -> start	239	0.225940	0.9454	0.0123
+total (first to last point)		18.410772		1

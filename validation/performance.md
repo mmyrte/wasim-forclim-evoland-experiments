@@ -62,14 +62,16 @@ Warm, single thread, same machine unless noted. ms per call (= per step):
 
 ## What the numbers say
 
-- **On one CPU thread and at these grid sizes, the ports are 5–40 times slower than WaSiM per module.** The time hardly grows from Doubs to Rhone (3.6 times the cells): it is per-call overhead, not arithmetic. Potential ET, for example, is about ten small field-operator calls per layer and step plus their Python glue and host-device copies.
+- **On one CPU thread and at these grid sizes, the ports are 5–40 times slower than WaSiM per module.** The time hardly grows from Doubs to Rhone (3.6 times the cells) because the ports compute the whole bounding rectangle of the grid, which has about the same size for both (44,421 and 47,965 points; 14 % and 45 % of them model cells). An earlier version of this file blamed per-call overhead; the CPU spike ([`spike-cpu.md`](spike-cpu.md)) showed that the time per ensemble member stays constant with more members, so it is arithmetic. Per grid point the ports' arithmetic costs about what WaSiM's does per model cell. The Python glue of today's process functions (masks rebuilt, host copies) roughly doubles it.
 - **Host Python loops** cost 13–19 ms (shading walk) and 6–14 ms (Gauss-Seidel sweep) per call on their own.
 - **Fixed already:** binding a field operator to a backend on every call cost about 1 s per potential-ET call on `gtfn_cpu`; wasim-gt now caches the bound operators (`fields.with_backend`), which brought it from 1,105 to 27 ms.
-- These numbers are not yet the comparison that matters. The case for wasim-gt is many parameter sets at once (an ensemble dimension) on a GPU, where the per-call overhead is shared by all members, and the Richards column, which dominates WaSiM's run time and is not ported yet (#7).
+- These numbers are not yet the comparison that matters. The case for wasim-gt is many parameter sets at once (an ensemble dimension) on a GPU, against WaSiM runs side by side, and the Richards column, which dominates WaSiM's run time and is not ported yet (#7); see [`spike-cpu.md`](spike-cpu.md) for how its loops fare in each formulation.
+
+WaSiM with OpenMP (4 threads): Doubs 39.0, Rhone 94.9 ms per step (Richards 24.5 and 49.4); 4 single-thread Doubs runs side by side have 3.5 times the throughput of one (`gt4py/spike/wasim_timing/`, [`spike-cpu.md`](spike-cpu.md)).
 
 ## Next steps
 
 - One benchmark script per ported process, all printing the same table, and one run that fills this file (also for the other modules on this machine).
-- Fuse the field operators of a process into one program, then a whole time step (wasim-gt #14); measure again.
+- Compute only the model cells (a compressed cell dimension) and keep fields in the backend between processes; fusing into gt4py programs made the spike slower ([`spike-cpu.md`](spike-cpu.md)).
 - Measure with an ensemble dimension (e.g. 1, 10, 100 members) on CPU and on a GPU (wasim-gt #17), against WaSiM runs in parallel processes, one per member.
 - Replace the host loops (shading, slides, glacier walk, Gauss-Seidel) or precompute what depends only on the DEM and the time (shading).
