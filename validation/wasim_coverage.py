@@ -44,7 +44,10 @@ def gcov_lines(src_dir, obj_dir, source):
 
 def function_range(src_dir, source, name):
     """First and last line of a function definition 'Class::function' (closing brace in column 0)."""
-    text = open(os.path.join(src_dir, source), encoding="utf-8", errors="replace").read().splitlines()
+    text = open(os.path.join(src_dir, source), encoding="utf-8", errors="replace").read()
+    # Braces inside block comments must not terminate the function range.
+    text = re.sub(r"/\*.*?\*/", lambda m: "\n" * m.group().count("\n"), text, flags=re.S)
+    text = text.splitlines()
     pattern = re.compile(r"^\S.*\b" + re.escape(name) + r"\s*\(")
     for i, line in enumerate(text):
         if pattern.match(line):
