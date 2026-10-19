@@ -1,6 +1,6 @@
 # Performance per module: WaSiM and wasim-gt
 
-Status 2026-10-18. The aim is a per-module comparison of legacy WaSiM and the wasim-gt ports on the same case, so that the speed-up of the port (or its cost) can be judged module by module, and later for whole time steps, ensembles and GPUs.
+Status 2026-10-19. The aim is a per-module comparison of legacy WaSiM and the wasim-gt ports on the same case, so that the speed-up of the port (or its cost) can be judged module by module, and later for whole time steps, ensembles and GPUs.
 
 ## How it is measured
 
@@ -60,6 +60,30 @@ Warm, single thread, same machine unless noted. ms per call (= per step):
 | snow part 1, method 7 | gt:cpu_ifirst | about 3 | | 1.68 / 6.38 | wasim-gt#19, macOS arm64 |
 | glacier dynamics (yearly, host) | — | | about 4 s per run | (not separable: inside snow part 2 on one day) | wasim-gt#24 |
 
+## The other ports on one machine (macOS arm64, 2026-10-19)
+
+`gt4py/benchmark_ports.py` times the meteo, snow, slides, glacier melt, permafrost and groundwater ports inside their validation scripts (only the time spent in the port's functions; dump I/O and the comparison with WaSiM excluded; the first step and later compiling calls left out), with the operator caching of mmyrte/wasim-gt#26. WaSiM on the same machine: wasim-eth with the `WASIM_TIMING` hook (mmyrte/wasim-eth#2), Doubs and Rhone golden cases, 48 hourly steps, `make MPI=0 ARCH=-ffp-contract=off`. One thread, Apple M-series, ms per step:
+
+| Module | WaSiM Doubs / Rhone | wasim-gt Doubs / Rhone | Backend |
+| --- | --- | --- | --- |
+| precipitation correction + meteo interpolation | 0.79 / 12.80 | 27.1 / 132.8 | embedded |
+| | | 11.7 / 102.8 | gtfn_cpu |
+| snow part 1, method 7 | 1.33 / 5.42 | 3.4 / 4.9 | gt:cpu_ifirst |
+| snow part 2: slides (host Python) | 1.21 / 3.66 (slides and glacier together) | 13.7 / 50.2 | numpy host loop |
+| glacier: snow part 1 on cell and glacier fraction | inside snow part 1 | – / 10.0 (Rhone, July) | gt:cpu_ifirst |
+| glacier melt, method 13 | inside snow part 1 | – / 6.5 (Rhone, July) | embedded |
+| permafrost (Rhone variant) | inside snow part 1 | – / 1.0 | embedded |
+| | | – / 0.8 | gtfn_cpu |
+| groundwater (per sub step) | 0.70 / 2.18 | 30.2 / 38.1 | embedded |
+| | | 21.7 / 33.7 | gtfn_cpu |
+| unsaturated zone (Richards), for scale | 23.2 / 45.0 | not ported | |
+| **total per step** | **38.7 / 86.8** | | |
+
+- **Snow part 1**, one `gt4py.cartesian` stencil per step, is as fast as WaSiM per cell (Rhone 4.9 vs 5.4 ms) and slower only at Doubs size, where the fixed cost of a call matters.
+- **Host Python loops dominate the rest:** the slide cascade (14–50 ms against WaSiM's 1–4 ms for slides and glacier together), the Gauss-Seidel sweep inside groundwater, and the station fits of the meteo interpolation. These are the first candidates for compiled helpers.
+- Without the operator caching of wasim-gt#26, permafrost on `gtfn_cpu` took 38 ms per call instead of 0.8 ms, and the meteo interpolation 279 instead of 12 ms (Doubs).
+- **Ensembles on a CPU** (snow part 1, Rhone, members tiled in one call): one thread 5.5–8.9 ms per member for 16–64 members; 15 threads 0.7–1.5 ms per member, against 0.36 ms per member for 15 WaSiM runs in parallel. On a CPU an ensemble in one process does not beat independent WaSiM processes; the case for the port rests on GPUs (#17).
+
 ## What the numbers say
 
 - **On one CPU thread and at these grid sizes, the ports are 5–40 times slower than WaSiM per module.** The time hardly grows from Doubs to Rhone (3.6 times the cells): it is per-call overhead, not arithmetic. Potential ET, for example, is about ten small field-operator calls per layer and step plus their Python glue and host-device copies.
@@ -69,7 +93,7 @@ Warm, single thread, same machine unless noted. ms per call (= per step):
 
 ## Next steps
 
-- One benchmark script per ported process, all printing the same table, and one run that fills this file (also for the other modules on this machine).
+- One benchmark script per ported process: done for ET (`benchmark_et.py`) and the others (`benchmark_ports.py`); one run on one machine that fills a single table is still open.
 - Fuse the field operators of a process into one program, then a whole time step (wasim-gt #14); measure again.
 - Measure with an ensemble dimension (e.g. 1, 10, 100 members) on CPU and on a GPU (wasim-gt #17), against WaSiM runs in parallel processes, one per member.
 - Replace the host loops (shading, slides, glacier walk, Gauss-Seidel) or precompute what depends only on the DEM and the time (shading).
