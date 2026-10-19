@@ -69,6 +69,7 @@ python3 gt4py/snow_evaporation.py <dump dir>                              # T-in
 python3 gt4py/snow_evaporation.py <dump dir> --energy-balance --pre after_snow1   # golden setup, snow method 7
 python3 gt4py/snow_energy_balance.py <dump dir> <run dir>/control.wasim   # golden Doubs setup, snow method 7 (grids and points: see its docstring)
 python3 gt4py/snow_energy_balance.py <dump dir> <run dir>/control.wasim --pre after_irrigation --input precipitation --ice GlacierizedCells   # Rhone
+python3 gt4py/glacier_melt.py <dump dir> <run dir>/control.wasim --start 2021-07-01   # Rhone summer variant, glacier method 13 (see its docstring)
 python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs g++
 ```
 
