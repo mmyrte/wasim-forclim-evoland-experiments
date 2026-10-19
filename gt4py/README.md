@@ -72,6 +72,7 @@ python3 gt4py/meteo_interpolation.py <dump dir> <run dir>/control.wasim <case di
 python3 gt4py/interception.py <dump dir> <run dir>/control.wasim          # golden Doubs setup, interception method 11
 python3 gt4py/snow_evaporation.py <dump dir>                              # T-index setup (doubs_snow_tindex.wasim.in)
 python3 gt4py/snow_evaporation.py <dump dir> --energy-balance --pre after_snow1   # golden setup, snow method 7
+python3 gt4py/permafrost.py <dump dir> <run dir>/control.wasim         # Rhone variant with the permafrost model on (see its docstring)
 python3 gt4py/snow_energy_balance.py <dump dir> <run dir>/control.wasim   # golden Doubs setup, snow method 7 (grids and points: see its docstring)
 python3 gt4py/snow_energy_balance.py <dump dir> <run dir>/control.wasim --pre after_irrigation --input precipitation --ice GlacierizedCells   # Rhone
 python3 gt4py/glacier_melt.py <dump dir> <run dir>/control.wasim --start 2021-07-01   # Rhone summer variant, glacier method 13 (see its docstring)
