@@ -22,13 +22,20 @@ Lowering it in the control file ("minimum slope for creating slides", e.g. to 20
 
 usage: snow_energy_balance.py DUMP_DIR CONTROL_FILE [--pre after_interception] [--input throughfall0]
                               [--ice GlacierizedCells] [--no-lakes] [--backend gt:cpu_ifirst]
+                              [--step-minutes 1440 --start 2021-01-01]
 
   Doubs (interception method 11, before snow):  defaults
   Rhone (interception method 1, after snow; glaciers):  --pre after_irrigation --input precipitation --ice GlacierizedCells
   With --ice, also dump GlacierizedCells and the snow on glaciers (TotalSnowStorage_onGlacier,
   LiquidSnowStorage_onGlacier, SolidSnowStorage_onGlacier) at after_gwflow and after_snow2.
+  Daily steps (--step-minutes 1440, e.g. golden/rhone/daily_jan.wasim.in): also dump temperature_night;
+  --start is the date of the first step (WaSiM labels it hour 24 of that day). The dark and bright
+  fractions of each day come from wasim_gt.processes.sun with [coordinates] of the expanded control
+  file (CONTROL_FILE.intern, which WaSiM writes next to the control file).
 """
 import argparse
+import datetime
+import os
 import re
 import time
 
@@ -36,6 +43,7 @@ import numpy as np
 
 from wasim_gt.processes.snow_energy_balance import SnowParameters, snow_energy_balance
 from wasim_gt.processes.snow_slides import snow_slides
+from wasim_gt.processes.sun import Site, daylight
 
 from wasim_dump import Dump
 
@@ -81,7 +89,16 @@ def snow_parameters(control_file):
     return p, dict(min_slide_slope=tail[2], slide_mass_fraction=tail[3])
 
 
-def landuse_albedo(d, active, pre, first_hour):
+def site_of(control_file):
+    """Site from [coordinates] and [output_interval] of the expanded control file (as potential_et.py)."""
+    intern = control_file + ".intern" if os.path.exists(control_file + ".intern") else control_file
+    lines = lambda name: [ln.split("#", 1)[0].strip() for ln in control_section(intern, name).splitlines()
+                          if ln.split("#", 1)[0].strip()]
+    c, o = lines("coordinates"), lines("output_interval")
+    return Site(float(c[0]), float(c[1]), float(c[2]), float(c[3]), float(o[3].split()[0]) / 60.0)
+
+
+def landuse_albedo(d, active, pre, first_hour, steps_per_day=24):
     """Land-use albedo per step, exactly as the snow model gets it, and the number of cells where it
     could not be observed.
 
@@ -98,7 +115,7 @@ def landuse_albedo(d, active, pre, first_hour):
     meteo, snow1 = d("after_meteo", "albedo"), d("after_snow1", "albedo")
     swe1 = d("after_snow1", "snow_storage_total")
     nsteps = meteo.shape[0]
-    day = (np.arange(nsteps) + first_hour) // 24
+    day = (np.arange(nsteps) + first_hour) // 24 if steps_per_day == 24 else np.arange(nsteps) // steps_per_day
     out, unobserved = [None] * nsteps, 0
     for k in np.unique(day):
         steps = np.flatnonzero(day == k)
@@ -127,7 +144,12 @@ def main():
                     "ported (issue #5) and are left out of the comparison")
     ap.add_argument("--step-minutes", type=float, default=60.0)
     ap.add_argument("--first-hour", type=int, default=1, help="hour of day of the first step (to group steps by day)")
+    ap.add_argument("--start", default=None, help="date of the first step, for daily steps (YYYY-MM-DD)")
     args = ap.parse_args()
+    daily = args.step_minutes > 720.0
+    if daily and not args.start:
+        raise SystemExit("daily steps need --start")
+    site = site_of(args.control_file) if daily else None
 
     d = Dump(args.dump_dir)
     params, slide = snow_parameters(args.control_file)
@@ -136,7 +158,7 @@ def main():
     ssnow0 = d(pre, "snowstorage_solid")
     nsteps = ssnow0.shape[0]
     active = d("start", "[zone_grid]")[0] > -9999
-    lu_alb, unobserved = landuse_albedo(d, active, pre, args.first_hour)
+    lu_alb, unobserved = landuse_albedo(d, active, pre, args.first_hour, 1 if daily else 24)
     elevation = d("start", "[elevation_model]")[0]
     check = active.copy()  # cells compared with WaSiM
     if args.ice:
@@ -164,8 +186,14 @@ def main():
                       active=active.astype(float), snowstorage_solid=g("snowstorage_solid"),
                       snowstorage_liquid=g("snowstorage_liquid"), snowtemp=g("snowtemp"),
                       surftemp=g("surftemp"), snow_age=g("snow_age"))
+        light = {}
+        if daily:
+            day = datetime.date.fromisoformat(args.start) + datetime.timedelta(days=t)
+            dl = daylight(site, day.day, day.month, 24, args.step_minutes)
+            light = dict(dark_fraction=dl.dark, bright_fraction=dl.bright)
+            inputs["temperature_night"] = g("temperature_night")
         start = time.perf_counter()
-        res = snow_energy_balance(inputs, params, args.step_minutes, backend=args.backend)
+        res = snow_energy_balance(inputs, params, args.step_minutes, backend=args.backend, **light)
         t_run += time.perf_counter() - start
         for k, name in compare1.items():
             worst1[k] = max(worst1[k], difference(res[k], g(name, post), check))
