@@ -78,6 +78,13 @@ python3 gt4py/snow_energy_balance.py <dump dir> <run dir>/control.wasim --pre af
 python3 gt4py/glacier_melt.py <dump dir> <run dir>/control.wasim --start 2021-07-01   # Rhone summer variant, glacier method 13 (see its docstring)
 python3 gt4py/glacier_dynamics.py <dump dir> <run dir>/control.wasim --start 2021-07-01   # glacier mass balance and yearly dynamics (see its docstring)
 python3 gt4py/soil/test_van_genuchten.py path/to/wasim-eth/src           # needs g++
+# radiation correction and potential ET (dumps after_meteo, after_expokorr, after_etp; see the script's header)
+NPY_DISABLE_CPU_FEATURES=X86_V4 python3 gt4py/potential_et.py <dump dir> <run dir>/control.wasim.intern 2021-01-01T01
+python3 gt4py/potential_et.py <dump dir> <run dir>/control.wasim.intern 2021-06-01T24 --cellsize 500 --backend gtfn_cpu  # Rhone daily
+# table-based phenology (vegetation grids at after_meteo)
+python3 gt4py/vegetation.py <dump dir> <run dir>/control.wasim.intern 2021-01-01T01
+# dynamic phenology, synthetic Rhone case gt4py/rhone_dynphen.wasim.in (dump after_meteo; grid list in the script's header)
+NPY_DISABLE_CPU_FEATURES=X86_V4 python3 gt4py/dynamic_phenology.py <dump dir> <run dir>/control.wasim.intern 2021-01-01T24
 ```
 
 The Doubs setup is `sample-run-doubs.zip`.

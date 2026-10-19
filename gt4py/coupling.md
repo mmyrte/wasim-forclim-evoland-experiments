@@ -83,12 +83,16 @@ Not in the grid table, but equally binding: the soil model sorts river-link cell
 
 ## Ported so far
 
-All three are checked bit for bit against WaSiM: interception and snow evaporation over every step and active cell, the soil functions against WaSiM's own C++ code.
+All are checked bit for bit against WaSiM: the processes over every step and active cell, the soil functions against WaSiM's own C++ code.
 
 | Port | Kernel (wasim-gt) / check (here) | Reference | Result |
 | --- | --- | --- | --- |
 | interception, methods 1/11, multiple vegetation layers | `wasim_gt.processes.interception` / `interception.py` | golden Doubs setup, 48 hourly steps, grid dumps before and after the call | all 12 output grids (per-layer and total storage, evaporation, throughfall, remaining ETP) **bit-identical**, numpy and `gtfn_cpu` backends |
 | snow evaporation, conventional and energy-balance branches | `wasim_gt.processes.snow_evaporation` / `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
+| radiation and temperature correction (method 2, with shading) | `wasim_gt.processes.radiation_correction` / `potential_et.py` | Doubs: golden setup 2021-01-01, 48 hourly steps, and `doubs_et_june.wasim.in` (48 sunny hours in June); Rhone daily (`golden/rhone/daily_jan.wasim.in`, `daily_june.wasim.in`), 61 days; dumps `after_meteo` → `after_expokorr` | correction factor, `Ieff_max`, shadow, corrected temperature: **bit-identical**, numpy and `gtfn_cpu` |
+| potential ET, Penman-Monteith, several vegetation layers, open water on ponded lake cells, hourly and daily | `wasim_gt.processes.potential_et` / `potential_et.py` | same runs, dumps `after_expokorr` → `after_etp` | ETP and EIP per layer and total, EVAP, corrected radiation, `AspectCorrectedGlobalRadiation`, cloudiness, `SSDTemp`, day and night temperature (daily): **bit-identical**, numpy and `gtfn_cpu` |
+| vegetation parameters from the land-use table (`VariableDayCount`), initialisation and daily update | `wasim_gt.processes.vegetation` / `vegetation.py` | golden Doubs setup, 10 days hourly (initialisation and 10 updates); Rhone daily, all of 2021 (365 updates); dump `after_meteo` | LAI, VCF, rsc, rsi, z0 and root depth per layer, albedo, rse: **bit-identical** |
+| dynamic phenology DP1–DP4: forcing, chilling, start of growth, multiple start times, leaf fall, and the vegetation parameters that follow | `wasim_gt.processes.dynamic_phenology` / `dynamic_phenology.py` | synthetic Rhone cases `rhone_dynphen.wasim.in` (one land use per model, daily, 2021-01-01 to 2022-07-31) and `rhone_dynphen2.wasim.in` (late start, soil-moisture stress on DP2–DP4, 2021-06-15 to 2022-06-30); dump `after_meteo` | all phenology grids and vegetation parameters: **bit-identical** (577 and 381 days, state carried from the start) |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
 | simple permafrost model (thaw depth, snow-cover and snow-free days, root-depth limit) | `wasim_gt.processes.permafrost` / `permafrost.py` | Rhone variant with the model switched on, 48 hourly steps, dumps before snow and `after_snow1` | all 4 output grids **bit-identical**, embedded and `gtfn_cpu`; the update code ran completely |
 | snow method 7: energy balance, wind redistribution, slides (cells without ice; slides also on glaciers) | `wasim_gt.processes.snow_energy_balance`, `snow_slides` / `snow_energy_balance.py` | golden Doubs and Rhone, 48 hourly steps, dumps before and after `run1` and `run2`; two Doubs variants with lower slide thresholds and stronger long-wave loss to reach the slides and the limiters | all 14 outputs of part 1 and the 6 (9 with glaciers) of part 2 **bit-identical**, `gt:cpu_ifirst` |
@@ -97,7 +101,9 @@ All three are checked bit for bit against WaSiM: interception and snow evaporati
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
-Together with the earlier T-index prototype, the snow, interception and snow evaporation chain can now run without WaSiM inputs other than the meteo fields and ETP.
+Together with the earlier T-index prototype, the chain phenology, radiation correction, potential ET, interception, snow evaporation can now run from the meteo fields and the albedo under snow (from snow method 7, not yet ported).
+
+The coverage tool (`../validation/wasim_coverage.py`) over the four reference runs shows every line of `getETP` run except net radiation as input (not ported), and in `potentiell` and `expokorrklasse::run` all lines of the ported branches except: the cap of the radiation at 1260 Wh/m² per bright hour; the albedo without a lake model; the sun below 1° altitude in a bright sub interval; the temperature formulas for `split` > 1; and branches that cannot run at Swiss latitudes (sunset after midnight, polar day and night) or with these settings (SSDTemp without a bright step).
 
 ## How the ports are validated
 
@@ -115,10 +121,18 @@ Each port reads the state WaSiM had just before the call and compares its result
 
 ## Findings along the way (not fixed)
 
+The complete list, grouped by module, is in wasim-eth `TODO.md` ("Found while porting to wasim-gt"); the workarounds wasim-gt needs to reproduce them are in wasim-gt `TODO.md`.
+
 - Snow evaporation adds each cell's EVRS to the zonal statistics twice (`etpetr.cc:2464` and `2507`).
 - Snow evaporation reduces ETP per layer but not the layer total `pot_transpiration0`, while interception reduces both.
 - `get_theta` reads `h_tab[0]` for suctions ≤ 0, but the table generation never sets it (uninitialized memory; in practice the result is θs).
 - `k_calc` searches its table with `anz_h` instead of `anz_k`. This is harmless only as long as both are 30.
+- Potential ET: the LAI accumulated above a layer (`LAIkum`, `etpetr.cc:2042`) adds the LAI of the layer above even where that layer has no land use, i.e. adds -9999, which makes the aerodynamic resistance of the lower layer negative. Only cells whose top layer is empty but a lower one is not are affected; the Doubs and Rhone grids have none.
+- Potential ET corrects the global radiation in place (`etpetr.cc:1956`) but caps only its copy `RGEX` at 1260 Wh/m² per bright hour, so later modules (snow) can see a corrected radiation above the cap.
+- The constant `c64_0` is 25.0 (`etpetr.cc:1349`), the ratio of measurement height and roughness length for z0 > 2 m.
+- Phenology: the initialisation and the daily update clamp differently and use different elevations on lake cells (before and after the lake model lowers them); two leap-year rules, both wrong for 2000; before the first fix point the values are interpolated from the last one without its altitude shift. Details in wasim-eth `TODO.md`.
+- WaSiM replaces the land-use codes in the grids by the position of the record in the table (`defltuzr.cc:1825`), so dumped land-use grids hold positions, not codes.
+- Dynamic phenology: the state grids are created with zeros, so the initialisation rules for unset (negative) values never apply to a fresh run: the start of growth is 0 and F* is 0 until the first `JDReset_TStart`, and DP2/DP4 skip their DP1 fallback, unlike the manual says. The day number counts February with 29 days in every year of a run that ends in a leap year. Details in wasim-eth `TODO.md`.
 - Snow, energy balance: when the surface temperature is limited to air temperature − 13 K, the latent heat flux is recomputed but the sensible one is not (`snowmod.cc:3087–3093`).
 - Snow, melt branch: only negative `Mass_lat` (sublimation) is taken from the snow; positive `Mass_lat` (deposition) is lost (`snowmod.cc:3423`).
 - Snow, daily steps: `calc_Accu_and_Melt` runs twice (night and day) and applies wind redistribution `P += DEPOINDEX · P_SNOW` to the input grid each time (`snowmod.cc:2863`, `4282–4286`). In the sublimation case `Mass_lat` is also multiplied by `Anteil` twice (`:3341`, `:3410`).
@@ -133,7 +147,7 @@ Each port reads the state WaSiM had just before the call and compares its result
 
 - `gt4py.next`: a field operator called outside a program needs `out=` even on the embedded backend.
 - `gt4py.cartesian`: data dimensions can be indexed at run time only on `gt:*` and `dace:*` backends, not on `numpy`. No function calls in `if` conditions, no `//`.
-- Bit-identical results on a CPU rely on no FMA contraction and the same `pow`. CUDA's `pow` and `exp` differ by up to about 2 ulp, so GPU runs have to be validated with a tolerance.
+- Bit-identical results on a CPU rely on no FMA contraction and the same `pow`, `exp` and `log`. numpy's vectorised versions (used by the embedded backend) differ from the C library in the last bit for 2–5% of arguments on AVX-512 machines; `NPY_DISABLE_CPU_FEATURES=X86_V4` (numpy 2.5) makes them agree. `gtfn_cpu` calls the C library directly. CUDA's `pow` and `exp` differ by up to about 2 ulp, so GPU runs have to be validated with a tolerance.
 
 ## Effort, in tokens and compute
 
@@ -148,6 +162,9 @@ The work is done by an LLM agent, so effort is measured in tokens and machine ti
 | interception port and validation | about 25,000 | about 400 |
 | snow evaporation port, both branches | about 12,000 | about 200 |
 | soil hydraulic functions, C++ reference extraction, test | about 45,000 | about 250 |
+| radiation correction and Penman-Monteith potential ET, hourly and daily; Rhone daily setup, synthetic case, coverage (later session) | about 330,000 | about 1,100 |
+| table-based phenology, same session | about 100,000 | about 500 |
+| dynamic phenology DP1–DP4, synthetic case, same session | about 120,000 | about 900 |
 
 For a port, the rate works out to about 100–150 tokens per C++ line that has to be read, rewritten and validated. That covers debugging and the GT4Py frontend's quirks, and comes on top of a fixed cost of about 10,000 tokens per process for a dump run and a comparison script.
 
@@ -155,7 +172,7 @@ For a port, the rate works out to about 100–150 tokens per C++ line that has t
 
 | Item | Relevant C++ lines (estimate) | Tokens (counter) |
 | --- | --- | --- |
-| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M |
+| potential ET (Penman-Monteith) and radiation correction | 1,000 | 0.1–0.2 M (**done**, with both phenologies: about 0.55 M; see above) |
 | precipitation correction, meteo interpolation (IDW, regression) | 1,500 | 0.15–0.25 M |
 | snow energy balance (method 7) without slides; slides on the CPU | 2,000 | 0.2–0.35 M |
 | dynamic glacier model (Rhone) | 1,500–2,000 | 0.2–0.3 M |
@@ -175,6 +192,5 @@ That is roughly 10–20 sessions of this one's size, and the uncertainty is a fa
 
 The remaining work is split into issues, one per process, in the wasim-gt repository, under its tracking issue [mmyrte/wasim-gt#1](https://github.com/mmyrte/wasim-gt/issues/1). Validation work stays here: harness #16, synthetic cases #17, legacy tools #18.
 
-1. Penman-Monteith potential ET (pointwise; closes the snow, interception, ET chain).
-2. Richards column for the Doubs/Rhone option set, in `gt4py.cartesian`, built on `soil/van_genuchten.py`; validate against `after_unsatzon` dumps per sub step.
-3. On a GPU node: run the soil-function test and interception on `gt:gpu`/`dace:gpu`, measure throughput with an ensemble dimension, and set the validation tolerance.
+1. Richards column for the Doubs/Rhone option set, in `gt4py.cartesian`, built on `soil/van_genuchten.py`; validate against `after_unsatzon` dumps per sub step.
+2. On a GPU node: run the soil-function test and interception on `gt:gpu`/`dace:gpu`, measure throughput with an ensemble dimension, and set the validation tolerance.
