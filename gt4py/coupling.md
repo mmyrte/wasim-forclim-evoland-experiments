@@ -89,6 +89,7 @@ All three are checked bit for bit against WaSiM: interception and snow evaporati
 | interception, methods 1/11, multiple vegetation layers | `wasim_gt.processes.interception` / `interception.py` | golden Doubs setup, 48 hourly steps, grid dumps before and after the call | all 12 output grids (per-layer and total storage, evaporation, throughfall, remaining ETP) **bit-identical**, numpy and `gtfn_cpu` backends |
 | snow evaporation, conventional and energy-balance branches | `wasim_gt.processes.snow_evaporation` / `snow_evaporation.py` | T-index Doubs setup and golden setup (snow method 7), 48 steps | snow store, snow evaporation, ETP per layer, EVAP: **bit-identical** |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
+| snow method 7: energy balance, wind redistribution, slides (cells without ice; slides also on glaciers) | `wasim_gt.processes.snow_energy_balance`, `snow_slides` / `snow_energy_balance.py` | golden Doubs and Rhone, 48 hourly steps, dumps before and after `run1` and `run2`; two Doubs variants with lower slide thresholds and stronger long-wave loss to reach the slides and the limiters | all 14 outputs of part 1 and the 6 (9 with glaciers) of part 2 **bit-identical**, `gt:cpu_ifirst` |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
@@ -114,6 +115,11 @@ Each port reads the state WaSiM had just before the call and compares its result
 - Snow evaporation reduces ETP per layer but not the layer total `pot_transpiration0`, while interception reduces both.
 - `get_theta` reads `h_tab[0]` for suctions ≤ 0, but the table generation never sets it (uninitialized memory; in practice the result is θs).
 - `k_calc` searches its table with `anz_h` instead of `anz_k`. This is harmless only as long as both are 30.
+- Snow, energy balance: when the surface temperature is limited to air temperature − 13 K, the latent heat flux is recomputed but the sensible one is not (`snowmod.cc:3087–3093`).
+- Snow, melt branch: only negative `Mass_lat` (sublimation) is taken from the snow; positive `Mass_lat` (deposition) is lost (`snowmod.cc:3423`).
+- Snow, daily steps: `calc_Accu_and_Melt` runs twice (night and day) and applies wind redistribution `P += DEPOINDEX · P_SNOW` to the input grid each time (`snowmod.cc:2863`, `4282–4286`). In the sublimation case `Mass_lat` is also multiplied by `Anteil` twice (`:3341`, `:3410`).
+- Snow part 2 (`run2`, slides) runs after the sub-step loop and before the post-runs, so its "before" state is the last sub step's `after_gwflow`, not `after_post_run`.
+- The land-use albedo the snow model asks for (`LUSEtabletype::GetAlbedo`) interpolates between fix points as `(x−x1)/(x2−x1)·y2 + (x2−x)/(x2−x1)·y1`, so a constant 0.15 comes out as 0.15 ± 1 ulp depending on day and elevation. The vegetation-parameter interpolation is not ported yet; `snow_energy_balance.py` reads the value back from the dumps.
 
 ## GT4Py limits met
 
