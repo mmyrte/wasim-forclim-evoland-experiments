@@ -1,0 +1,128 @@
+{
+  "pre_run": {
+    "first": 7732,
+    "last": 7913,
+    "whole": 119,
+    "in_scope": 62,
+    "doubs": 60,
+    "rhone": 60,
+    "union": 60
+  },
+  "run": {
+    "first": 7939,
+    "last": 12296,
+    "whole": 2421,
+    "in_scope": 654,
+    "doubs": 476,
+    "rhone": 555,
+    "union": 555
+  },
+  "post_run": {
+    "first": 13105,
+    "last": 13402,
+    "whole": 179,
+    "in_scope": 41,
+    "doubs": 34,
+    "rhone": 40,
+    "union": 41
+  },
+  "quflow": {
+    "first": 4850,
+    "last": 4853,
+    "whole": 2,
+    "in_scope": 2,
+    "doubs": 2,
+    "rhone": 2,
+    "union": 2
+  },
+  "gradient_restriction": {
+    "first": 4859,
+    "last": 4965,
+    "whole": 71,
+    "in_scope": 66,
+    "doubs": 65,
+    "rhone": 66,
+    "union": 66
+  },
+  "GetMeanTheta": {
+    "first": 4969,
+    "last": 5034,
+    "whole": 38,
+    "in_scope": 38,
+    "doubs": 25,
+    "rhone": 25,
+    "union": 25
+  },
+  "evapotranspiration": {
+    "first": 5038,
+    "last": 5206,
+    "whole": 79,
+    "in_scope": 74,
+    "doubs": 71,
+    "rhone": 71,
+    "union": 71
+  },
+  "hydraulic_heads_iterative": {
+    "first": 5210,
+    "last": 5264,
+    "whole": 32,
+    "in_scope": 30,
+    "doubs": 30,
+    "rhone": 30,
+    "union": 30
+  },
+  "calc_surface_interaction": {
+    "first": 5269,
+    "last": 5457,
+    "whole": 115,
+    "in_scope": 111,
+    "doubs": 104,
+    "rhone": 71,
+    "union": 104
+  },
+  "specific_fluxes": {
+    "first": 5461,
+    "last": 5832,
+    "whole": 131,
+    "in_scope": 100,
+    "doubs": 78,
+    "rhone": 78,
+    "union": 78
+  },
+  "flux_restrictions_opt": {
+    "first": 6174,
+    "last": 6558,
+    "whole": 231,
+    "in_scope": 225,
+    "doubs": 62,
+    "rhone": 91,
+    "union": 91
+  },
+  "new_thetas": {
+    "first": 6563,
+    "last": 6619,
+    "whole": 33,
+    "in_scope": 33,
+    "doubs": 29,
+    "rhone": 29,
+    "union": 29
+  },
+  "groundwater_recharge": {
+    "first": 6623,
+    "last": 6703,
+    "whole": 38,
+    "in_scope": 32,
+    "doubs": 21,
+    "rhone": 21,
+    "union": 21
+  },
+  "CalculateMacroporeInfiltration": {
+    "first": 7320,
+    "last": 7400,
+    "whole": 41,
+    "in_scope": 41,
+    "doubs": 7,
+    "rhone": 16,
+    "union": 16
+  }
+}
