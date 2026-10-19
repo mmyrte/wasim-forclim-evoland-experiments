@@ -87,3 +87,5 @@ its regression-profile refit. Regression regions/weights are ignored exactly as 
 constructor, which explicitly disables them. Missing-value patterns must also match. For exact
 compiled CPU checks, use a compiler with OpenMP, set `CXXFLAGS=-ffp-contract=off`, put the
 venv's CMake/Ninja on `PATH`, and use a fresh `GT4PY_BUILD_CACHE_DIR` after changing flags.
+
+`groundwater.py DUMP_DIR CONTROL_FILE --backend embedded|gtfn_cpu --json RESULT.json` compares all active cells and substeps at `after_etreal` → `after_gwflow`, including head, flow, balance and explicit soil/river handovers (target exactly zero).
