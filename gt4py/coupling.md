@@ -57,6 +57,7 @@ Interception methods 1 and 2 swap 7a and 7b. Real evapotranspiration is computed
 | groundwater | `baseflow` (soil) | exchange with the soil from head changes | `gwflow.cc:2327` |
 | routing | `ponding_storage` (soil) | lake water level → pond depth | `abfluss.cc:6698` |
 | ET | `ponding_storage` (soil) | evaporation from ponds | `etpetr.cc:2594` |
+| snow (permafrost) | `root_depth1` (vegetation parameters) | limited to the thaw depth in every step | `snowmod.cc:4422` |
 | ET | `global_radiation` (meteo) | corrected for exposure in place | `etpetr.cc:1956` |
 | irrigation | precipitation (meteo), `irrigation_amounts` (soil) | `P += IRRIG` | `irrigate.cc:338ff, 623` |
 | precipitation correction (gridded or superposed input only) | precipitation (meteo) | in place | `meteoint.cc:4694ff` |
@@ -93,6 +94,10 @@ All are checked bit for bit against WaSiM: the processes over every step and act
 | vegetation parameters from the land-use table (`VariableDayCount`), initialisation and daily update | `wasim_gt.processes.vegetation` / `vegetation.py` | golden Doubs setup, 10 days hourly (initialisation and 10 updates); Rhone daily, all of 2021 (365 updates); dump `after_meteo` | LAI, VCF, rsc, rsi, z0 and root depth per layer, albedo, rse: **bit-identical** |
 | dynamic phenology DP1–DP4: forcing, chilling, start of growth, multiple start times, leaf fall, and the vegetation parameters that follow | `wasim_gt.processes.dynamic_phenology` / `dynamic_phenology.py` | synthetic Rhone cases `rhone_dynphen.wasim.in` (one land use per model, daily, 2021-01-01 to 2022-07-31) and `rhone_dynphen2.wasim.in` (late start, soil-moisture stress on DP2–DP4, 2021-06-15 to 2022-06-30); dump `after_meteo` | all phenology grids and vegetation parameters: **bit-identical** (577 and 381 days, state carried from the start) |
 | soil hydraulic functions `h_calc`, `k_calc`, `get_theta` | `wasim_gt.soil.van_genuchten` / `soil/test_van_genuchten.py` | WaSiM's C++ functions, extracted verbatim (`soil/extract_reference.sh`), 220,000 random horizons and queries including edge cases | **bit-identical** (`gt:cpu_ifirst`) |
+| simple permafrost model (thaw depth, snow-cover and snow-free days, root-depth limit) | `wasim_gt.processes.permafrost` / `permafrost.py` | Rhone variant with the model switched on, 48 hourly steps, dumps before snow and `after_snow1` | all 4 output grids **bit-identical**, embedded and `gtfn_cpu`; the update code ran completely |
+| snow method 7: energy balance, wind redistribution, slides (cells without ice; slides also on glaciers) | `wasim_gt.processes.snow_energy_balance`, `snow_slides` / `snow_energy_balance.py` | golden Doubs and Rhone, 48 hourly steps, dumps before and after `run1` and `run2`; two Doubs variants with lower slide thresholds and stronger long-wave loss to reach the slides and the limiters | all 14 outputs of part 1 and the 6 (9 with glaciers) of part 2 **bit-identical**, `gt:cpu_ifirst` |
+| glacier melt, method 13: snow on the glacier fraction, ice and firn melt, firn stack | `wasim_gt.processes.glacier_melt`, `snow_energy_balance(on_glacier=True)` / `glacier_melt.py` | Rhone summer variant (1-3 July 2021, snow on glaciers set to 0 in a copy of the states), with and without a debris grid, 48 hourly steps | all compared grids **bit-identical** on all cells, `gt:cpu_ifirst`; the method-13 path ran completely |
+| glacier mass balance and yearly dynamics (volume-area relation, retreat and advance at margin cells, new glacier cells, balance redistribution) | `wasim_gt.processes.glacier_dynamics` / `glacier_dynamics.py` | Rhone with the evaluation date moved into the run: summer (retreat by 6 cells with a 100-fold melt factor), January, and January with a 50 mm threshold for new glacier cells (355 new glaciers) | all 20 compared grids **bit-identical**; every step's mass balance exact |
 
 In WaSiM the soil functions interpolate in lookup tables of 30 entries per soil horizon. Storing these tables per cell and level would take several GB for Switzerland, so the port recomputes only the entries that each lookup touches. It uses the same floating-point expressions as WaSiM's table generation, so the results are identical. The search is a fixed five-step bisection, so every GPU thread does the same work. This replaces memory traffic by about a dozen `pow` calls per lookup, a good trade on a GPU.
 
@@ -116,6 +121,8 @@ Each port reads the state WaSiM had just before the call and compares its result
 
 ## Findings along the way (not fixed)
 
+The complete list, grouped by module, is in wasim-eth `TODO.md` ("Found while porting to wasim-gt"); the workarounds wasim-gt needs to reproduce them are in wasim-gt `TODO.md`.
+
 - Snow evaporation adds each cell's EVRS to the zonal statistics twice (`etpetr.cc:2464` and `2507`).
 - Snow evaporation reduces ETP per layer but not the layer total `pot_transpiration0`, while interception reduces both.
 - `get_theta` reads `h_tab[0]` for suctions ≤ 0, but the table generation never sets it (uninitialized memory; in practice the result is θs).
@@ -126,6 +133,15 @@ Each port reads the state WaSiM had just before the call and compares its result
 - Phenology: the initialisation and the daily update clamp differently and use different elevations on lake cells (before and after the lake model lowers them); two leap-year rules, both wrong for 2000; before the first fix point the values are interpolated from the last one without its altitude shift. Details in wasim-eth `TODO.md`.
 - WaSiM replaces the land-use codes in the grids by the position of the record in the table (`defltuzr.cc:1825`), so dumped land-use grids hold positions, not codes.
 - Dynamic phenology: the state grids are created with zeros, so the initialisation rules for unset (negative) values never apply to a fresh run: the start of growth is 0 and F* is 0 until the first `JDReset_TStart`, and DP2/DP4 skip their DP1 fallback, unlike the manual says. The day number counts February with 29 days in every year of a run that ends in a leap year. Details in wasim-eth `TODO.md`.
+- Snow, energy balance: when the surface temperature is limited to air temperature − 13 K, the latent heat flux is recomputed but the sensible one is not (`snowmod.cc:3087–3093`).
+- Snow, melt branch: only negative `Mass_lat` (sublimation) is taken from the snow; positive `Mass_lat` (deposition) is lost (`snowmod.cc:3423`).
+- Snow, daily steps: `calc_Accu_and_Melt` runs twice (night and day) and applies wind redistribution `P += DEPOINDEX · P_SNOW` to the input grid each time (`snowmod.cc:2863`, `4282–4286`). In the sublimation case `Mass_lat` is also multiplied by `Anteil` twice (`:3341`, `:3410`).
+- Glacier dynamics: `CreateNewGlacierCells` returns at once for every existing glacier (`if (glacierindexmap.find(id) != end) return;`, `snowmod.cc:6548`), so a glacier never grows into new cells; for an unknown id the following line would dereference `end()`.
+- Glacier dynamics: `UpdateGlacierStatisticsZones` passes `isIce = false` to `addCell` (`:6290`, an MPI simplification), so each glacier's elevation range is the elevation of its first cell and the elevation bands collapse; every cell it adds also extends the old area and volume again (`:6293–6306`).
+- Glacier dynamics: a margin cell that drops below 0 subtracts its negative value from the remaining change (`remainingChanges -= temp`, `:7208`) instead of the part of the change it took.
+- Glacier radiation coefficients: `Aice` and `Asnow` count the day of the year as `tag + (month-1) · mon[month]` instead of the sum of the previous months (`snowmod.cc:2660–2674`), which shifts the seasonal sine by up to a few days. The step at 24:00 already uses the next day.
+- Snow part 2 (`run2`, slides) runs after the sub-step loop and before the post-runs, so its "before" state is the last sub step's `after_gwflow`, not `after_post_run`.
+- The land-use albedo the snow model asks for (`LUSEtabletype::GetAlbedo`) interpolates between fix points as `(x−x1)/(x2−x1)·y2 + (x2−x)/(x2−x1)·y1`, so a constant 0.15 comes out as 0.15 ± 1 ulp depending on day and elevation. The vegetation-parameter interpolation is not ported yet; `snow_energy_balance.py` reads the value back from the dumps.
 
 ## GT4Py limits met
 
