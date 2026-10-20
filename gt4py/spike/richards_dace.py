@@ -38,7 +38,7 @@ def column_step(p: dace.float64[N, 9, L], th: dace.float64[N, L], rain: dace.flo
         q = np.empty(L + 1, dtype=np.float64)
         dz = np.empty(L, dtype=np.float64)
         for k in range(L):
-            dz[k] = p[c, DZ, k]  # local copy: DaCe 2.0.0a10 drops the +1 in p[c, DZ, k + 1] (see README.md)
+            dz[k] = p[c, DZ, k]  # local copy: DaCe 2.0.0a10 drops the +1 in p[c, DZ, k + 1] (dace/known-issues/)
         P = rain[c]
         E = et[c]
         dtmin = DT * 1.0

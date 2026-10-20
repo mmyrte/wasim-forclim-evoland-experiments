@@ -80,4 +80,4 @@ Potential ET (2 layers), interception (2 layers), snow evaporation and T-index s
 
 - The column result comes from a proxy, not WaSiM's Richards zone; the proxy's cost matches WaSiM's on Doubs (1 thread 80 against 60 ms, 4 threads 22 against 24.5 ms) and its iteration counts are what drives the comparison.
 - One machine, 4 cores, no GPU. The fused-chain inputs are one real daylight step with made-up precipitation and snow (the dump has none).
-- DaCe 2.0.0a10 miscompiled one access pattern (`gt4py/spike/dace_offset_bug.py`: an index offset dropped inside a map); its default flags include `-ffast-math`. Both need regression tests before the model depends on DaCe.
+- DaCe 2.0.0a10 (PyPI) miscompiled one access pattern: an index offset of a sequential loop inside a map is dropped ([`dace/known-issues/`](../dace/known-issues/README.md); fixed in DaCe main, not yet released). Its default flags include `-ffast-math`. Both need regression tests before the model depends on DaCe.

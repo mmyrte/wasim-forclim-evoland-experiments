@@ -73,9 +73,10 @@ DaCe needs `DACE_compiler_cpu_args="-std=c++17 -fPIC -O3 -fopenmp"`: its default
 
 ## Found on the way
 
-- **DaCe 2.0.0a10 drops an index offset** (`dace_offset_bug.py`): inside a `dace.map`,
-  `p[c, 1, k] + p[c, 1, k + 1]` reads `p[c, 1, k]` twice. Workaround in `richards_dace.py`: copy
-  the column into a local array first. Not reported upstream yet.
+- **DaCe 2.0.0a10 drops an index offset** inside a `dace.map`: `p[c, 1, k] + p[c, 1, k + 1]` in a
+  sequential loop reads `p[c, 1, k]` twice. Workaround in `richards_dace.py`: copy the column into a
+  local array first. Fixed in DaCe main, not yet released; reproducer and details in
+  [`../../dace/known-issues/`](../../dace/known-issues/README.md).
 - **gt4py.next on gtfn:** a scan cannot take another scan's output within one field operator
   ("Scans are only supported at the top level of a stencil closure"), so each scan is its own
   stage of a program; one large field operator for a whole tick did not finish compiling within
