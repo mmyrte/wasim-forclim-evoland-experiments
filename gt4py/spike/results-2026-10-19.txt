@@ -1,0 +1,129 @@
+== Richards proxy, doubs
+C++ reference, 1 thread(s): 6022 cells, 20 levels, 48 steps: 79.599 ms per step (best of 3); mean sub-steps 1.028, mean iterations per cell-step 5.89
+C++ reference, 4 thread(s): 6022 cells, 20 levels, 48 steps: 21.594 ms per step (best of 3); mean sub-steps 1.028, mean iterations per cell-step 5.89
+DaCe, 1 thread(s): 6022 cells, 20 levels, 48 steps, dace: 82.90 ms per step (compiled in 8 s)
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+DaCe, time loop inside, 1 thread(s): 6022 cells, 20 levels, 48 steps, dace (time loop inside): 81.26 ms per step (compiled in 9 s)
+DaCe, 4 thread(s): 6022 cells, 20 levels, 48 steps, dace: 25.22 ms per step (compiled in 8 s)
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+DaCe, time loop inside, 4 thread(s): 6022 cells, 20 levels, 48 steps, dace (time loop inside): 25.09 ms per step (compiled in 8 s)
+cartesian lockstep, 1 thread(s): 6022 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode adaptive: 1169.20 ms per step (warm; compile 96 s), 36.7 ticks per step, 31.869 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, stages called one by one, 1 thread(s): 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode adaptive, split: 1538.25 ms per step (warm; first step 3.5 s), 36.7 ticks per step, 41.929 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+cartesian lockstep, 4 thread(s): 6022 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode adaptive: 335.40 ms per step (warm; compile 0 s), 36.7 ticks per step, 9.142 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, stages called one by one, 4 thread(s): 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode adaptive, split: 659.01 ms per step (warm; first step 3.4 s), 36.7 ticks per step, 17.963 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, one program per tick, 4 steps, 1 thread: 6022 cells, 20 levels, 4 steps, gtfn_cpu, mode adaptive: 339.27 ms per step (warm; first step 90.0 s), 6.2 ticks per step, 54.284 ms per tick
+  theta after 4 steps: max |diff| 0, bit-identical cells 100.0 %
+cartesian fixed N=1 I=8, 4 threads: 6022 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode fixed N=1 I=8: 73.85 ms per step (warm; compile 0 s), 8.0 ticks per step, 9.232 ms per tick
+next fixed N=1 I=4: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=4, split: 172.44 ms per step (warm; first step 3.3 s), 4.0 ticks per step, 43.111 ms per tick
+  theta after 48 steps: max |diff| 0.32, bit-identical cells 26.5 %
+  drain   max |diff| per cell-step 3.01e+14 mm; total 536.71 vs -1.08696e+15 mm (-2.03e+14 %)
+  excess  max |diff| per cell-step 3.01e+14 mm; total 65038.6 vs 1.08696e+15 mm (+1.67e+12 %)
+  eta     max |diff| per cell-step 0.221 mm; total 27088 vs 26483.2 mm (-2.23 %)
+  substeps mean 1.028 vs 1.000; cell-steps that differ 2.78 %
+  iters    mean 5.885 vs 3.216; cell-steps that differ 46.97 %
+next fixed N=1 I=6: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=6, split: 269.67 ms per step (warm; first step 3.3 s), 6.0 ticks per step, 44.946 ms per tick
+  theta after 48 steps: max |diff| 0.27, bit-identical cells 42.6 %
+  drain   max |diff| per cell-step 9.86e+13 mm; total 536.71 vs -3.19019e+14 mm (-5.94e+13 %)
+  excess  max |diff| per cell-step 9.86e+13 mm; total 65038.6 vs 3.19019e+14 mm (+4.91e+11 %)
+  eta     max |diff| per cell-step 0.154 mm; total 27088 vs 26983.8 mm (-0.384 %)
+  substeps mean 1.028 vs 1.000; cell-steps that differ 2.78 %
+  iters    mean 5.885 vs 4.065; cell-steps that differ 25.35 %
+next fixed N=1 I=8: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=8, split: 354.21 ms per step (warm; first step 3.3 s), 8.0 ticks per step, 44.276 ms per tick
+  theta after 48 steps: max |diff| 0.27, bit-identical cells 46.8 %
+  drain   max |diff| per cell-step 1.34e+13 mm; total 536.71 vs -2.88545e+13 mm (-5.38e+12 %)
+  excess  max |diff| per cell-step 1.34e+13 mm; total 65038.6 vs 2.88545e+13 mm (+4.44e+10 %)
+  eta     max |diff| per cell-step 0.114 mm; total 27088 vs 27074.3 mm (-0.0505 %)
+  substeps mean 1.028 vs 1.000; cell-steps that differ 2.78 %
+  iters    mean 5.885 vs 4.514; cell-steps that differ 17.15 %
+next fixed N=1 I=12: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=12, split: 504.78 ms per step (warm; first step 3.7 s), 12.0 ticks per step, 42.065 ms per tick
+  theta after 48 steps: max |diff| 0.182, bit-identical cells 58.9 %
+  drain   max |diff| per cell-step 42.5 mm; total 536.71 vs 550.627 mm (+2.59 %)
+  excess  max |diff| per cell-step 48.5 mm; total 65038.6 vs 72519.1 mm (+11.5 %)
+  eta     max |diff| per cell-step 0.115 mm; total 27088 vs 27066.1 mm (-0.0808 %)
+  substeps mean 1.028 vs 1.000; cell-steps that differ 2.78 %
+  iters    mean 5.885 vs 4.916; cell-steps that differ 12.14 %
+next fixed N=1 I=16: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=16, split: 686.82 ms per step (warm; first step 3.4 s), 16.0 ticks per step, 42.926 ms per tick
+  theta after 48 steps: max |diff| 0.182, bit-identical cells 61.9 %
+  drain   max |diff| per cell-step 53.8 mm; total 536.71 vs 482.334 mm (-10.1 %)
+  excess  max |diff| per cell-step 73.1 mm; total 65038.6 vs 70372.2 mm (+8.2 %)
+  eta     max |diff| per cell-step 0.114 mm; total 27088 vs 27070.7 mm (-0.0638 %)
+  substeps mean 1.028 vs 1.000; cell-steps that differ 2.78 %
+  iters    mean 5.885 vs 5.143; cell-steps that differ 10.29 %
+next fixed N=2 I=8: 6022 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=2 I=8, split: 708.78 ms per step (warm; first step 3.6 s), 16.0 ticks per step, 44.299 ms per tick
+  theta after 48 steps: max |diff| 0.196, bit-identical cells 0.0 %
+  drain   max |diff| per cell-step 42.5 mm; total 536.71 vs 581.559 mm (+8.36 %)
+  excess  max |diff| per cell-step 48.5 mm; total 65038.6 vs 69827.6 mm (+7.36 %)
+  eta     max |diff| per cell-step 0.114 mm; total 27088 vs 27092.4 mm (+0.0163 %)
+  substeps mean 1.028 vs 2.000; cell-steps that differ 97.22 %
+  iters    mean 5.885 vs 7.493; cell-steps that differ 86.64 %
+== Richards proxy, rhone
+C++ reference, 1 thread(s): 21584 cells, 20 levels, 48 steps: 284.129 ms per step (best of 3); mean sub-steps 1.026, mean iterations per cell-step 5.72
+C++ reference, 4 thread(s): 21584 cells, 20 levels, 48 steps: 73.473 ms per step (best of 3); mean sub-steps 1.026, mean iterations per cell-step 5.72
+DaCe, 1 thread(s): 21584 cells, 20 levels, 48 steps, dace: 283.40 ms per step (compiled in 8 s)
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+DaCe, time loop inside, 1 thread(s): 21584 cells, 20 levels, 48 steps, dace (time loop inside): 294.54 ms per step (compiled in 9 s)
+DaCe, 4 thread(s): 21584 cells, 20 levels, 48 steps, dace: 81.79 ms per step (compiled in 8 s)
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+DaCe, time loop inside, 4 thread(s): 21584 cells, 20 levels, 48 steps, dace (time loop inside): 82.26 ms per step (compiled in 9 s)
+cartesian lockstep, 1 thread(s): 21584 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode adaptive: 5347.66 ms per step (warm; compile 0 s), 37.9 ticks per step, 141.270 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, stages called one by one, 1 thread(s): 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode adaptive, split: 5969.57 ms per step (warm; first step 3.8 s), 37.9 ticks per step, 157.699 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+cartesian lockstep, 4 thread(s): 21584 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode adaptive: 1466.81 ms per step (warm; compile 0 s), 37.9 ticks per step, 38.749 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, stages called one by one, 4 thread(s): 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode adaptive, split: 2534.15 ms per step (warm; first step 3.7 s), 37.9 ticks per step, 66.945 ms per tick
+  theta after 48 steps: max |diff| 0, bit-identical cells 100.0 %
+next lockstep, one program per tick, 4 steps, 1 thread: 21584 cells, 20 levels, 4 steps, gtfn_cpu, mode adaptive: 1263.75 ms per step (warm; first step 3.3 s), 6.2 ticks per step, 202.200 ms per tick
+  theta after 4 steps: max |diff| 0, bit-identical cells 100.0 %
+cartesian fixed N=1 I=8, 4 threads: 21584 cells, 20 levels, 48 steps, gt:cpu_ifirst, mode fixed N=1 I=8: 317.13 ms per step (warm; compile 0 s), 8.0 ticks per step, 39.642 ms per tick
+next fixed N=1 I=4: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=4, split: 694.53 ms per step (warm; first step 3.5 s), 4.0 ticks per step, 173.633 ms per tick
+  theta after 48 steps: max |diff| 0.32, bit-identical cells 27.9 %
+  drain   max |diff| per cell-step 5.39e+14 mm; total 2020.18 vs -2.68545e+15 mm (-1.33e+14 %)
+  excess  max |diff| per cell-step 5.39e+14 mm; total 234943 vs 2.68545e+15 mm (+1.14e+12 %)
+  eta     max |diff| per cell-step 0.236 mm; total 96881.4 vs 94835.7 mm (-2.11 %)
+  substeps mean 1.026 vs 1.000; cell-steps that differ 2.62 %
+  iters    mean 5.723 vs 3.187; cell-steps that differ 45.27 %
+next fixed N=1 I=6: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=6, split: 972.38 ms per step (warm; first step 3.8 s), 6.0 ticks per step, 162.063 ms per tick
+  theta after 48 steps: max |diff| 0.32, bit-identical cells 44.3 %
+  drain   max |diff| per cell-step 9.07e+13 mm; total 2020.18 vs -9.30991e+14 mm (-4.61e+13 %)
+  excess  max |diff| per cell-step 9.07e+13 mm; total 234943 vs 9.30991e+14 mm (+3.96e+11 %)
+  eta     max |diff| per cell-step 0.177 mm; total 96881.4 vs 96518.5 mm (-0.375 %)
+  substeps mean 1.026 vs 1.000; cell-steps that differ 2.62 %
+  iters    mean 5.723 vs 4.007; cell-steps that differ 24.11 %
+next fixed N=1 I=8: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=8, split: 1278.24 ms per step (warm; first step 3.9 s), 8.0 ticks per step, 159.781 ms per tick
+  theta after 48 steps: max |diff| 0.269, bit-identical cells 48.5 %
+  drain   max |diff| per cell-step 1.4e+13 mm; total 2020.18 vs -6.7571e+13 mm (-3.34e+12 %)
+  excess  max |diff| per cell-step 1.4e+13 mm; total 234943 vs 6.7571e+13 mm (+2.88e+10 %)
+  eta     max |diff| per cell-step 0.178 mm; total 96881.4 vs 96814.1 mm (-0.0695 %)
+  substeps mean 1.026 vs 1.000; cell-steps that differ 2.62 %
+  iters    mean 5.723 vs 4.429; cell-steps that differ 16.14 %
+next fixed N=1 I=12: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=12, split: 1886.67 ms per step (warm; first step 4.6 s), 12.0 ticks per step, 157.222 ms per tick
+  theta after 48 steps: max |diff| 0.191, bit-identical cells 60.6 %
+  drain   max |diff| per cell-step 72.1 mm; total 2020.18 vs 1958.74 mm (-3.04 %)
+  excess  max |diff| per cell-step 84.5 mm; total 234943 vs 260003 mm (+10.7 %)
+  eta     max |diff| per cell-step 0.119 mm; total 96881.4 vs 96818.7 mm (-0.0647 %)
+  substeps mean 1.026 vs 1.000; cell-steps that differ 2.62 %
+  iters    mean 5.723 vs 4.813; cell-steps that differ 11.38 %
+next fixed N=1 I=16: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=1 I=16, split: 2617.69 ms per step (warm; first step 5.5 s), 16.0 ticks per step, 163.606 ms per tick
+  theta after 48 steps: max |diff| 0.19, bit-identical cells 63.8 %
+  drain   max |diff| per cell-step 32.6 mm; total 2020.18 vs 2007.06 mm (-0.649 %)
+  excess  max |diff| per cell-step 28.4 mm; total 234943 vs 251754 mm (+7.16 %)
+  eta     max |diff| per cell-step 0.118 mm; total 96881.4 vs 96848.1 mm (-0.0344 %)
+  substeps mean 1.026 vs 1.000; cell-steps that differ 2.62 %
+  iters    mean 5.723 vs 5.031; cell-steps that differ 9.57 %
+next fixed N=2 I=8: 21584 cells, 20 levels, 48 steps, gtfn_cpu, mode fixed N=2 I=8, split: 2601.80 ms per step (warm; first step 5.7 s), 16.0 ticks per step, 162.612 ms per tick
+  theta after 48 steps: max |diff| 0.201, bit-identical cells 0.0 %
+  drain   max |diff| per cell-step 19.5 mm; total 2020.18 vs 2040.6 mm (+1.01 %)
+  excess  max |diff| per cell-step 28.4 mm; total 234943 vs 252501 mm (+7.47 %)
+  eta     max |diff| per cell-step 0.0597 mm; total 96881.4 vs 96892 mm (+0.0109 %)
+  substeps mean 1.026 vs 2.000; cell-steps that differ 97.38 %
+  iters    mean 5.723 vs 7.356; cell-steps that differ 86.68 %
+== fused 2-D chain (potential ET, interception, snow evaporation, T-index snow)
+Doubs, 1 thread(s): 1 member(s), 6022 active cells (221 x 201), gtfn_cpu: current   53.50 ms, lean calls   21.26 ms (max |diff| 0), one program   27.94 ms (max |diff| 0; compiled in 1 s); per member: current 53.50, lean 21.26 ms 4 member(s), 24088 active cells (884 x 201), gtfn_cpu: current  176.43 ms, lean calls   93.63 ms (max |diff| 0), one program  125.08 ms (max |diff| 0; compiled in 1 s); per member: current 44.11, lean 23.41 ms 16 member(s), 96352 active cells (3536 x 201), gtfn_cpu: current  845.13 ms, lean calls  444.04 ms (max |diff| 0), one program  552.29 ms (max |diff| 0; compiled in 1 s); per member: current 52.82, lean 27.75 ms 
+Rhone, 1 thread(s): 1 member(s), 21584 active cells (181 x 265), gtfn_cpu: current   57.80 ms, lean calls   29.06 ms (max |diff| 0), one program   36.07 ms (max |diff| 0; compiled in 1 s); per member: current 57.80, lean 29.06 ms 4 member(s), 86336 active cells (724 x 265), gtfn_cpu: current  207.56 ms, lean calls  129.12 ms (max |diff| 0), one program  155.67 ms (max |diff| 0; compiled in 1 s); per member: current 51.89, lean 32.28 ms 
+Doubs, 4 thread(s): 1 member(s), 6022 active cells (221 x 201), gtfn_cpu: current   46.01 ms, lean calls   11.66 ms (max |diff| 0), one program   18.38 ms (max |diff| 0; compiled in 1 s); per member: current 46.01, lean 11.66 ms 4 member(s), 24088 active cells (884 x 201), gtfn_cpu: current  139.07 ms, lean calls   45.85 ms (max |diff| 0), one program   84.77 ms (max |diff| 0; compiled in 1 s); per member: current 34.77, lean 11.46 ms 16 member(s), 96352 active cells (3536 x 201), gtfn_cpu: current  531.09 ms, lean calls  171.64 ms (max |diff| 0), one program  302.09 ms (max |diff| 0; compiled in 1 s); per member: current 33.19, lean 10.73 ms 
+Rhone, 4 thread(s): 1 member(s), 21584 active cells (181 x 265), gtfn_cpu: current   38.95 ms, lean calls   11.11 ms (max |diff| 0), one program   22.19 ms (max |diff| 0; compiled in 1 s); per member: current 38.95, lean 11.11 ms 4 member(s), 86336 active cells (724 x 265), gtfn_cpu: current  144.16 ms, lean calls   47.53 ms (max |diff| 0), one program   83.29 ms (max |diff| 0; compiled in 1 s); per member: current 36.04, lean 11.88 ms 

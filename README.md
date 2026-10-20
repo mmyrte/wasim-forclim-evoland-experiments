@@ -40,6 +40,7 @@ Monthly timesteps will not be sufficient to capture anything less than the most 
 
 - `plan-switzerland.md`: working plan for the harmonized Swiss WaSiM setup.
 - `golden/`: golden-test cases (Doubs, Rhone) and benchmarks for legacy WaSiM ([wasim-eth](https://github.com/mmyrte/wasim-eth)).
-- `validation/`: checking wasim-gt (the GT4Py reimplementation, separate repository) against legacy WaSiM. Includes reference cases and the coverage tool.
-- `gt4py/`: per-process checks of wasim-gt against WaSiM grid dumps, plus the analysis of WaSiM's module coupling.
+- `validation/`: checking wasim-gt (the reimplementation, separate repository; GT4Py so far, moving to DaCe and to be renamed wasim-dace) against legacy WaSiM. Includes reference cases, the coverage tool, performance comparisons and the CPU spike results.
+- `gt4py/`: per-process checks of wasim-gt against WaSiM grid dumps, plus the analysis of WaSiM's module coupling; `gt4py/spike/`: the CPU spike comparing C++, DaCe, gt4py.cartesian and gt4py.next.
+- `dace/known-issues/`: reproducers of DaCe defects met on the way, usable as regression tests.
 - `legacy/`: tools that convert legacy WaSiM inputs, states and control files (planned).
