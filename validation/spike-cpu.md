@@ -1,8 +1,10 @@
-# CPU spike: hand-over, fusion and column loops
+# CPU spike: limits of gt4py for WaSiM
+
+**This spike tested the feasibility and limits of gt4py for wasim-gt, and it is what led to the change to DaCe** (decided 2026-10-20; wasim-gt `docs/architecture.md` §2, §9, repository to be renamed wasim-dace). gt4py could not run WaSiM's per-cell column loops inside a kernel and was 15–35 times slower than C++ on them; DaCe ran them bit-identical at C++ speed. The rest of this page is the evidence.
 
 Status 2026-10-19. Code, specification and raw output: [`gt4py/spike/`](../gt4py/spike/) (`results-2026-10-19.txt`, `wasim_timing/`). Machine: this container, x86-64, 4 cores, no GPU; gt4py 1.2.3, DaCe 2.0.0a10, clang/gcc `-O3` without `-march=native`. All times are ms per hourly step, warm (without compilation).
 
-The question: can a port reach WaSiM's speed, and which formulation should the final model use? Three parts:
+The question at the time: can a gt4py port reach WaSiM's speed, and if not, which formulation should the final model use? Three parts:
 
 1. the 2-D processes, called one by one as today versus with data kept in the backend and one call per process or one program per step;
 2. WaSiM's per-cell loops in the Richards zone (sub-steps, iteration to convergence) in C++, DaCe, gt4py.cartesian and gt4py.next, including fixed loop counts that gt4py.next can run without host decisions;
@@ -74,7 +76,7 @@ Potential ET (2 layers), interception (2 layers), snow evaporation and T-index s
 1. **Equal performance with WaSiM on CPU is in reach, but not with gt4py for the columns.** DaCe with WaSiM's per-cell loops ran at C++ speed and bit-identical; both gt4py flavours have to run those loops in lockstep from the host and were 15–35 times slower. Fixed loop counts are unstable or several percent off for WaSiM's scheme.
 2. **For the 2-D processes the lever is the layout, not fusion:** compute model cells only (a compressed cell dimension, with neighbour tables where a process needs neighbours) and keep fields in the backend between processes. Fusing calls into one gt4py program made things slower.
 3. **Ensembles:** WaSiM already gets 3.5 times the throughput from 4 processes on 4 cores. A port has to beat that, not WaSiM's single-thread time.
-4. **Way forward** (wasim-gt `docs/architecture.md` §9): keep replicating module by module with gt4py, bit for bit; then build the fast model directly in DaCe, with a compressed cell layout and the per-cell loops as they are, and measure on a GPU.
+4. **Way forward,** as first concluded (2026-10-19): keep replicating with gt4py, then build the fast model in DaCe. **Decided on 2026-10-20 instead:** drop gt4py and write wasim-gt directly in DaCe (new ports in DaCe, the gt4py ports translated later), with a compressed cell layout and the per-cell loops as they are, then measure on a GPU (wasim-gt `docs/architecture.md` §2, §9).
 
 ## Caveats
 

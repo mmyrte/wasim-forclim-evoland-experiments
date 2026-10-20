@@ -1,6 +1,13 @@
-# CPU spike: fusion, column loops and coordination cost
+# CPU spike: limits of gt4py for WaSiM (fusion, column loops, coordination cost)
 
-Three questions, answered on CPU (this container: 4 cores, no GPU) before more modules are ported:
+**Purpose and outcome.** This spike tested how far gt4py (cartesian and next) can carry wasim-gt:
+whether processes can hand data over without going through Python, whether they can be fused, and
+whether WaSiM's per-cell column loops fit at all, with DaCe and C++ as yardsticks. Its results led to
+the decision of 2026-10-20 to drop gt4py and write wasim-gt directly in DaCe (wasim-gt
+`docs/architecture.md` §2, §9; the repository is to become wasim-dace). The gt4py scripts here are
+the feasibility tests behind that decision, not a plan to continue with gt4py.
+
+Three questions, answered on CPU (this container: 4 cores, no GPU):
 
 1. What does it cost to call the 2-D processes one by one, and what does one fused call per step
    cost instead? (`fused_chain.py`)
