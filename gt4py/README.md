@@ -50,6 +50,8 @@ At 500 m, all of hydrological Switzerland is about 0.2 million active cells, too
 2. **Port process by process**, in order of value for a daily water balance: snow (T-index done), interception (done), snow evaporation (done), Penman-Monteith ET, Richards column (one soil option set; hydraulic functions done), groundwater, then simple routing. Each process is compared at every step with the state WaSiM had just before and after the call (grid dump hook, `coupling.md`).
 3. **Decision point after the Richards column**: if one soil configuration reproduces WaSiM within an agreed tolerance, the rest is mostly routine. If not, the port stays a research prototype.
 
+The design and validation plan for the Richards column, with the phase-0 analysis, the `h_temp1` finding (mmyrte/wasim-eth#3) and a first CPU ensemble benchmark, is in [`richards.md`](richards.md).
+
 Effort is given in tokens of agent work, measured on the ports so far, in [`coupling.md`](coupling.md#effort-in-tokens-and-compute). GPU validation needs a CUDA node.
 
 ## Running the checks

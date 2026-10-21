@@ -1,0 +1,1922 @@
+[
+  {
+    "function": "pre_run",
+    "line": 7741,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "pre_run",
+    "line": 7752,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 8314,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8315,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8316,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8350,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8351,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8352,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8753,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8754,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8764,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8765,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8766,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8771,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 8772,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9000,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9001,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9099,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9106,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9107,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9108,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9110,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9111,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9113,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9126,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9193,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9195,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9198,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9201,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9202,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9203,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9204,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9208,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9209,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9210,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9212,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9213,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9214,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9219,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9220,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9221,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9222,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9332,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9333,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9334,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9335,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9336,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9337,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9338,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9340,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9341,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9343,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9345,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9346,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9347,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9354,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9355,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9381,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9383,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9384,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9385,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9388,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9389,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9391,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9423,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9429,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9432,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "run",
+    "line": 9877,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9880,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 9881,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10485,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10486,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10490,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10491,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10497,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10547,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10548,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "run",
+    "line": 10702,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10704,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10706,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10707,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10708,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10750,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10765,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 10766,
+    "group": "SurfacePondAndAdaptiveStep",
+    "proposal": "First vary maximum pond depth, minimum dynamic step and iteration limit in copied controls; then a saturated, dry, or high-rain column. Daily forcing needs an explicit aggregation case."
+  },
+  {
+    "function": "run",
+    "line": 11923,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 11982,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 11983,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12029,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12030,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12138,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12153,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12154,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12155,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12157,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12158,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12159,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12171,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12172,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12198,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "run",
+    "line": 12199,
+    "group": "ZonalAndDaily",
+    "proposal": "Vary travel-time classes and reservoir constants in copied controls; add a daily interval with forcing aggregation defined explicitly. Retain deterministic zone/cell reduction order."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 4994,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 4995,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 4996,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 4998,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 4999,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5003,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5005,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5006,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5009,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5010,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5011,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5012,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "GetMeanTheta",
+    "line": 5013,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "evapotranspiration",
+    "line": 5177,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "evapotranspiration",
+    "line": 5195,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "evapotranspiration",
+    "line": 5196,
+    "group": "DroughtAndRoots",
+    "proposal": "First vary rooting depth, dry/wet ET limits and vegetation coverage in copied controls; then use sustained dry forcing to wilting and a wet-root column."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5294,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5404,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5409,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5444,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5445,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5446,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "calc_surface_interaction",
+    "line": 5449,
+    "group": "RiverExchange",
+    "proposal": "Coordinate #8: vary river depth/colmation and available river flow; use deep contact levels and limited reinfiltration. Keep river-link ordering explicit."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5488,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5490,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5491,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5492,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5494,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5495,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5498,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5499,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5501,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5502,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5503,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5504,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5505,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5506,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5661,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5707,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5709,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5710,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5734,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5735,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5750,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "specific_fluxes",
+    "line": 5751,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6191,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6192,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6258,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6260,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6261,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6262,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6263,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6266,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6267,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6268,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6270,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6287,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6289,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6290,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6291,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6292,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6295,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6296,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6297,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6299,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6305,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6307,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6308,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6309,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6311,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6313,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6315,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6316,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6317,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6318,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6321,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6322,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6323,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6325,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6326,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6327,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6328,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6330,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6332,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6333,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6335,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6337,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6338,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6339,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6342,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6343,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6345,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6346,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6347,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6362,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6363,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6369,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6371,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6372,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6373,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6376,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6377,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6379,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6392,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6393,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6394,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6398,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6407,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6408,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6409,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6410,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6411,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6412,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6414,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6415,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6416,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6418,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6420,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6422,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6423,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6424,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6427,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6428,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6430,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6432,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6434,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6436,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6437,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6438,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6439,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6442,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6443,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6444,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6446,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6447,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6448,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6449,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6450,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6456,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6462,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6464,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6465,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6468,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6470,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6475,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6477,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6478,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6479,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6482,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6483,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6485,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6491,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6493,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6494,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6495,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6496,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6498,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6499,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6501,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6503,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6505,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6506,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6507,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6510,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6511,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6513,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6515,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6517,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6519,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6520,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6521,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6522,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6525,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6526,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6527,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6529,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6530,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6531,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "flux_restrictions_opt",
+    "line": 6532,
+    "group": "FluxDirectionAndBounds",
+    "proposal": "First vary rainfall, min step and convergence settings; then synthetic saturation/wilting, upward and downward gradients, and thaw-depth input from #6. Heat/SE-only cases remain #9."
+  },
+  {
+    "function": "new_thetas",
+    "line": 6598,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "new_thetas",
+    "line": 6599,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "new_thetas",
+    "line": 6602,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "new_thetas",
+    "line": 6603,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6661,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6663,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6664,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6667,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6668,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6669,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6672,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6673,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6676,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6677,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "groundwater_recharge",
+    "line": 6678,
+    "group": "RisingFallingGroundwater",
+    "proposal": "First vary starting groundwater state and module substeps in copied controls; use synthetic upward/downward exchange across layer interfaces and the moving active-depth witness."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7346,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7347,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7348,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7360,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7361,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7362,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7364,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7366,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7367,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7368,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7369,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7370,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7373,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7378,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7379,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7380,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7381,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7382,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7386,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7387,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7388,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7389,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7392,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7393,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  },
+  {
+    "function": "CalculateMacroporeInfiltration",
+    "line": 7394,
+    "group": "MacroporePulse",
+    "proposal": "First lower PMacroThreshold and vary capacity/depth in copied soil tables; then apply a positive rain pulse to a partly saturated column."
+  }
+]
