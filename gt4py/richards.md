@@ -281,7 +281,7 @@ Composition tests on the installed frontend:
 - Groundwater depth should mask a fixed physical K range. Keep surface slot 0 and the legacy zero sentinel L+1. Do not equate a soil horizon code with the physical K index; expand table parameters explicitly or use the already ported lookup representation.
 - Runtime data-dimension indexing remains unavailable on Cartesian numpy (coupling.md); soil lookup calls in conditions must first be assigned to temporaries, and gtscript does not support // integer floor division. Preserve arithmetic grouping and explicit no-FMA flags. The effective Cartesian C++ extra args must include `-ffp-contract=off`.
 
-GPU redirection has not been tested. Divergent split/iteration counts cost work, and preserving the row-history dependency (§4) would additionally require a sequential fallback; the proposed WaSiM fix removes that need.
+Divergent split/iteration counts cost work, and preserving the row-history dependency (§4) would additionally require a sequential fallback; the proposed WaSiM fix removes that need. GPU measurements of a column proxy follow below.
 
 **Ensemble throughput on a CPU (2026-10-19).** A first measurement with the ported snow model (method 7, part 1: one `gt4py.cartesian` stencil with per-cell `while` loops, the closest existing analogue of a Richards column), Rhone grid, hourly step, Apple M-series CPU with 5 performance and 10 efficiency cores, warm calls, ms per ensemble member and step:
 
@@ -292,6 +292,25 @@ GPU redirection has not been tested. Divergent split/iteration counts cost work,
 | port, 16–64 members in one call (`gt:cpu_ifirst` / `gt:cpu_kfirst`) | 5.5–8.9 / 6.3–6.9 | 1.45 / 0.73–0.87 |
 
 Per cell the port is as fast as WaSiM. On a CPU an ensemble in one process does not beat independent WaSiM processes, which are already embarrassingly parallel over runs. Any speed-up of the port therefore has to come from GPUs (or from avoiding WaSiM's per-step I/O and statistics); this needs a measurement on GPU hardware (#17) before the go/no-go decision. On the same machine the Richards zone takes 45 ms of 87 ms per Rhone step (52 %).
+
+**GPU measurements of a column proxy (2026-10-20).** Three sessions on a desktop PC (NVIDIA RTX 3080 10 GB, Intel i7-10700, WSL Ubuntu 24.04, CUDA 12.9, gt4py 1.2.3, dace 2.0.0a10). The proxy is synthetic: it runs the stages of one nonlinear theta update with the split and iteration counts recorded from WaSiM (§4 workload), not adaptive convergence, and it omits the repeated limiter passes, the gradient search, ET, macropores and the couplings. It is not a Richards port and gives no full-model speed-up.
+
+- *Reference on the same PC.* Eight parallel WaSiM runs need 15.91 ms per member and hourly step for the `after_siltingup → after_unsatzon` segment over January; the ordinary-column share gives a **column budget of 15.04 ms**. About 18 ms for a full year is a Mac-to-PC scaling assumption, not a measurement.
+- *Snow as the pointwise reference.* With fields resident on the device, the snow port runs at 0.14–0.17 ms per member against 0.86 ms for eight parallel WaSiM runs (5–6×). Calls that allocate and copy fields every step are slower than WaSiM.
+- *Lockstep.* Over 2021, a Rhone column needs 2.1 iterations per call on average, but a step needs 117 global rounds at the median and 733 at the worst, because every round runs over all columns until the slowest has finished. Only 1.3 % of the column work in a round is useful. A masked column still costs about 21 % of an active one.
+- *Hydraulics.* The port's `h_calc`/`k_calc`/`get_theta` recompute the table entries a query needs. WaSiM's tables depend only on soil type and layer (50 types × 15 layers for Rhone, 0.74 MB; 7 × 20 for Doubs, 0.14 MB), so they can be built once. GT4Py reads them as K-only fields with a flattened data dimension and a runtime soil index. The lookup is bit-identical to the CPU port on `gt:cpu_kfirst`, `gt:gpu` and `dace:gpu` when the GPU build disables fused multiply-add (`--fmad=false`); with the default build the difference reached 1.4e-12. Pointwise, the lookup costs 0.095 ms per member against 5.8 ms recomputing and 0.82 ms for the analytic formulas (`gt:gpu`, 15 levels, 64 members).
+- *Proxy step times* (ms per member and step, `gt:gpu`, 16 members, fused driver):
+
+| | Rhone median | Rhone worst | Doubs median | Doubs worst |
+| --- | ---: | ---: | ---: | ---: |
+| recomputing tables | 61.6 | 122.0 | 60.8 | 132.3 |
+| precomputed tables | 7.2 | 39.0 | 3.3 | 16.1 |
+| precomputed tables, compacting driver | 17.6 | 32.5 | 6.7 | 12.7 |
+
+- *Annual estimate.* Interpolated over the global rounds of all 8,759 hourly steps of 2021, the fused proxy with precomputed tables averages about 11 ms (16 members) and 9 ms (64 members) for Rhone, and 4–5 ms for Doubs; `dace:gpu` is 20–45 % slower. The estimate rests on four measured steps; a regression over them did not pass its own quality check for Rhone and gave a range of 7.5–18.8 ms.
+- *Compaction.* Gathering the unfinished columns into dense buffers and scattering them back costs more than it saves (Rhone, 16 members: 223 of 282 ms are data movement) and wins only in the worst steps. This rules out that implementation, not compaction in general.
+
+So precomputed tables remove the hydraulics cost, and on this card the proxy column reaches 1.4–1.6× (Rhone) and 3.2–3.6× (Doubs) the throughput of eight parallel WaSiM runs, measured against the column budget. The rest of the column's work is not included, so the margin is not a decision. The remaining limit is the global lockstep. GT4Py does not allow a `while` around a computation over K, and it synchronises after every frontend call (126 calls per median Rhone step). A column kernel that iterates each column to convergence in its own thread would remove both; testing that, for example in DaCe directly, is the next measurement. Throughput on a data-centre GPU must be measured, not scaled from the RTX 3080's FP64 rate.
 
 ## 8. Proposed phases and task contracts
 
@@ -317,7 +336,7 @@ Acceptance should progress helper exactness → intermediate real call-state exa
 - **Maintainer (mmyrte):** Accept or reject the `h_temp1` fix (mmyrte/wasim-eth#3); reachability and order dependence are now established (§4). Agree the #7/#8 cut through calc_surface_interaction and limiter exchange restrictions.
 - **Maintainer and #14 owner:** Agree physical K layout (0,1..L,L+1), table/horizon mapping, static vs evolving parameters, initialized-history metadata, ensemble shape, masks, immutable state/flux ownership, units at each handover and deterministic reduction order.
 - **Port team:** Turn the phase-1 packages into individual tasks after the interface gate, select a trace/capture implementation for phase 2, and review the conservative line set. Keep method-3 macropores in scope despite the old estimate.
-- **Project lead:** Decide the milestone budget and the go/no-go criteria at the #1 decision point: CPU bit identity first, target-domain performance next, and GPU tolerance only after device measurements. Confirm whether daily runs are required before that decision, and measure ensemble throughput on GPU hardware (§7).
+- **Project lead:** Decide the milestone budget and the go/no-go criteria at the #1 decision point: CPU bit identity first, target-domain performance next, and GPU tolerance only after device measurements. Confirm whether daily runs are required before that decision, and decide, after a per-column kernel test, whether the column is written in GT4Py or DaCe (§7).
 - **Joint validation:** Keep the known Rhone full-model golden discrepancy separate from isolated helper/column checks. Do not overwrite goldens. Define how S0, baseflow phase units, river availability and zonal stores are compared and persisted.
 
 No trace hook is proposed as an implemented diff; the trace specification above is a design for a later reviewed change.
